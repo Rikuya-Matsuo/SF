@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include <SDL/SDL.h>
 
+// デバッグマクロ
+// リリース時はこれをコメントアウトする
+#define DEBUG_SF
+
 // ゲームのシステム面の流れを管理するシングルトンクラス
 class GameSystem final
 {

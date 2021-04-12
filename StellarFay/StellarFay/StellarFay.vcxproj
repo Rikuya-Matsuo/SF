@@ -75,8 +75,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>../../../Libraries/SDL/include;../../../Libraries/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>../../../Libraries/SDL/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -92,8 +93,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>../../../Libraries/SDL/include;../../../Libraries/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>../../../Libraries/SDL/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -111,7 +113,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>../../../Libraries/SDL/include;../../../Libraries/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -132,7 +134,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>../../../Libraries/SDL/include;../../../Libraries/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -149,12 +151,24 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c" />
     <ClCompile Include="SourceCode\GameSystem.cpp" />
+    <ClCompile Include="SourceCode\Hash.cpp" />
     <ClCompile Include="SourceCode\main.cpp" />
+    <ClCompile Include="SourceCode\Matrix.cpp" />
+    <ClCompile Include="SourceCode\Mesh.cpp" />
     <ClCompile Include="SourceCode\Renderer.cpp" />
+    <ClCompile Include="SourceCode\Shader.cpp" />
+    <ClCompile Include="SourceCode\Texture.cpp" />
+    <ClCompile Include="SourceCode\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h" />
+    <ClInclude Include="SourceCode\Hash.h" />
+    <ClInclude Include="SourceCode\Matrix.h" />
+    <ClInclude Include="SourceCode\Mesh.h" />
     <ClInclude Include="SourceCode\Renderer.h" />
+    <ClInclude Include="SourceCode\Shader.h" />
+    <ClInclude Include="SourceCode\Texture.h" />
+    <ClInclude Include="SourceCode\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
