@@ -13,6 +13,11 @@ public:
 private:
 	std::string mName;
 
+	// 内包する直方体（AABB）
+	AABB mBox;
+
+	bool mDrawFlag;
+
 	struct PolyGroup
 	{
 		std::string mName;
@@ -31,9 +36,8 @@ private:
 	};
 	std::vector<PolyGroup *> mPolyGroups;
 
-	bool mDrawFlag = true;
-
-	ObjectData()
+	ObjectData() :
+		mDrawFlag(true)
 	{
 		PolyGroup * group = new PolyGroup;
 		mPolyGroups.emplace_back(group);
@@ -210,6 +214,9 @@ bool Mesh::Load(const std::string & path)
 			pos.z = std::stof(wordsInLine[3]);
 
 			vertexPos.emplace_back(pos);
+
+			// AABBの頂点情報を更新
+			mObjects.back()->mBox.UpdateVertex(pos);
 		}
 		else if (wordsInLine[0] == "vt")
 		{
@@ -551,6 +558,35 @@ void Mesh::SetObjectDrawFlag(const std::string & objectName, bool value)
 
 	// 描画フラグをいじる
 	obj->mDrawFlag = value;
+}
+
+AABB Mesh::GetObjectAABB(const std::string & objectName) const
+{
+	ObjectData * obj = FindObjectWithName(objectName);
+	return obj->mBox;
+}
+
+AABB Mesh::GetBiggestAABB() const
+{
+	// AABBの体積が最も大きいオブジェクトを探す
+	ObjectData * biggestObj = nullptr;
+	float maxVolume = 0.0f;
+
+	for (auto itr : mObjects)
+	{
+		Vector3D size = itr->mBox.mMax - itr->mBox.mMin;
+
+		// 体積を計算
+		float volume = size.x * size.y * size.z;
+
+		if (volume > maxVolume)
+		{
+			biggestObj = itr;
+			volume = maxVolume;
+		}
+	}
+
+	return biggestObj->mBox;
 }
 
 void Mesh::GetWordsInLine(const char * line, std::vector<std::string> & wordsInLine)

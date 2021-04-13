@@ -161,6 +161,7 @@
     <ClCompile Include="SourceCode\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Collision.h" />
     <ClInclude Include="SourceCode\GameSystem.h" />
     <ClInclude Include="SourceCode\Hash.h" />
     <ClInclude Include="SourceCode\Matrix.h" />
