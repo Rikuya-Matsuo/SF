@@ -75,6 +75,9 @@
     <ClCompile Include="SourceCode\Texture.cpp">
       <Filter>ソース ファイル\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\MeshComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\Actor.h">
       <Filter>ヘッダー ファイル\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\MeshComponent.h">
+      <Filter>ヘッダー ファイル\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

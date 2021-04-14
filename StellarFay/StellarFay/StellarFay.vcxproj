@@ -157,6 +157,7 @@
     <ClCompile Include="SourceCode\main.cpp" />
     <ClCompile Include="SourceCode\Matrix.cpp" />
     <ClCompile Include="SourceCode\Mesh.cpp" />
+    <ClCompile Include="SourceCode\MeshComponent.cpp" />
     <ClCompile Include="SourceCode\Renderer.cpp" />
     <ClCompile Include="SourceCode\Shader.cpp" />
     <ClCompile Include="SourceCode\Texture.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="SourceCode\Hash.h" />
     <ClInclude Include="SourceCode\Matrix.h" />
     <ClInclude Include="SourceCode\Mesh.h" />
+    <ClInclude Include="SourceCode\MeshComponent.h" />
     <ClInclude Include="SourceCode\Renderer.h" />
     <ClInclude Include="SourceCode\Shader.h" />
     <ClInclude Include="SourceCode\Texture.h" />
