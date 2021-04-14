@@ -150,6 +150,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c" />
+    <ClCompile Include="SourceCode\Actor.cpp" />
+    <ClCompile Include="SourceCode\ComponentBase.cpp" />
     <ClCompile Include="SourceCode\GameSystem.cpp" />
     <ClCompile Include="SourceCode\Hash.cpp" />
     <ClCompile Include="SourceCode\main.cpp" />
@@ -161,7 +163,10 @@
     <ClCompile Include="SourceCode\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Actor.h" />
+    <ClInclude Include="SourceCode\BitFlagFunc.h" />
     <ClInclude Include="SourceCode\Collision.h" />
+    <ClInclude Include="SourceCode\ComponentBase.h" />
     <ClInclude Include="SourceCode\GameSystem.h" />
     <ClInclude Include="SourceCode\Hash.h" />
     <ClInclude Include="SourceCode\Matrix.h" />

@@ -23,6 +23,7 @@ public:
 
 	void SetObjectDrawFlag(const std::string & objectName, bool value);
 
+	// 特定オブジェクトのAABBを返す
 	AABB GetObjectAABB(const std::string & objectName) const;
 
 	// 体積が最も大きいAABBを返す
