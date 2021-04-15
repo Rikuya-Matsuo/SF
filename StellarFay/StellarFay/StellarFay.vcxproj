@@ -178,6 +178,10 @@
     <ClInclude Include="SourceCode\Texture.h" />
     <ClInclude Include="SourceCode\Vector.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Phong.frag" />
+    <None Include="Shaders\Phong.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -349,6 +349,7 @@ bool Mesh::Load(const std::string & path)
 			// 検索にかからなかった場合、新たにインデックスと頂点を作成
 			if (itr == vertIndices.end())
 			{
+				// 位置
 				GLuint newIndex = vertIndices.size();
 				vertIndices[vert] = newIndex;
 
@@ -357,6 +358,7 @@ bool Mesh::Load(const std::string & path)
 				mVertices.emplace_back(pos.y);
 				mVertices.emplace_back(pos.z);
 
+				// テクスチャ座標
 				int texIndex = vert.mTexCoordIndex - 1;
 				Vector2D uv;
 				if (texIndex < 0)
@@ -371,6 +373,7 @@ bool Mesh::Load(const std::string & path)
 				mVertices.emplace_back(uv.x);
 				mVertices.emplace_back(uv.y);
 
+				// 法線
 				const Vector3D & n = norm[vert.mNormIndex - 1];
 				mVertices.emplace_back(n.x);
 				mVertices.emplace_back(n.y);
