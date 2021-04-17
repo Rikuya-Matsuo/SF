@@ -4,6 +4,7 @@
 class ComponentBase
 {
 public:
+	// ownerにnullptrを入れないこと！
 	ComponentBase(class Actor * owner, int priority = 0);
 	virtual ~ComponentBase();
 

@@ -1,4 +1,5 @@
 ﻿#include "Actor.h"
+#include "ComponentBase.h"
 #include <algorithm>
 
 const Actor::ActorFlagType Actor::mSortComponentsFlagMask = BIT_SHIFT(0);
@@ -52,6 +53,26 @@ void Actor::Update()
 
 	// 継承先依存の最終更新
 	UpdateActorLast();
+}
+
+void Actor::ResisterComponent(ComponentBase * cmp)
+{
+	// mPriorityの値が小さい順になるよう挿入する
+	const int priority = cmp->GetPriority();
+
+	for (auto itr = mComponents.begin(); itr != mComponents.end(); ++itr)
+	{
+		const int itrPriority = (*itr)->GetPriority();
+
+		if (priority < itrPriority)
+		{
+			mComponents.insert(itr, cmp);
+			return;
+		}
+	}
+
+	// ここまでで挿入できなかった場合、最後尾に追加する
+	mComponents.emplace_back(cmp);
 }
 
 void Actor::UpdateActor()

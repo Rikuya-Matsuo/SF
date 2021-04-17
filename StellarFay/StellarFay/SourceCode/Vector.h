@@ -7,9 +7,9 @@ public:
 	float x;
 	float y;
 
-	Vector2D() :
-		x(0.0f),
-		y(0.0f)
+	Vector2D(float allValue = 0.0f) :
+		x(allValue),
+		y(allValue)
 	{}
 	
 	Vector2D(float _x, float _y) :
@@ -21,6 +21,11 @@ public:
 		x(v.x),
 		y(v.y)
 	{}
+
+	void SetAll(float value)
+	{
+		x = y = value;
+	}
 
 	friend Vector2D operator+(const Vector2D & lhs, const Vector2D & rhs)
 	{
@@ -123,10 +128,10 @@ public:
 	float y;
 	float z;
 
-	Vector3D() :
-		x(0.0f),
-		y(0.0f),
-		z(0.0f)
+	Vector3D(float allValue = 0.0f) :
+		x(allValue),
+		y(allValue),
+		z(allValue)
 	{}
 
 	Vector3D(float _x, float _y, float _z) :
@@ -140,6 +145,11 @@ public:
 		y(v.y),
 		z(v.z)
 	{}
+
+	void SetAll(float value)
+	{
+		x = y = z = value;
+	}
 
 	const float * GetAsFloatPtr() const
 	{

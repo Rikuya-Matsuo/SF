@@ -2,7 +2,7 @@
 #include <SDL/SDL.h>
 #include <list>
 #include "BitFlagFunc.h"
-#include "ComponentBase.h"
+#include "Vector.h"
 
 class Actor
 {
@@ -17,6 +17,10 @@ public:
 	// ソートが実行されるのはアクターのUpdate()開始時のみ
 	void RequestSortComponents() { BitFlagFunc::Set(mActorFlags, mSortComponentsFlagMask, true); }
 
+	// アクターにコンポーネントを追加
+	// コンポーネント基底クラスのコンストラクタにて呼び出すことで、いちいちリストへの追加処理を書かなくてもよいようにする
+	void ResisterComponent(class ComponentBase * cmp);
+
 protected:
 	// ビットフラグの型
 	typedef Uint8 ActorFlagType;
@@ -30,8 +34,17 @@ protected:
 	// この値が小さいものから処理を行う。
 	int mPriority;
 
+	// 位置
+	Vector3D mPosition;
+
+	// スケール値
+	Vector3D mScales;
+
+	// 回転
+	Vector3D mRotation;
+
 	// 所持するコンポーネントのリスト
-	std::list<ComponentBase *> mComponents;
+	std::list<class ComponentBase *> mComponents;
 
 	// 継承先の処理
 	virtual void UpdateActor();
