@@ -158,6 +158,7 @@
     <ClCompile Include="SourceCode\Matrix.cpp" />
     <ClCompile Include="SourceCode\Mesh.cpp" />
     <ClCompile Include="SourceCode\MeshComponent.cpp" />
+    <ClCompile Include="SourceCode\Quaternion.cpp" />
     <ClCompile Include="SourceCode\Renderer.cpp" />
     <ClCompile Include="SourceCode\Shader.cpp" />
     <ClCompile Include="SourceCode\Texture.cpp" />
@@ -167,12 +168,14 @@
     <ClInclude Include="SourceCode\Actor.h" />
     <ClInclude Include="SourceCode\BitFlagFunc.h" />
     <ClInclude Include="SourceCode\Collision.h" />
+    <ClInclude Include="SourceCode\CommonMath.h" />
     <ClInclude Include="SourceCode\ComponentBase.h" />
     <ClInclude Include="SourceCode\GameSystem.h" />
     <ClInclude Include="SourceCode\Hash.h" />
     <ClInclude Include="SourceCode\Matrix.h" />
     <ClInclude Include="SourceCode\Mesh.h" />
     <ClInclude Include="SourceCode\MeshComponent.h" />
+    <ClInclude Include="SourceCode\Quaternion.h" />
     <ClInclude Include="SourceCode\Renderer.h" />
     <ClInclude Include="SourceCode\Shader.h" />
     <ClInclude Include="SourceCode\Texture.h" />
