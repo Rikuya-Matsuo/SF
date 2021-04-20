@@ -15,6 +15,8 @@ public:
 	virtual bool GetBeforeUpdateActorFlag() const final { return (mPriority < 0); }
 	virtual bool GetAfterUpdateActorFlag() const final { return !GetBeforeUpdateActorFlag(); }
 
+	void SetPriority(int priority);
+
 protected:
 	class Actor * mOwner;
 

@@ -16,3 +16,9 @@ void ComponentBase::Update()
 {
 	// 処理内容は継承先に依存する
 }
+
+void ComponentBase::SetPriority(int priority)
+{
+	mOwner->RequestSortComponents();
+	mPriority = priority;
+}

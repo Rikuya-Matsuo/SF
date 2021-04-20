@@ -577,10 +577,8 @@ AABB Mesh::GetBiggestAABB() const
 
 	for (auto itr : mObjects)
 	{
-		Vector3D size = itr->mBox.mMax - itr->mBox.mMin;
-
 		// 体積を計算
-		float volume = size.x * size.y * size.z;
+		float volume = itr->mBox.CalculateVolume();
 
 		if (volume > maxVolume)
 		{
