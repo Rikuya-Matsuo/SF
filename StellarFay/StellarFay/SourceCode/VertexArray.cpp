@@ -1,8 +1,7 @@
 ﻿#include "VertexArray.h"
+#include <cstdarg>
 
-#
-
-VertexArray::VertexArray(const void * verts, size_t vertsMass, size_t * attributeSizes, size_t attributeSizeElemMass, GLenum type, GLboolean normalize, GLenum usage)
+VertexArray::VertexArray(const void * verts, size_t vertsMass, const size_t * attributeSizes, size_t attributeSizeElemMass, GLenum type, GLboolean normalize, GLenum usage)
 {
 	// 頂点配列、頂点バッファ生成
 	glGenVertexArrays(1, &mVAO);
@@ -59,4 +58,25 @@ VertexArray::VertexArray(const void * verts, size_t vertsMass, size_t * attribut
 		glEnableVertexAttribArray(i);
 		attSizesSumBuf += attributeSizes[i];
 	}
+}
+
+VertexArray::~VertexArray()
+{
+	glDeleteVertexArrays(1, &mVAO);
+	glDeleteBuffers(1, &mVBO);
+}
+
+void VertexArray::ArgumentPreset::SetAttributeSizes(size_t argMass, ...)
+{
+	va_list ap;
+	va_start(ap, argMass);
+
+	mAttributeSizes.clear();
+	for (size_t i = 0; i < argMass; ++i)
+	{
+		size_t v = va_arg(ap, size_t);
+		mAttributeSizes.emplace_back(v);
+	}
+
+	mAttributeSizes.shrink_to_fit();
 }
