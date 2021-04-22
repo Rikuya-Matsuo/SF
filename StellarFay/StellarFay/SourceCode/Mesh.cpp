@@ -5,6 +5,8 @@
 #include "Vector.h"
 #include "Hash.h"
 
+VertexArray::ArgumentPreset Mesh::VAPreset;
+
 class Mesh::ObjectData
 {
 public:
@@ -108,13 +110,24 @@ private:
 
 Mesh::Mesh()
 {
+	static bool firstLoad = true;
+	if (firstLoad)
+	{
+		VAPreset.mType = GL_FLOAT;
+		VAPreset.mNormalize = GL_FALSE;
+		VAPreset.SetAttributeSizes(3, 3, 2, 3);
+
+		firstLoad = false;
+	}
 }
 
 Mesh::~Mesh()
 {
 	// リソース割り当ての解除
-	glDeleteVertexArrays(1, &mVAO);
-	glDeleteBuffers(1, &mVBO);
+	if (mVertexArray)
+	{
+		delete mVertexArray;
+	}
 
 	for (auto itr = mObjects.rbegin(); itr != mObjects.rend(); ++itr)
 	{
@@ -484,28 +497,7 @@ bool Mesh::Load(const std::string & path)
 	/////////////////////////////
 	// OpenGLに組み込む
 	/////////////////////////////
-	// 頂点配列、頂点バッファ生成
-	glGenBuffers(1, &mVAO);
-	glGenBuffers(1, &mVBO);
-	//glGenBuffers(1, &mEBO);
-
-	// 頂点配列をバインド
-	glBindVertexArray(mVAO);
-
-	// 頂点バッファに頂点を設定
-	glBindBuffer(GL_ARRAY_BUFFER, mVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mVertices.size(), mVertices.data(), GL_STATIC_DRAW);
-
-	// 頂点データ解釈方法をOpenGLに教える
-	const int stride = sizeof(float) * 8;
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, (void*)(sizeof(float) * 3));
-	glEnableVertexAttribArray(1);
-
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, stride, (void*)(sizeof(float) * 5));
-	glEnableVertexAttribArray(2);
+	mVertexArray = new VertexArray(mVertices.data(), mVertices.size(), VAPreset);
 
 	// ポリゴングループごとにインデックスバッファを作成
 	for (auto objItr : mObjects)
@@ -518,10 +510,6 @@ bool Mesh::Load(const std::string & path)
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * polygItr->mIndices.size(), polygItr->mIndices.data(), GL_STATIC_DRAW);
 		}
 	}
-
-	// バッファをアンバインド
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
 
 	return true;
 }
@@ -636,7 +624,7 @@ Mesh::ObjectData * Mesh::FindObjectWithName(const std::string & objectName) cons
 
 void Mesh::DrawUnderCondition(Shader * shader, std::function<bool(ObjectData * obj, size_t polyGroupIndex)> condition) const
 {
-	glBindVertexArray(mVAO);
+	mVertexArray->Activate();
 	for (auto objItr : mObjects)
 	{
 		// オブジェクトデータの描画フラグが偽のものはスキップ

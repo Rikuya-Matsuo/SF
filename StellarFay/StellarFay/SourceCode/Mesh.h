@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "Collision.h"
+#include "VertexArray.h"
 #include <vector>
 #include <list>
 #include <string>
@@ -30,9 +31,7 @@ public:
 	AABB GetBiggestAABB() const;
 
 private:
-	GLuint mVAO;
-
-	GLuint mVBO;
+	VertexArray * mVertexArray;
 
 	// 頂点配列
 	std::vector<float> mVertices;
@@ -58,4 +57,6 @@ private:
 
 	// 条件が真となるものを描画する
 	void DrawUnderCondition(Shader * shader, std::function<bool(ObjectData * obj, size_t polyGroupIndex)> condition) const;
+
+	static VertexArray::ArgumentPreset VAPreset;
 };
