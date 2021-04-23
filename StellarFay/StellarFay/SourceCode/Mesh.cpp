@@ -5,7 +5,7 @@
 #include "Vector.h"
 #include "Hash.h"
 
-VertexArray::ArgumentPreset Mesh::VAPreset;
+VertexArray::ArgumentPreset Mesh::mVAPreset;
 
 class Mesh::ObjectData
 {
@@ -113,9 +113,9 @@ Mesh::Mesh()
 	static bool firstLoad = true;
 	if (firstLoad)
 	{
-		VAPreset.mType = GL_FLOAT;
-		VAPreset.mNormalize = GL_FALSE;
-		VAPreset.SetAttributeSizes(3, 3, 2, 3);
+		mVAPreset.mType = GL_FLOAT;
+		mVAPreset.mNormalize = GL_FALSE;
+		mVAPreset.SetAttributeSizes(3, 3, 2, 3);
 
 		firstLoad = false;
 	}
@@ -497,7 +497,7 @@ bool Mesh::Load(const std::string & path)
 	/////////////////////////////
 	// OpenGLに組み込む
 	/////////////////////////////
-	mVertexArray = new VertexArray(mVertices.data(), mVertices.size(), VAPreset);
+	mVertexArray = new VertexArray(mVertices.data(), mVertices.size(), mVAPreset);
 
 	// ポリゴングループごとにインデックスバッファを作成
 	for (auto objItr : mObjects)

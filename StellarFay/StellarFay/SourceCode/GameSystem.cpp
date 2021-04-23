@@ -1,6 +1,7 @@
 ﻿#include <cstdio>
 #include <SDL/SDL_image.h>
 #include "GameSystem.h"
+#include "Renderer.h"
 
 GameSystem::GameSystem():
 	mPrevTicks(SDL_GetTicks()),
@@ -26,6 +27,15 @@ bool GameSystem::Init()
 		printf("画像ライブラリ初期化失敗\n");
 		return false;
 	}
+
+	// デバッグ時のみフルスクリーンではない
+	bool fullScreenFlag = true;
+#ifdef DEBUG_SF
+	fullScreenFlag = false;
+#endif
+
+	mRenderer = new Renderer();
+	mRenderer->Init(1920, 1080, fullScreenFlag);
 
 	return true;
 }

@@ -27,10 +27,17 @@ public:
 
 	float GetGameWorldDeltaTime() const { return mGameWorldDetaTime; }
 
+	class Renderer * GetRenderer() { return mRenderer; }
+
 	void SetTimeSpeedRate(float rate) { mTimeSpeedRate = rate; }
 
 private:
 	GameSystem();
+
+	/////////////////////
+	// レンダラー
+	/////////////////////
+	class Renderer * mRenderer;
 
 	////////////////
 	// 時間関係
@@ -52,3 +59,4 @@ private:
 };
 
 #define GAME_SYSTEM_INSTANCE GameSystem::GetInstance()
+#define RENDERER_INSTANCE (*(GAME_SYSTEM_INSTANCE.GetRenderer()))
