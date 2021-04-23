@@ -160,6 +160,7 @@
     <ClCompile Include="SourceCode\MeshComponent.cpp" />
     <ClCompile Include="SourceCode\Quaternion.cpp" />
     <ClCompile Include="SourceCode\Renderer.cpp" />
+    <ClCompile Include="SourceCode\SceneBase.cpp" />
     <ClCompile Include="SourceCode\Shader.cpp" />
     <ClCompile Include="SourceCode\Texture.cpp" />
     <ClCompile Include="SourceCode\Vector.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="SourceCode\MeshComponent.h" />
     <ClInclude Include="SourceCode\Quaternion.h" />
     <ClInclude Include="SourceCode\Renderer.h" />
+    <ClInclude Include="SourceCode\SceneBase.h" />
     <ClInclude Include="SourceCode\Shader.h" />
     <ClInclude Include="SourceCode\Texture.h" />
     <ClInclude Include="SourceCode\Vector.h" />

@@ -1,5 +1,6 @@
 ﻿#include "Actor.h"
 #include "ComponentBase.h"
+#include "SceneBase.h"
 #include <algorithm>
 
 const Actor::ActorFlagType Actor::mSortComponentsFlagMask = BIT_SHIFT(0);
@@ -7,6 +8,7 @@ const Actor::ActorFlagType Actor::mSortComponentsFlagMask = BIT_SHIFT(0);
 Actor::Actor(int priority) :
 	mPriority(priority)
 {
+	SceneBase::GetLatestScene(this);
 }
 
 Actor::~Actor()

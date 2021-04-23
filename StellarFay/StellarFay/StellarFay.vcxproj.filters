@@ -37,6 +37,12 @@
     <Filter Include="ヘッダー ファイル\Actor">
       <UniqueIdentifier>{6901ce14-8352-4302-a581-d7742a80e55b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{5ed54b25-c7dc-44a1-8dd8-4dc3eb53a498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{dfe77e40-e2fd-4e58-960f-79743aefa0f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c">
@@ -83,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="SourceCode\MeshComponent.cpp">
       <Filter>ソース ファイル\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SceneBase.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\CommonMath.h">
       <Filter>ヘッダー ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SceneBase.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

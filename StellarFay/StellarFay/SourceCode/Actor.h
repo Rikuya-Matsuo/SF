@@ -13,6 +13,8 @@ public:
 	// コンポーネントとアクター自身の更新処理
 	virtual void Update() final;
 
+	void SetBelongScene(class SceneBase * scene) { mBelongScene = scene; }
+
 	// コンポーネントのソートを要請する
 	// ソートが実行されるのはアクターのUpdate()開始時のみ
 	void RequestSortComponents() { BitFlagFunc::Set(mActorFlags, mSortComponentsFlagMask, true); }
@@ -45,6 +47,9 @@ protected:
 
 	// 所持するコンポーネントのリスト
 	std::list<class ComponentBase *> mComponents;
+
+	// 所属するシーン
+	class SceneBase * mBelongScene;
 
 	// 継承先の処理
 	virtual void UpdateActor();
