@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Collision.h"
 #include "VertexArray.h"
+#include "Hash.h"
 #include <vector>
 #include <list>
 #include <string>
@@ -67,4 +68,118 @@ private:
 	void DrawUnderCondition(Shader * shader, std::function<bool(ObjectData * obj, size_t polyGroupIndex)> condition) const;
 
 	static VertexArray::ArgumentPreset mVAPreset;
+};
+
+//////////////////////////
+// 内部構造体群
+//////////////////////////
+class Mesh::ObjectData
+{
+public:
+	friend Mesh;
+
+	struct PolyGroup
+	{
+		std::string mName;
+		std::vector<GLuint> mIndices;
+
+		GLuint mEBO;
+
+		std::string mUsemtlName;
+		const MtlData * mUsemtl;
+
+		~PolyGroup()
+		{
+			glDeleteBuffers(1, &mEBO);
+			std::vector<GLuint>().swap(mIndices);
+		}
+	};
+
+	const std::string & GetName() const { return mName; }
+	const AABB & GetBox() const { return mBox; }
+	bool GetDrawFlag() const { return mDrawFlag; }
+	const std::vector<PolyGroup*> & GetPolyGroups() const { return mPolyGroups; }
+
+private:
+	std::string mName;
+
+	// 内包する直方体（AABB）
+	AABB mBox;
+
+	bool mDrawFlag;
+
+	std::vector<PolyGroup *> mPolyGroups;
+
+	ObjectData() :
+		mDrawFlag(true)
+	{
+		PolyGroup * group = new PolyGroup;
+		mPolyGroups.emplace_back(group);
+	}
+
+	~ObjectData()
+	{
+		for (auto itr = mPolyGroups.rbegin(); itr != mPolyGroups.rend(); ++itr)
+		{
+			delete *itr;
+		}
+		std::vector<PolyGroup *>().swap(mPolyGroups);
+	}
+};
+
+struct Mesh::ObjPolyVertData
+{
+	int mVertIndex = -1;
+	int mTexCoordIndex = -1;
+	int mNormIndex = -1;
+
+	void Load(const std::string & str);
+
+	friend bool operator==(const ObjPolyVertData & lhs, const ObjPolyVertData & rhs)
+	{
+		return lhs.mVertIndex == rhs.mVertIndex &&
+			lhs.mTexCoordIndex == rhs.mTexCoordIndex &&
+			lhs.mNormIndex == rhs.mNormIndex;
+	}
+
+	struct HashFunc final
+	{
+		size_t operator()(const ObjPolyVertData & v) const
+		{
+			static const size_t arraySize = 3;
+			int array[arraySize] = { v.mVertIndex, v.mTexCoordIndex, v.mNormIndex };
+			return Hash::Fnv1(reinterpret_cast<uint32_t*>(array), arraySize);
+		}
+	};
+};
+
+struct Mesh::ObjPolyData
+{
+	ObjPolyVertData mVerts[3];
+	unsigned int mObjectIndex = 0;
+	unsigned int mPolyGroupIndex = 0;
+
+	std::string mUsemtl;
+};
+
+class Mesh::MtlData
+{
+public:
+	friend Mesh;
+
+	const std::string & GetName() const { return mName; }
+	float GetDissolve() { return mDissolve; }
+	const Texture * GetTexture() const { return mTexture; }
+
+	~MtlData()
+	{
+		delete mTexture;
+	}
+
+private:
+	std::string mName;
+
+	float mDissolve;
+
+	Texture * mTexture;
 };

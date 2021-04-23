@@ -31,9 +31,40 @@ void MeshComponent::DrawFullDissolveObject(Shader * shader) const
 
 void MeshComponent::DrawUnderCondition(Shader * shader, std::function<bool(Mesh::ObjectData*obj, size_t polyGroupIndex)> condition) const
 {
+	// 頂点配列アクティブ化
 	mMesh->mVertexArray->Activate();
+
+	// ポリゴングループごとに描画処理
 	for (auto objItr : mMesh->mObjects)
 	{
-		//if (objItr->)
+		// 描画フラグが偽であればスキップ
+		if (!objItr->GetDrawFlag())
+		{
+			continue;
+		}
+
+		// オブジェクトに所属するポリゴングループに対し、処理を行う
+		for (size_t polygIndex = 0; polygIndex < objItr->GetPolyGroups().size(); ++polygIndex)
+		{
+			// 指定した条件が偽になるものはスキップ
+			if (!condition(objItr, polygIndex))
+			{
+				continue;
+			}
+
+			// エイリアス取得
+			const Mesh::ObjectData::PolyGroup * polygPtr = objItr->GetPolyGroups()[polygIndex];
+
+			const Mesh::MtlData * mtl = polygPtr->mUsemtl;
+			const Texture * tex = mtl->GetTexture();
+
+			if (tex)
+			{
+				tex->Activate();
+			}
+
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, polygPtr->mEBO);
+			glDrawElements(GL_TRIANGLES, polygPtr->mIndices.size(), GL_UNSIGNED_INT, 0);
+		}
 	}
 }
