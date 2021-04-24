@@ -130,7 +130,7 @@ void Renderer::RegisterMeshComponent(MeshComponent * meshComp)
 	mMeshComponents.emplace_back(meshComp);
 }
 
-void Renderer::DeregisterComponent(MeshComponent * meshComp)
+void Renderer::DeregisterMeshComponent(MeshComponent * meshComp)
 {
 	// 指定されたコンポーネントを検索
 	auto itr = std::find(mMeshComponents.begin(), mMeshComponents.end(), meshComp);

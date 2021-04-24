@@ -21,7 +21,7 @@ public:
 	void RegisterMeshComponent(class MeshComponent * meshComp);
 
 	// メッシュコンポーネント登録解除
-	void DeregisterComponent(class MeshComponent * meshComp);
+	void DeregisterMeshComponent(class MeshComponent * meshComp);
 
 private:
 	// ウィンドウサイズ

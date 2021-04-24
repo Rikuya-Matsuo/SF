@@ -21,7 +21,7 @@ MeshComponent::MeshComponent(Actor * owner, Mesh * msh, int drawPriority) :
 
 MeshComponent::~MeshComponent()
 {
-	RENDERER_INSTANCE.DeregisterComponent(this);
+	RENDERER_INSTANCE.DeregisterMeshComponent(this);
 }
 
 void MeshComponent::SetInitialShader(const std::string & vertFilePath, const std::string & fragFilePath)
