@@ -29,14 +29,49 @@ void SceneBase::ResisterActor(Actor * actor)
 		}
 	}
 
-	// ここまでに挿入できなければ最後尾に挿入する
+	// ここまでに挿入できなければ最後尾に追加する
 	mActors.emplace_back(actor);
 }
 
-void SceneBase::UpdateActor()
+void SceneBase::Update()
 {
+	// フラグの値に従い、アクターをソート
+	if (mSortActorFlag)
+	{
+		// ソート順を示すラムダ式
+		auto order = [](const Actor * lhs, const Actor * rhs)
+		{
+			return lhs->GetPriority() < rhs->GetPriority();
+		};
+
+		// ソート
+		mActors.sort(order);
+
+		// フラグを下す
+		mSortActorFlag = false;
+	}
+
+	// アクターの更新
+	UpdateActors();
+
+	// シーンの更新
+	UpdateScene();
+}
+
+void SceneBase::UpdateScene()
+{
+	// 処理内容は継承先に依存
+}
+
+void SceneBase::UpdateActors()
+{
+	// 全アクターの更新処理
 	for (auto itr : mActors)
 	{
-		itr->Update();
+		// アクティブなもののみ更新を行う
+		if (itr->GetActiveFlag())
+		{
+			itr->Update();
+		}
 	}
 }

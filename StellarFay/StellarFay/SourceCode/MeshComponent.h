@@ -1,8 +1,21 @@
 ﻿#pragma once
 #include "ComponentBase.h"
 #include "Mesh.h"
+#include "BitFlagFunc.h"
 #include <string>
 #include <functional>
+
+namespace MeshComponentFlagMask
+{
+	// 型
+	typedef Uint8 Type;
+
+	// マスク
+	static const Type mDrawFlagMask			= BIT_SHIFT(0);
+
+	// 初期化値
+	static const Type mInitialFlag = mDrawFlagMask;
+}
 
 class MeshComponent : public ComponentBase
 {
@@ -16,13 +29,20 @@ public:
 
 	void SetShader(class Shader * shader) { mShader = shader; }
 
+	void SetDrawFlag(bool value) { BitFlagFunc::Set(mMeshCompFlags, MeshComponentFlagMask::mDrawFlagMask, value); }
+
 	class Shader * GetShader() const { return mShader; }
+
+	bool GetDrawFlag() const { return BitFlagFunc::GetOr(mMeshCompFlags, MeshComponentFlagMask::mDrawFlagMask); }
 
 	void DrawFullDissolveObject(class Shader * shader) const;
 
 	void DrawFullDissolveObject() const { DrawFullDissolveObject(mShader); }
 
 private:
+	// ビットフラグ
+	MeshComponentFlagMask::Type mMeshCompFlags;
+
 	// メッシュ
 	Mesh * mMesh;
 

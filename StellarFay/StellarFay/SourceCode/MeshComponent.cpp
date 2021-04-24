@@ -5,12 +5,16 @@
 #include "Renderer.h"
 #include "Shader.h"
 
+// 名前空間の省略
+namespace mcfm = MeshComponentFlagMask;
+
 Shader * MeshComponent::mInitialShader = nullptr;
 
 MeshComponent::MeshComponent(Actor * owner, Mesh * msh, int drawPriority) :
 	ComponentBase(owner, 1000),
 	mMesh(msh),
-	mDrawPriority(drawPriority)
+	mDrawPriority(drawPriority),
+	mMeshCompFlags(mcfm::mInitialFlag)
 {
 }
 

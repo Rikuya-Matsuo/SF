@@ -61,6 +61,15 @@ void Actor::Update()
 	UpdateActorLast();
 }
 
+void Actor::SetPriority(int priority)
+{
+	// 更新順変更
+	mPriority = priority;
+	
+	// シーンに対しアクターのソートを要請
+	mBelongScene->RequestSortActor();
+}
+
 void Actor::ResisterComponent(ComponentBase * cmp)
 {
 	// mPriorityの値が小さい順になるよう挿入する

@@ -12,9 +12,10 @@ namespace ActorFlagMask
 	// ビットフラグマスク
 	static const Type mSortComponentsFlagMask			= BIT_SHIFT(0);
 	static const Type mActiveFlagMask					= BIT_SHIFT(1);
+	static const Type mDrawFlagMask						= BIT_SHIFT(2);
 
 	// ビットフラグの初期化値
-	static const Type mInitialFlag = mActiveFlagMask;
+	static const Type mInitialFlag = mActiveFlagMask | mDrawFlagMask;
 }
 
 class Actor
@@ -26,9 +27,32 @@ public:
 	// コンポーネントとアクター自身の更新処理
 	virtual void Update() final;
 
+	/////////////////////
+	// セッター
+	/////////////////////
+	// 所属シーンのセッター
 	void SetBelongScene(class SceneBase * scene) { mBelongScene = scene; }
 
+	// mPriorityのセットと同時に、所属シーンに対してアクターのソート要請を出すため、必要な時だけ呼ぶようにすべし
+	void SetPriority(int priority);
+
+	// 更新フラグのセッター
+	void SetActiveFlag(bool value) { BitFlagFunc::Set(mActorFlags, ActorFlagMask::mActiveFlagMask, value); }
+
+	// 描画フラグのセッター
+	void SetDrawFlag(bool value) { BitFlagFunc::Set(mActorFlags, ActorFlagMask::mDrawFlagMask, value); }
+
+	///////////////////
+	// ゲッター
+	///////////////////
+	// 更新順の値を取得
 	int GetPriority() const { return mPriority; }
+
+	// 更新フラグ取得
+	bool GetActiveFlag() const { return BitFlagFunc::GetOr(mActorFlags, ActorFlagMask::mActiveFlagMask); }
+
+	// 描画フラグ取得
+	bool GetDrawFlag() const { return BitFlagFunc::GetOr(mActorFlags, ActorFlagMask::mDrawFlagMask); }
 
 	// コンポーネントのソートを要請する
 	// ソートが実行されるのはアクターのUpdate()開始時のみ
