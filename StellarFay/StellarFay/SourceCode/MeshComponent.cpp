@@ -16,10 +16,12 @@ MeshComponent::MeshComponent(Actor * owner, Mesh * msh, int drawPriority) :
 	mDrawPriority(drawPriority),
 	mMeshCompFlags(mcfm::mInitialFlag)
 {
+	RENDERER_INSTANCE.RegisterMeshComponent(this);
 }
 
 MeshComponent::~MeshComponent()
 {
+	RENDERER_INSTANCE.DeregisterComponent(this);
 }
 
 void MeshComponent::SetInitialShader(const std::string & vertFilePath, const std::string & fragFilePath)

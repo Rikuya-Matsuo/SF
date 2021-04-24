@@ -1,6 +1,8 @@
 ﻿#include <cstdio>
+#include <algorithm>
 #include "Renderer.h"
 #include "Shader.h"
+#include "MeshComponent.h"
 
 Renderer::Renderer()
 {
@@ -106,4 +108,36 @@ Shader * Renderer::GetShader(const std::string & vertFilePath, const std::string
 
 	// コンテナのkeyの要素を返す
 	return mShaderMap[key];
+}
+
+void Renderer::RegisterMeshComponent(MeshComponent * meshComp)
+{
+	// 描画順の数値取得
+	const int drawPriority = meshComp->GetDrawPriority();
+
+	// 描画順になるように挿入
+	for (auto itr = mMeshComponents.begin(); itr != mMeshComponents.end(); ++itr)
+	{
+		if (drawPriority < (*itr)->GetDrawPriority())
+		{
+			mMeshComponents.insert(itr, meshComp);
+
+			return;
+		}
+	}
+
+	// ここまでに挿入されなければ最後尾に追加する
+	mMeshComponents.emplace_back(meshComp);
+}
+
+void Renderer::DeregisterComponent(MeshComponent * meshComp)
+{
+	// 指定されたコンポーネントを検索
+	auto itr = std::find(mMeshComponents.begin(), mMeshComponents.end(), meshComp);
+
+	// 検索にヒットすれば、リストから排除する
+	if (itr != mMeshComponents.end())
+	{
+		mMeshComponents.erase(itr);
+	}
 }

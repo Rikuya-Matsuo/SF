@@ -14,7 +14,7 @@ void SceneBase::GetLatestScene(Actor * actor)
 	actor->SetBelongScene(mLatestScene);
 }
 
-void SceneBase::ResisterActor(Actor * actor)
+void SceneBase::RegisterActor(Actor * actor)
 {
 	// 更新順を取得
 	const int priority = actor->GetPriority();

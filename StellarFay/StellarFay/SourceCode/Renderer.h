@@ -2,6 +2,7 @@
 #include <SDL/SDL.h>
 #include <string>
 #include <unordered_map>
+#include <list>
 #include "Hash.h"
 
 class Renderer
@@ -10,9 +11,17 @@ public:
 	Renderer();
 	~Renderer();
 
+	// 初期化
 	bool Init(Uint32 windowWidth, Uint32 windowHeight, bool fullScreen);
 
+	// シェーダのロード。すでにロードされている組み合わせであればそのポインタを返す
 	class Shader * GetShader(const std::string & vertFilePath, const std::string & fragFilePath);
+
+	// メッシュコンポーネントの登録
+	void RegisterMeshComponent(class MeshComponent * meshComp);
+
+	// メッシュコンポーネント登録解除
+	void DeregisterComponent(class MeshComponent * meshComp);
 
 private:
 	// ウィンドウサイズ
@@ -28,9 +37,9 @@ private:
 	// コンテクスト
 	SDL_GLContext mContext;
 
-	// シェーダーコンテナ
 	// 頂点シェーダファイル名と、フラグメントシェーダファイル名の組み合わせで検索できるようにする
 	typedef std::pair<std::string, std::string> StringPair;
+
 	// string同士のpairのためのハッシュ用ファンクタ
 	struct StringPairHash final
 	{
@@ -40,6 +49,11 @@ private:
 			return Hash::Fnv1(hashes, 2);
 		}
 	};
+
+	// シェーダーコンテナ
 	typedef std::unordered_map<StringPair, class Shader *, StringPairHash> ShaderMap;
 	ShaderMap mShaderMap;
+
+	// メッシュコンポーネントのコンテナ
+	std::list<class MeshComponent *> mMeshComponents;
 };

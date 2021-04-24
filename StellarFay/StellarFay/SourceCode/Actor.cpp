@@ -12,7 +12,7 @@ Actor::Actor(int priority) :
 {
 	// 所属シーン取得及び、シーンへのアクター登録
 	SceneBase::GetLatestScene(this);
-	mBelongScene->ResisterActor(this);
+	mBelongScene->RegisterActor(this);
 }
 
 Actor::~Actor()
@@ -70,7 +70,7 @@ void Actor::SetPriority(int priority)
 	mBelongScene->RequestSortActor();
 }
 
-void Actor::ResisterComponent(ComponentBase * cmp)
+void Actor::RegisterComponent(ComponentBase * cmp)
 {
 	// mPriorityの値が小さい順になるよう挿入する
 	const int priority = cmp->GetPriority();

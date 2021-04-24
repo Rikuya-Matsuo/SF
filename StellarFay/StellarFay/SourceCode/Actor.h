@@ -60,7 +60,7 @@ public:
 
 	// アクターにコンポーネントを追加
 	// コンポーネント基底クラスのコンストラクタにて呼び出すことで、いちいちリストへの追加処理を書かなくてもよいようにする
-	void ResisterComponent(class ComponentBase * cmp);
+	void RegisterComponent(class ComponentBase * cmp);
 
 protected:
 	// ビットフラグ

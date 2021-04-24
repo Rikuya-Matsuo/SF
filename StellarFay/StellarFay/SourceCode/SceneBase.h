@@ -11,7 +11,7 @@ public:
 	static void GetLatestScene(class Actor * actor);
 
 	// シーンクラス内のコンテナに、受け取ったアクターを加える
-	void ResisterActor(class Actor * actor);
+	void RegisterActor(class Actor * actor);
 
 	// アクターのソートを要請。アクターの更新順が変わったときに実行する。
 	void RequestSortActor() { mSortActorFlag = true; }

@@ -27,13 +27,21 @@ public:
 
 	static void SetInitialShader(class Shader * shader) { mInitialShader = shader; }
 
+	////////////////////////
+	// セッター
+	////////////////////////
 	void SetShader(class Shader * shader) { mShader = shader; }
 
 	void SetDrawFlag(bool value) { BitFlagFunc::Set(mMeshCompFlags, MeshComponentFlagMask::mDrawFlagMask, value); }
 
+	////////////////////////
+	// ゲッター
+	////////////////////////
 	class Shader * GetShader() const { return mShader; }
 
 	bool GetDrawFlag() const { return BitFlagFunc::GetOr(mMeshCompFlags, MeshComponentFlagMask::mDrawFlagMask); }
+
+	int GetDrawPriority() const { return mDrawPriority; }
 
 	void DrawFullDissolveObject(class Shader * shader) const;
 
