@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "Shader.h"
 #include "MeshComponent.h"
+#include "Actor.h"
 
 Renderer::Renderer()
 {
@@ -112,32 +113,101 @@ Shader * Renderer::GetShader(const std::string & vertFilePath, const std::string
 
 void Renderer::RegisterMeshComponent(MeshComponent * meshComp)
 {
+	//////////////////////////////
+	// カメラ距離ソートコンテナ
+	//////////////////////////////
+	// ソートは描画直前に行うため、単純に最後尾に追加するだけでよい
+	mMeshComponentsSortedInCameraDistance.emplace_back(meshComp);
+
+	//////////////////////////////
+	// 描画順ソートコンテナ
+	//////////////////////////////
 	// 描画順の数値取得
 	const int drawPriority = meshComp->GetDrawPriority();
 
 	// 描画順になるように挿入
-	for (auto itr = mMeshComponents.begin(); itr != mMeshComponents.end(); ++itr)
+	for (auto itr = mMeshComponentsSortedInDrawPriority.begin(); itr != mMeshComponentsSortedInDrawPriority.end(); ++itr)
 	{
 		if (drawPriority < (*itr)->GetDrawPriority())
 		{
-			mMeshComponents.insert(itr, meshComp);
+			mMeshComponentsSortedInDrawPriority.insert(itr, meshComp);
 
 			return;
 		}
 	}
 
 	// ここまでに挿入されなければ最後尾に追加する
-	mMeshComponents.emplace_back(meshComp);
+	mMeshComponentsSortedInDrawPriority.emplace_back(meshComp);
 }
 
 void Renderer::DeregisterMeshComponent(MeshComponent * meshComp)
 {
 	// 指定されたコンポーネントを検索
-	auto itr = std::find(mMeshComponents.begin(), mMeshComponents.end(), meshComp);
+	auto itr = std::find(mMeshComponentsSortedInDrawPriority.begin(), mMeshComponentsSortedInDrawPriority.end(), meshComp);
 
 	// 検索にヒットすれば、リストから排除する
-	if (itr != mMeshComponents.end())
+	if (itr != mMeshComponentsSortedInDrawPriority.end())
 	{
-		mMeshComponents.erase(itr);
+		mMeshComponentsSortedInDrawPriority.erase(itr);
+	}
+
+	// カメラ順ソートのコンテナからも同様に削除する
+	itr = std::find(mMeshComponentsSortedInCameraDistance.begin(), mMeshComponentsSortedInCameraDistance.end(), meshComp);
+
+	if (itr != mMeshComponentsSortedInCameraDistance.end())
+	{
+		mMeshComponentsSortedInCameraDistance.erase(itr);
+	}
+}
+
+void Renderer::Draw()
+{
+	// 不透明部分
+	DrawFullDissolveObject();
+
+	// 半透明部分
+	DrawNotFullDissolveObject();
+}
+
+void Renderer::DrawFullDissolveObject()
+{
+	// 描画順に従って描画
+	for (auto itr : mMeshComponentsSortedInDrawPriority)
+	{
+		// ただし、コンポーネントとアクターの両方が描画を認めたものに限る
+		bool actorAllow = itr->GetOwner()->GetDrawFlag();
+		bool compAllow = itr->GetDrawFlag();
+		if (actorAllow && compAllow)
+		{
+			itr->DrawFullDissolveObject();
+		}
+	}
+}
+
+void Renderer::DrawNotFullDissolveObject()
+{
+	// カメラとコンポーネント所持者の距離が長い順にソート
+	// ラムダ式
+	auto calcCamDistSq = [this](const Actor * actor) -> float
+	{
+		return (actor->GetPosition() - mCameraPosition).LengthSq();
+	};
+	auto camDistLongOrder = [&calcCamDistSq](const MeshComponent * lhs, const MeshComponent * rhs)
+	{
+		return (calcCamDistSq(lhs->GetOwner()) > calcCamDistSq(rhs->GetOwner()));
+	};
+
+	// ソート
+	mMeshComponentsSortedInCameraDistance.sort(camDistLongOrder);
+
+	// 描画
+	for (auto itr : mMeshComponentsSortedInCameraDistance)
+	{
+		bool actorAllow = itr->GetOwner()->GetDrawFlag();
+		bool compAllow = itr->GetDrawFlag();
+		if (actorAllow && compAllow)
+		{
+			itr->DrawNotFullDissolveObject();
+		}
 	}
 }

@@ -10,6 +10,8 @@ public:
 
 	virtual void Update();
 
+	virtual class Actor * GetOwner() const final { return mOwner; }
+
 	virtual int GetPriority() const final { return mPriority; }
 
 	virtual bool GetBeforeUpdateActorFlag() const final { return (mPriority < 0); }

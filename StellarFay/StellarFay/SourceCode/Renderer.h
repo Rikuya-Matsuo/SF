@@ -3,6 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <list>
+#include "Vector.h"
 #include "Hash.h"
 
 class Renderer
@@ -22,6 +23,12 @@ public:
 
 	// メッシュコンポーネント登録解除
 	void DeregisterMeshComponent(class MeshComponent * meshComp);
+
+	// カメラ位置のセット
+	void SetCameraPos(const Vector3D & pos) { mCameraPosition = pos; }
+
+	// 描画
+	void Draw();
 
 private:
 	// ウィンドウサイズ
@@ -54,6 +61,18 @@ private:
 	typedef std::unordered_map<StringPair, class Shader *, StringPairHash> ShaderMap;
 	ShaderMap mShaderMap;
 
-	// メッシュコンポーネントのコンテナ
-	std::list<class MeshComponent *> mMeshComponents;
+	// メッシュコンポーネントのコンテナ（描画順ソート）
+	std::list<class MeshComponent *> mMeshComponentsSortedInDrawPriority;
+
+	// メッシュコンポーネントのコンテナ（カメラ距離ソート）
+	std::list<class MeshComponent *> mMeshComponentsSortedInCameraDistance;
+
+	// カメラ位置
+	Vector3D mCameraPosition;
+
+	// 不透明オブジェクト描画部分
+	void DrawFullDissolveObject();
+
+	// 半透明オブジェクト描画部分
+	void DrawNotFullDissolveObject();
 };

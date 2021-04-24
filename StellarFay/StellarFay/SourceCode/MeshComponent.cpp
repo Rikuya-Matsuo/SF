@@ -35,10 +35,18 @@ void MeshComponent::DrawFullDissolveObject(Shader * shader) const
 	
 }
 
+void MeshComponent::DrawNotFullDissolveObject(Shader * shader) const
+{
+
+}
+
 void MeshComponent::DrawUnderCondition(Shader * shader, std::function<bool(Mesh::ObjectData*obj, size_t polyGroupIndex)> condition) const
 {
 	// 頂点配列アクティブ化
 	mMesh->mVertexArray->Activate();
+
+	// シェーダアクティブ化
+	shader->Activate();
 
 	// ポリゴングループごとに描画処理
 	for (auto objItr : mMesh->mObjects)

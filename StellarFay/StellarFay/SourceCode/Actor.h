@@ -45,6 +45,9 @@ public:
 	///////////////////
 	// ゲッター
 	///////////////////
+	// 位置取得
+	const Vector3D & GetPosition() const { return mPosition; }
+
 	// 更新順の値を取得
 	int GetPriority() const { return mPriority; }
 

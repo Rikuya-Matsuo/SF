@@ -43,9 +43,16 @@ public:
 
 	int GetDrawPriority() const { return mDrawPriority; }
 
+	///////////////////
+	// 描画
+	///////////////////
 	void DrawFullDissolveObject(class Shader * shader) const;
 
 	void DrawFullDissolveObject() const { DrawFullDissolveObject(mShader); }
+
+	void DrawNotFullDissolveObject(class Shader * shader) const;
+
+	void DrawNotFullDissolveObject() const { DrawNotFullDissolveObject(mShader); }
 
 private:
 	// ビットフラグ
