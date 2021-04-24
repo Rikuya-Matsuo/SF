@@ -32,12 +32,28 @@ void MeshComponent::SetInitialShader(const std::string & vertFilePath, const std
 
 void MeshComponent::DrawFullDissolveObject(Shader * shader) const
 {
-	
+	// ディゾルブが1であるかを検証するラムダ式
+	auto isFullDissolve = [](Mesh::ObjectData * obj, size_t polyGroupIndex)
+	{
+		const Mesh::MtlData * mtl = obj->GetPolyGroups()[polyGroupIndex]->mUsemtl;
+		return (mtl->GetDissolve() == 1.0f);
+	};
+
+	// 条件を指定して描画
+	DrawUnderCondition(shader, isFullDissolve);
 }
 
 void MeshComponent::DrawNotFullDissolveObject(Shader * shader) const
 {
+	// ディゾルブが1未満であるかを検証するラムダ式
+	auto isNotFullDissolve = [](Mesh::ObjectData * obj, size_t polyGroupIndex)
+	{
+		const Mesh::MtlData * mtl = obj->GetPolyGroups()[polyGroupIndex]->mUsemtl;
+		return (mtl->GetDissolve() < 1.0f);
+	};
 
+	// 条件を指定して描画
+	DrawUnderCondition(shader, isNotFullDissolve);
 }
 
 void MeshComponent::DrawUnderCondition(Shader * shader, std::function<bool(Mesh::ObjectData*obj, size_t polyGroupIndex)> condition) const

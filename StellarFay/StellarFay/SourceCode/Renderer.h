@@ -71,8 +71,8 @@ private:
 	Vector3D mCameraPosition;
 
 	// 不透明オブジェクト描画部分
-	void DrawFullDissolveObject();
+	void DrawFullDissolveObjects();
 
 	// 半透明オブジェクト描画部分
-	void DrawNotFullDissolveObject();
+	void DrawNotFullDissolveObjects();
 };

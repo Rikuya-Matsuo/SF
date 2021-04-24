@@ -163,13 +163,13 @@ void Renderer::DeregisterMeshComponent(MeshComponent * meshComp)
 void Renderer::Draw()
 {
 	// 不透明部分
-	DrawFullDissolveObject();
+	DrawFullDissolveObjects();
 
 	// 半透明部分
-	DrawNotFullDissolveObject();
+	DrawNotFullDissolveObjects();
 }
 
-void Renderer::DrawFullDissolveObject()
+void Renderer::DrawFullDissolveObjects()
 {
 	// 描画順に従って描画
 	for (auto itr : mMeshComponentsSortedInDrawPriority)
@@ -184,14 +184,16 @@ void Renderer::DrawFullDissolveObject()
 	}
 }
 
-void Renderer::DrawNotFullDissolveObject()
+void Renderer::DrawNotFullDissolveObjects()
 {
 	// カメラとコンポーネント所持者の距離が長い順にソート
 	// ラムダ式
+	// カメラ距離の2乗を計算
 	auto calcCamDistSq = [this](const Actor * actor) -> float
 	{
 		return (actor->GetPosition() - mCameraPosition).LengthSq();
 	};
+	// カメラ距離大きい順
 	auto camDistLongOrder = [&calcCamDistSq](const MeshComponent * lhs, const MeshComponent * rhs)
 	{
 		return (calcCamDistSq(lhs->GetOwner()) > calcCamDistSq(rhs->GetOwner()));

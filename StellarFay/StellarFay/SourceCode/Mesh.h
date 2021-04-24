@@ -168,7 +168,7 @@ public:
 	friend Mesh;
 
 	const std::string & GetName() const { return mName; }
-	float GetDissolve() { return mDissolve; }
+	float GetDissolve() const { return mDissolve; }
 	const Texture * GetTexture() const { return mTexture; }
 
 	~MtlData()
