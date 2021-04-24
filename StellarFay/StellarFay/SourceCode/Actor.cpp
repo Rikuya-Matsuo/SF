@@ -3,12 +3,16 @@
 #include "SceneBase.h"
 #include <algorithm>
 
-const Actor::ActorFlagType Actor::mSortComponentsFlagMask = BIT_SHIFT(0);
+// 本cppファイル内でのみ、省略した名前を使う
+namespace afm = ActorFlagMask;
 
 Actor::Actor(int priority) :
-	mPriority(priority)
+	mPriority(priority),
+	mActorFlags(afm::mInitialFlag)
 {
+	// 所属シーン取得及び、シーンへのアクター登録
 	SceneBase::GetLatestScene(this);
+	mBelongScene->ResisterActor(this);
 }
 
 Actor::~Actor()
@@ -25,7 +29,7 @@ Actor::~Actor()
 void Actor::Update()
 {
 	// コンポーネントのソート要請を受けた場合、実行
-	if (BitFlagFunc::GetOr(mActorFlags, mSortComponentsFlagMask))
+	if (BitFlagFunc::GetOr(mActorFlags, afm::mSortComponentsFlagMask))
 	{
 		// ソート順を示すラムダ式
 		auto orderLambda = [](const ComponentBase * c1, const ComponentBase * c2)

@@ -52,6 +52,10 @@ void GameSystem::Loop()
 
 void GameSystem::Finish()
 {
+	if (mRenderer)
+	{
+		delete mRenderer;
+	}
 }
 
 void GameSystem::UpdateDeltaTimes()
