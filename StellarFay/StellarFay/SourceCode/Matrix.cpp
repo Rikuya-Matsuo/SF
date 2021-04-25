@@ -1,5 +1,6 @@
 ﻿#include "Matrix.h"
 #include "Quaternion.h"
+#include <iomanip>
 
 static float mat3Ident[3][3] =
 {
@@ -154,4 +155,41 @@ Matrix4 Matrix4::CreateFromQuaternion(const Quaternion & q)
 	mat[3][3] = 1.0f;
 
 	return Matrix4(mat);
+}
+
+std::ostream & operator<<(std::ostream & stream, const Matrix3 & m)
+{
+	for (int i = 0; i < 3; ++i)
+	{
+		if (i)
+		{
+			stream << '\n';
+		}
+
+		for (int j = 0; j < 3; ++j)
+		{
+			stream << std::fixed << std::setprecision(3) << std::setw(6) << m.mat[i][j];
+		}
+	}
+
+	return stream;
+}
+
+std::ostream & operator<<(std::ostream & stream, const Matrix4 m)
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		if (i)
+		{
+			stream << '\n';
+		}
+
+		for (int j = 0; j < 4; ++j)
+		{
+			stream << std::fixed << std::setprecision(3) << std::setw(6) << m.mat[i][j];
+
+		}
+	}
+
+	return stream;
 }

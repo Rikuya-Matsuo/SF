@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <cmath>
+#include <ios>
 
 class Vector2D
 {
@@ -72,6 +73,8 @@ public:
 		y *= f;
 		return *this;
 	}
+
+	friend std::ostream & operator<<(std::ostream & stream, const Vector2D & v);
 
 	float LengthSq() const
 	{
@@ -204,6 +207,8 @@ public:
 		z *= f;
 		return *this;
 	}
+
+	friend std::ostream & operator<<(std::ostream & stream, const Vector3D & v);
 
 	float LengthSq() const
 	{

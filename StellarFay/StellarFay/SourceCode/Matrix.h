@@ -52,6 +52,8 @@ public:
 		return (*this = (*this * rm));
 	}
 
+	friend std::ostream & operator<<(std::ostream & stream, const Matrix3 & m);
+
 	float CalculateDeterminant() const;
 
 	static Matrix3 CreateScale(float xScale, float yScale)
@@ -152,6 +154,8 @@ public:
 	{
 		return (*this = (*this * rm));
 	}
+
+	friend std::ostream & operator<<(std::ostream & stream, const Matrix4 m);
 
 	// 挙動重いかも。
 	float CalculateDeterminant() const;

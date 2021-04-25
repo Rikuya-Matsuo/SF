@@ -1,6 +1,7 @@
 ﻿#include "Vector.h"
 #include "Matrix.h"
 #include <limits>
+#include <iomanip>
 
 const Vector2D Vector2D::Zero(0.0f, 0.0f);
 const Vector2D Vector2D::UnitX(1.0f, 0.0f);
@@ -59,4 +60,20 @@ Vector3D Vector3D::TransformWithPerspDiv(const Vector3D & v, const Matrix4 & mat
 	}
 	
 	return ret;
+}
+
+std::ostream & operator<<(std::ostream & stream, const Vector2D & v)
+{
+	stream << std::fixed << std::setprecision(3) <<
+		"(" << v.x << ", " << v.y << ")";
+
+	return stream;
+}
+
+std::ostream & operator<<(std::ostream & stream, const Vector3D & v)
+{
+	stream << std::fixed << std::setprecision(3) <<
+		"(" << v.x << ", " << v.y << ", " << v.z << ")";
+
+	return stream;
 }
