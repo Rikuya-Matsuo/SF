@@ -168,7 +168,7 @@ std::ostream & operator<<(std::ostream & stream, const Matrix3 & m)
 
 		for (int j = 0; j < 3; ++j)
 		{
-			stream << std::fixed << std::setprecision(3) << std::setw(6) << m.mat[i][j];
+			stream << std::fixed << std::setprecision(2) << std::setw(10) << m.mat[i][j] << ' ';
 		}
 	}
 
@@ -186,8 +186,7 @@ std::ostream & operator<<(std::ostream & stream, const Matrix4 m)
 
 		for (int j = 0; j < 4; ++j)
 		{
-			stream << std::fixed << std::setprecision(3) << std::setw(6) << m.mat[i][j];
-
+			stream << std::fixed << std::setprecision(2) << std::setw(10) << m.mat[i][j] << ' ';
 		}
 	}
 

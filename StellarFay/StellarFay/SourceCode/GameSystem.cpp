@@ -1,5 +1,6 @@
 ﻿#include <cstdio>
 #include <SDL/SDL_image.h>
+#include <iostream>
 #include "GameSystem.h"
 #include "Renderer.h"
 

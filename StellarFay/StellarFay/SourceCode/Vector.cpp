@@ -64,16 +64,21 @@ Vector3D Vector3D::TransformWithPerspDiv(const Vector3D & v, const Matrix4 & mat
 
 std::ostream & operator<<(std::ostream & stream, const Vector2D & v)
 {
-	stream << std::fixed << std::setprecision(3) <<
-		"(" << v.x << ", " << v.y << ")";
+	stream << std::fixed << std::setprecision(2) <<
+		"(" <<
+		std::setw(10) << v.x << ", " <<
+		std::setw(10) << v.y << ")";
 
 	return stream;
 }
 
 std::ostream & operator<<(std::ostream & stream, const Vector3D & v)
 {
-	stream << std::fixed << std::setprecision(3) <<
-		"(" << v.x << ", " << v.y << ", " << v.z << ")";
+	stream << std::fixed << std::setprecision(2) <<
+		"(" <<
+		std::setw(10) << v.x << ", " <<
+		std::setw(10) << v.y << ", " <<
+		std::setw(10) << v.z << ")";
 
 	return stream;
 }

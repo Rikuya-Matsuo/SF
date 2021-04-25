@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <SDL/SDL.h>
+#include "Vector.h"
+#include "Matrix.h"
 
 // デバッグマクロ
 // リリース時はこれをコメントアウトする
