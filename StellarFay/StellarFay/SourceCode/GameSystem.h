@@ -31,6 +31,8 @@ public:
 
 	class Renderer * GetRenderer() { return mRenderer; }
 
+	void SetFirstScene(class SceneBase * scene) { mCurrentScene = scene; }
+
 	void SetTimeSpeedRate(float rate) { mTimeSpeedRate = rate; }
 
 private:
@@ -58,6 +60,15 @@ private:
 	float mTimeSpeedRate;
 
 	void UpdateDeltaTimes();
+
+	///////////////////
+	// シーン
+	///////////////////
+	// 現在のシーン
+	class SceneBase * mCurrentScene;
+
+	// 次のシーンに移動する
+	bool GoNextScene();
 };
 
 #define GAME_SYSTEM_INSTANCE GameSystem::GetInstance()

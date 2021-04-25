@@ -3,10 +3,13 @@
 #include <iostream>
 #include "GameSystem.h"
 #include "Renderer.h"
+#include "Input.h"
+#include "SceneBase.h"
 
 GameSystem::GameSystem():
 	mPrevTicks(SDL_GetTicks()),
-	mTimeSpeedRate(1.0f)
+	mTimeSpeedRate(1.0f),
+	mCurrentScene(nullptr)
 {
 }
 
@@ -36,7 +39,14 @@ bool GameSystem::Init()
 #endif
 
 	mRenderer = new Renderer();
-	mRenderer->Init(1920, 1080, fullScreenFlag);
+	bool successRendererInit = mRenderer->Init(1920, 1080, fullScreenFlag);
+	if (!successRendererInit)
+	{
+		printf("Rendererクラス初期化失敗\n");
+		return false;
+	}
+
+	mRenderer->SetBGColor(Vector3D::Zero);
 
 	return true;
 }
@@ -47,7 +57,39 @@ void GameSystem::Loop()
 
 	while (runLoopFlag)
 	{
-		runLoopFlag = false;
+		// 時間情報更新
+		UpdateDeltaTimes();
+
+		// 入力状態の更新
+		INPUT_INSTANCE.Update();
+
+		// escキーの入力 or 終了イベントの発生でループを終了
+		if (INPUT_INSTANCE.GetKey(SDL_SCANCODE_ESCAPE) || INPUT_INSTANCE.GetQuitEventFlag())
+		{
+			runLoopFlag = false;
+		}
+
+		// シーン更新
+		mCurrentScene->Update();
+
+		// シーン移動判定
+		if (mCurrentScene->GetGoNextSceneFlag())
+		{
+			// 次シーンへ移動
+			bool success = GoNextScene();
+
+			// 失敗時、ゲームを終了する
+			if (!success)
+			{
+				runLoopFlag = false;
+			}
+		}
+
+		// 描画
+		mRenderer->Draw();
+
+		// 入力状態の最終更新
+		INPUT_INSTANCE.LastUpdate();
 	}
 }
 
@@ -56,6 +98,11 @@ void GameSystem::Finish()
 	if (mRenderer)
 	{
 		delete mRenderer;
+	}
+
+	if (mCurrentScene)
+	{
+		delete mCurrentScene;
 	}
 }
 
@@ -77,4 +124,29 @@ void GameSystem::UpdateDeltaTimes()
 
 	// ゲーム内世界におけるデルタタイム計算
 	mGameWorldDetaTime = mRealDeltaTime * mTimeSpeedRate;
+}
+
+bool GameSystem::GoNextScene()
+{
+	// 次シーンの種類取得
+	SceneEnum next = mCurrentScene->GetNextScene();
+
+	// 生成
+	SceneBase * nextPtr = SceneBase::GenerateScene(next);
+
+	// 生成の成否に関わらず、現在のシーンは削除する
+	delete mCurrentScene;
+	mCurrentScene = nullptr;
+
+	// 生成失敗時、偽を返す
+	if (!nextPtr)
+	{
+		return false;
+	}
+
+	// 成功時は、現在のシーンとして新しいシーンを設定する
+	mCurrentScene = nextPtr;
+
+	// 生成に成功したとして、真を返す
+	return true;
 }

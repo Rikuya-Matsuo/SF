@@ -1,9 +1,13 @@
 ﻿#include "SceneBase.h"
+#include <iostream>
 #include "Actor.h"
+#include "TestScene.h"
 
 SceneBase * SceneBase::mLatestScene = nullptr;
 
-SceneBase::SceneBase()
+SceneBase::SceneBase() :
+	mGoNextSceneFlag(false),
+	mNextScene(SceneEnum::Invalid_SceneEnum)
 {
 	mLatestScene = this;
 }
@@ -12,6 +16,38 @@ void SceneBase::GetLatestScene(Actor * actor)
 {
 	// アクターに最新シーンを設定
 	actor->SetBelongScene(mLatestScene);
+}
+
+SceneBase * SceneBase::GenerateScene(SceneEnum sceneEnum)
+{
+	// 返却値
+	SceneBase * ret = nullptr;
+
+	// シーン生成
+	switch (sceneEnum)
+	{
+	case Test_SceneEnum:
+		ret = new TextScene();
+		break;
+
+	case Title_SceneEnum:
+		// タイトルシーン生成
+		break;
+
+	case Game_SceneEnum:
+		// ゲームシーン生成
+		break;
+
+	case Base_SceneEnum:
+	case Invalid_SceneEnum:
+		break;
+
+	default:
+		std::cout << "GenerateScene : 挙動未定義のシーン列挙体が渡されました\n";
+		break;
+	}
+
+	return ret;
 }
 
 void SceneBase::RegisterActor(Actor * actor)

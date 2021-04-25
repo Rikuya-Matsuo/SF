@@ -162,6 +162,12 @@ void Renderer::DeregisterMeshComponent(MeshComponent * meshComp)
 
 void Renderer::Draw()
 {
+	// 背景色を反映
+	glClearColor(mBGColor.x, mBGColor.y, mBGColor.z, 1.0f);
+
+	// 画面クリア
+	ClearWindow();
+
 	// 不透明部分
 	DrawFullDissolveObjects();
 

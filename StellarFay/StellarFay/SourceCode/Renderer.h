@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <SDL/SDL.h>
+#include <glad/glad.h>
 #include <string>
 #include <unordered_map>
 #include <list>
@@ -26,6 +27,12 @@ public:
 
 	// カメラ位置のセット
 	void SetCameraPos(const Vector3D & pos) { mCameraPosition = pos; }
+
+	// 背景色設定
+	void SetBGColor(const Vector3D & color) { mBGColor = color; }
+
+	// 画面のクリア
+	void ClearWindow() const { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
 	// 描画
 	void Draw();
@@ -69,6 +76,9 @@ private:
 
 	// カメラ位置
 	Vector3D mCameraPosition;
+
+	// 背景色
+	Vector3D mBGColor;
 
 	// 不透明オブジェクト描画部分
 	void DrawFullDissolveObjects();

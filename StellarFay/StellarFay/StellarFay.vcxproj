@@ -163,6 +163,7 @@
     <ClCompile Include="SourceCode\Renderer.cpp" />
     <ClCompile Include="SourceCode\SceneBase.cpp" />
     <ClCompile Include="SourceCode\Shader.cpp" />
+    <ClCompile Include="SourceCode\TestScene.cpp" />
     <ClCompile Include="SourceCode\Texture.cpp" />
     <ClCompile Include="SourceCode\Vector.cpp" />
     <ClCompile Include="SourceCode\VertexArray.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="SourceCode\Renderer.h" />
     <ClInclude Include="SourceCode\SceneBase.h" />
     <ClInclude Include="SourceCode\Shader.h" />
+    <ClInclude Include="SourceCode\TestScene.h" />
     <ClInclude Include="SourceCode\Texture.h" />
     <ClInclude Include="SourceCode\Vector.h" />
     <ClInclude Include="SourceCode\VertexArray.h" />
