@@ -87,6 +87,9 @@ protected:
 	// 所属するシーン
 	class SceneBase * mBelongScene;
 
+	// 大体のものはPhongシェーダを使うことになると思われるので、静的変数として取得しておく
+	static class Shader * mPhongShader;
+
 	// 継承先の処理
 	virtual void UpdateActor();
 	// 全コンポーネントの更新とUpdateActor()が終わった後に走る処理

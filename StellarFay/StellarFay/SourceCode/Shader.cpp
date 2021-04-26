@@ -176,6 +176,8 @@ bool Shader::Load(GLuint & target, const std::string & path, GLenum shaderType)
 	std::ifstream file(path);
 	if (file.fail())
 	{
+		std::cout << "ファイル読み込み失敗：" << path << std::endl;
+
 		glDeleteShader(target);
 		return false;
 	}

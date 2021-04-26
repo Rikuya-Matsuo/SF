@@ -9,6 +9,8 @@ class SceneBase
 public:
 	SceneBase();
 
+	~SceneBase();
+
 	// シーンのファクトリ関数
 	static SceneBase * GenerateScene(SceneEnum sceneEnum);
 

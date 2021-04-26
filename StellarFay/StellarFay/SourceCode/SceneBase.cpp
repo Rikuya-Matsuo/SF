@@ -12,6 +12,17 @@ SceneBase::SceneBase() :
 	mLatestScene = this;
 }
 
+SceneBase::~SceneBase()
+{
+	for (auto itr : mActors)
+	{
+		delete itr;
+	}
+	mActors.clear();
+
+	std::list<Actor *>().swap(mActors);
+}
+
 void SceneBase::GetLatestScene(Actor * actor)
 {
 	// アクターに最新シーンを設定

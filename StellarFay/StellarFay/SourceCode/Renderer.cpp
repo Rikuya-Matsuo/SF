@@ -180,6 +180,9 @@ void Renderer::Draw()
 
 	// 半透明部分
 	DrawNotFullDissolveObjects();
+
+	// ウィンドウフリップ
+	SDL_GL_SwapWindow(mWindow);
 }
 
 void Renderer::DrawFullDissolveObjects()

@@ -1,7 +1,12 @@
 ﻿#include "Actor.h"
 #include "ComponentBase.h"
 #include "SceneBase.h"
+#include "Shader.h"
+#include "GameSystem.h"
+#include "Renderer.h"
 #include <algorithm>
+
+Shader * Actor::mPhongShader = nullptr;
 
 // 本cppファイル内でのみ、省略した名前を使う
 namespace afm = ActorFlagMask;
@@ -10,6 +15,12 @@ Actor::Actor(int priority) :
 	mPriority(priority),
 	mActorFlags(afm::mInitialFlag)
 {
+	// 静的変数の設定
+	if (!mPhongShader)
+	{
+		mPhongShader = RENDERER_INSTANCE.GetShader("Shaders/Phong.vert", "Shaders/Phong.frag");
+	}
+
 	// 所属シーン取得及び、シーンへのアクター登録
 	SceneBase::GetLatestScene(this);
 	mBelongScene->RegisterActor(this);
@@ -23,6 +34,7 @@ Actor::~Actor()
 		delete *itr;
 		*itr = nullptr;
 	}
+	mComponents.clear();
 	std::list<ComponentBase *>().swap(mComponents);
 }
 
@@ -43,8 +55,15 @@ void Actor::Update()
 
 	// アクター更新前に更新するコンポーネントを更新
 	auto itr = mComponents.begin();
-	for (; (*itr)->GetBeforeUpdateActorFlag(); ++itr)
+	for (; itr != mComponents.end(); ++itr)
 	{
+		// アクター更新前に更新するものでなくなった場合、ループから抜ける
+		if (!(*itr)->GetBeforeUpdateActorFlag())
+		{
+			break;
+		}
+
+		// 更新
 		(*itr)->Update();
 	}
 

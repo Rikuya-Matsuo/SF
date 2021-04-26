@@ -46,7 +46,8 @@ bool GameSystem::Init()
 		return false;
 	}
 
-	mRenderer->SetBGColor(Vector3D::Zero);
+	Vector3D BGcolor = Vector3D::Zero;
+	mRenderer->SetBGColor(BGcolor);
 
 	return true;
 }
