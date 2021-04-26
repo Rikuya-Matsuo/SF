@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c" />
     <ClCompile Include="SourceCode\Actor.cpp" />
     <ClCompile Include="SourceCode\ComponentBase.cpp" />
+    <ClCompile Include="SourceCode\DestroyableActor.cpp" />
     <ClCompile Include="SourceCode\GameSystem.cpp" />
     <ClCompile Include="SourceCode\Hash.cpp" />
     <ClCompile Include="SourceCode\Input.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="SourceCode\ComponentBase.h" />
     <ClInclude Include="SourceCode\GameSystem.h" />
     <ClInclude Include="SourceCode\Hash.h" />
+    <ClInclude Include="SourceCode\DestroyableActor.h" />
     <ClInclude Include="SourceCode\Input.h" />
     <ClInclude Include="SourceCode\Matrix.h" />
     <ClInclude Include="SourceCode\Mesh.h" />
