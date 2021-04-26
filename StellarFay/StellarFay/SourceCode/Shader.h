@@ -12,6 +12,10 @@ public:
 
 	void Activate() const { glUseProgram(mID); }
 
+	////////////////////////////////
+	// ユニフォーム変数設定
+	////////////////////////////////
+
 	void SetUniform1f(const std::string & name, float value);
 
 	void SetUniform2fv(const std::string & name, const float * values);

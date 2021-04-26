@@ -11,6 +11,13 @@ Renderer::Renderer()
 
 Renderer::~Renderer()
 {
+	// シェーダ削除
+	for (auto itr : mShaderMap)
+	{
+		delete itr.second;
+	}
+	mShaderMap.clear();
+
 	SDL_GL_DeleteContext(mContext);
 	SDL_DestroyWindow(mWindow);
 }
