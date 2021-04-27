@@ -3,6 +3,8 @@
 #include <list>
 #include "BitFlagFunc.h"
 #include "Vector.h"
+#include "Matrix.h"
+#include "Quaternion.h"
 
 namespace ActorFlagMask
 {
@@ -24,12 +26,10 @@ public:
 	Actor(int priority);
 	virtual ~Actor();
 
-	// コンポーネントとアクター自身の更新処理
-	virtual void Update() final;
-
 	/////////////////////
 	// セッター
 	/////////////////////
+
 	// 所属シーンのセッター
 	void SetBelongScene(class SceneBase * scene) { mBelongScene = scene; }
 
@@ -45,6 +45,7 @@ public:
 	///////////////////
 	// ゲッター
 	///////////////////
+
 	// 位置取得
 	const Vector3D & GetPosition() const { return mPosition; }
 
@@ -56,6 +57,13 @@ public:
 
 	// 描画フラグ取得
 	bool GetDrawFlag() const { return BitFlagFunc::GetOr(mActorFlags, ActorFlagMask::mDrawFlagMask); }
+	
+	/////////////////////
+	// その他
+	/////////////////////
+
+	// コンポーネントとアクター自身の更新処理
+	virtual void Update() final;
 
 	// コンポーネントのソートを要請する
 	// ソートが実行されるのはアクターのUpdate()開始時のみ
@@ -65,6 +73,10 @@ public:
 	// コンポーネント基底クラスのコンストラクタにて呼び出すことで、いちいちリストへの追加処理を書かなくてもよいようにする
 	void RegisterComponent(class ComponentBase * cmp);
 
+	// シェーダのユニフォーム変数設定
+	// 予めシェーダをアクティブにしておく必要がある。
+	virtual void SetUniforms(class Shader * shader);
+
 protected:
 	// ビットフラグ
 	ActorFlagMask::Type mActorFlags;
@@ -72,14 +84,17 @@ protected:
 	// この値が小さいものから処理を行う。
 	int mPriority;
 
-	// 位置
+	// 位置ベクトル
 	Vector3D mPosition;
 
-	// スケール値
+	// スケール値ベクトル
 	Vector3D mScales;
 
 	// 回転
-	Vector3D mRotation;
+	Quaternion mRotation;
+
+	// モデル行列
+	Matrix4 mModelMat;
 
 	// 所持するコンポーネントのリスト
 	std::list<class ComponentBase *> mComponents;
@@ -94,4 +109,11 @@ protected:
 	virtual void UpdateActor();
 	// 全コンポーネントの更新とUpdateActor()が終わった後に走る処理
 	virtual void UpdateActorLast();
+
+	// Phongシェーダのユニフォーム変数設定
+	void SetPhongUniforms(class Shader * shader) const;
+
+private:
+	// モデル行列の更新
+	void UpdateModelMat();
 };

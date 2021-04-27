@@ -78,6 +78,9 @@ void Actor::Update()
 
 	// 継承先依存の最終更新
 	UpdateActorLast();
+
+	// 行列の更新
+	UpdateModelMat();
 }
 
 void Actor::SetPriority(int priority)
@@ -109,6 +112,12 @@ void Actor::RegisterComponent(ComponentBase * cmp)
 	mComponents.emplace_back(cmp);
 }
 
+void Actor::SetUniforms(Shader * shader)
+{
+	// デフォルトでPhongシェーダの設定を行う
+	SetPhongUniforms(shader);
+}
+
 void Actor::UpdateActor()
 {
 	// 内容は継承先に依存する
@@ -117,4 +126,22 @@ void Actor::UpdateActor()
 void Actor::UpdateActorLast()
 {
 	// 内容は継承先に依存する
+}
+
+void Actor::SetPhongUniforms(Shader * shader) const
+{
+	shader->SetUniform4m("modelMat", mModelMat.GetAsFloatPtr());
+
+
+
+	Matrix4 invModel = mModelMat;
+	invModel.Invert();
+	shader->SetUniform4m("invertedModelMat", invModel.GetAsFloatPtr());
+}
+
+void Actor::UpdateModelMat()
+{
+	mModelMat = Matrix4::CreateScale(mScales);
+	mModelMat *= Matrix4::CreateFromQuaternion(mRotation);
+	mModelMat *= Matrix4::CreateTranslation(mPosition);
 }
