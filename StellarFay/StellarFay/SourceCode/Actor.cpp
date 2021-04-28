@@ -132,7 +132,7 @@ void Actor::SetPhongUniforms(Shader * shader) const
 {
 	shader->SetUniform4m("modelMat", mModelMat.GetAsFloatPtr());
 
-
+	shader->SetUniform4m("projectionMat", RENDERER_INSTANCE.GetProjectionMat().GetAsFloatPtr());
 
 	Matrix4 invModel = mModelMat;
 	invModel.Invert();

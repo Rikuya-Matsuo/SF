@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <list>
 #include "Vector.h"
+#include "Matrix.h"
 #include "Hash.h"
 
 class Renderer
@@ -36,6 +37,9 @@ public:
 
 	// 描画
 	void Draw();
+
+	// プロジェクション行列の取得
+	const class Matrix4 & GetProjectionMat() const { return mProjectionMat; }
 
 private:
 	// ウィンドウサイズ
@@ -79,6 +83,9 @@ private:
 
 	// 背景色
 	Vector3D mBGColor;
+
+	// プロジェクション行列
+	Matrix4 mProjectionMat;
 
 	// 不透明オブジェクト描画部分
 	void DrawFullDissolveObjects();

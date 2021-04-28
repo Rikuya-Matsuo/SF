@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "MeshComponent.h"
 #include "Actor.h"
+#include "CommonMath.h"
 
 Renderer::Renderer()
 {
@@ -87,6 +88,11 @@ bool Renderer::Init(Uint32 windowWidth, Uint32 windowHeight, bool fullScreen)
 	{
 		printf("GL 拡張読み込み失敗\n");
 	}
+
+	// プロジェクション行列の設定
+	mProjectionMat =
+		Matrix4::CreatePerspectiveFOV(DEG_TO_RAD(45.0f),
+			static_cast<float>(mWindowWidth), static_cast<float>(mWindowHeight), 0.1f, 1000.0f);
 
 	return true;
 }
