@@ -24,6 +24,8 @@ out vec4 FragColor;
 uniform Material material;
 uniform Light light;
 
+uniform float dissolve;
+
 uniform vec3 cameraPos;
 
 void main()
@@ -48,5 +50,5 @@ void main()
 	vec3 specularColor = light.specular * spec * vec3(texture(material.specularTex, fTexCoord));
 
 	vec3 result = ambientColor + diffuseColor + specularColor;
-	FragColor = vec4(result, 1.0);
+	FragColor = vec4(result, dissolve);
 }

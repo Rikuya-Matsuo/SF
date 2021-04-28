@@ -96,6 +96,9 @@ void MeshComponent::DrawUnderCondition(Shader * shader, std::function<bool(Mesh:
 				tex->Activate();
 			}
 
+			// ディゾルブ転送
+			shader->SetUniform1f("dissolve", mtl->GetDissolve());
+
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, polygPtr->mEBO);
 			glDrawElements(GL_TRIANGLES, polygPtr->mIndices.size(), GL_UNSIGNED_INT, 0);
 		}
