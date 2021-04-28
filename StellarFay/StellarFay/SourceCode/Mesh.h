@@ -33,21 +33,25 @@ public:
 
 	friend class MeshComponent;
 
+	// モデルをいくつかのオブジェクト・ポリゴングループに分けることで、
+	// テクスチャの使い分け等を可能にする
+	// データ内容：名前、当たり判定用直方体、描画フラグ、ポリゴングループのコンテナ
+	class ObjectData;
+
+	// 読み込んだmtlデータ
+	// データ内容：名前、ディゾルブ値、テクスチャ
+	class MtlData;
+
 private:
 	VertexArray * mVertexArray;
 
 	// 頂点配列
 	std::vector<float> mVertices;
 
-	// モデルをいくつかのオブジェクト・ポリゴングループに分けることで、
-	// テクスチャの使い分け等を可能にする
-	// データ内容：名前、当たり判定用直方体、描画フラグ、ポリゴングループのコンテナ
-	class ObjectData;
+	// オブジェクトのコンテナ
 	std::vector<ObjectData *> mObjects;
 
-	// 読み込んだmtlデータ
-	// データ内容：名前、ディゾルブ値、テクスチャ
-	class MtlData;
+	// Mtlのリスト
 	std::list<MtlData *> mMtlDatas;
 
 	// 頂点の情報をインデックスで記録している
