@@ -46,12 +46,17 @@ public:
 	///////////////////
 	// 描画
 	///////////////////
+	
+	// シェーダ指定
 	void DrawFullDissolveObject(class Shader * shader) const;
 
+	// メンバーのシェーダを使用
 	void DrawFullDissolveObject() const { DrawFullDissolveObject(mShader); }
 
+	// シェーダ指定
 	void DrawNotFullDissolveObject(class Shader * shader) const;
 
+	// メンバーのシェーダを使用
 	void DrawNotFullDissolveObject() const { DrawNotFullDissolveObject(mShader); }
 
 private:

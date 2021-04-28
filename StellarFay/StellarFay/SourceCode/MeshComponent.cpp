@@ -64,6 +64,9 @@ void MeshComponent::DrawUnderCondition(Shader * shader, std::function<bool(Mesh:
 	// シェーダアクティブ化
 	shader->Activate();
 
+	// ユニフォーム変数設定
+	mOwner->SetUniforms(shader);
+
 	// ポリゴングループごとに描画処理
 	for (auto objItr : mMesh->mObjects)
 	{
