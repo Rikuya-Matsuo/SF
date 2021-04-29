@@ -17,8 +17,8 @@ PhongShaderWrapper::PhongShaderWrapper(Shader * shader) :
 	mShader = (!shader) ? mPhongShader : shader;
 }
 
-void PhongShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup & polyGroup) const
+void PhongShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
 {
 	// ディゾルブの転送
-	mShader->SetUniform1f("dissolve", polyGroup.mUsemtl->GetDissolve());
+	mShader->SetUniform1f("dissolve", polyGroup->mUsemtl->GetDissolve());
 }

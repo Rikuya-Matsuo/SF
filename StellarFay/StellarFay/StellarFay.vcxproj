@@ -160,6 +160,7 @@
     <ClCompile Include="SourceCode\Matrix.cpp" />
     <ClCompile Include="SourceCode\Mesh.cpp" />
     <ClCompile Include="SourceCode\MeshComponent.cpp" />
+    <ClCompile Include="SourceCode\ObjMeshShaderWrapper.cpp" />
     <ClCompile Include="SourceCode\PhongShaderWrapper.cpp" />
     <ClCompile Include="SourceCode\Quaternion.cpp" />
     <ClCompile Include="SourceCode\Renderer.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="SourceCode\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\ObjMeshShaderWrapper.h" />
     <ClInclude Include="SourceCode\Actor.h" />
     <ClInclude Include="SourceCode\BitFlagFunc.h" />
     <ClInclude Include="SourceCode\Collision.h" />
@@ -196,6 +198,8 @@
     <ClInclude Include="SourceCode\VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\ObjMesh.frag" />
+    <None Include="Shaders\ObjMesh.vert" />
     <None Include="Shaders\Phong.frag" />
     <None Include="Shaders\Phong.vert" />
   </ItemGroup>

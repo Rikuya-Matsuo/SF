@@ -23,7 +23,7 @@ public:
 	
 	// ポリゴングループごとのユニフォーム設定
 	// 挙動は継承先依存
-	virtual void SetPolyUniforms(const Mesh::ObjectData::PolyGroup & polyGroup) const;
+	virtual void SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const;
 
 protected:
 	Shader * mShader;

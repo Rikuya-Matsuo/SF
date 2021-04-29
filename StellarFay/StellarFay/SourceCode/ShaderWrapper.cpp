@@ -27,6 +27,6 @@ void ShaderWrapper::SetUniforms() const
 	}
 }
 
-void ShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup & polyGroup) const
+void ShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
 {
 }

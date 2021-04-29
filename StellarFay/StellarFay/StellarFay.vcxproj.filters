@@ -43,6 +43,12 @@
     <Filter Include="ソース ファイル\Scene">
       <UniqueIdentifier>{dfe77e40-e2fd-4e58-960f-79743aefa0f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\ShaderWrapper">
+      <UniqueIdentifier>{e4c685af-a864-452f-8948-8cabc4e87fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ShaderWrapper">
+      <UniqueIdentifier>{ec924f8b-8e0b-4c8b-8402-1aaffc0321f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c">
@@ -102,11 +108,14 @@
     <ClCompile Include="SourceCode\DestroyableActor.cpp">
       <Filter>ソース ファイル\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\ShaderWrapper.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="SourceCode\ObjMeshShaderWrapper.cpp">
+      <Filter>ソース ファイル\ShaderWrapper</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\PhongShaderWrapper.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\ShaderWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\ShaderWrapper.cpp">
+      <Filter>ソース ファイル\ShaderWrapper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -170,11 +179,14 @@
     <ClInclude Include="SourceCode\DestroyableActor.h">
       <Filter>ヘッダー ファイル\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\ShaderWrapper.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="SourceCode\ObjMeshShaderWrapper.h">
+      <Filter>ヘッダー ファイル\ShaderWrapper</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\PhongShaderWrapper.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\ShaderWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\ShaderWrapper.h">
+      <Filter>ヘッダー ファイル\ShaderWrapper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +194,12 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="Shaders\Phong.vert">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="Shaders\ObjMesh.vert">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="Shaders\ObjMesh.frag">
       <Filter>リソース ファイル</Filter>
     </None>
   </ItemGroup>
