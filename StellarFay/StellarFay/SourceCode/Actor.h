@@ -23,7 +23,7 @@ namespace ActorFlagMask
 class Actor
 {
 public:
-	Actor(int priority);
+	Actor(int priority = 0);
 	virtual ~Actor();
 
 	/////////////////////

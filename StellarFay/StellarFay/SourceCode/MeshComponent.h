@@ -25,19 +25,19 @@ public:
 
 	static void SetInitialShader(const std::string & vertFilePath, const std::string & fragFilePath);
 
-	static void SetInitialShader(class Shader * shader) { mInitialShader = shader; }
+	static void SetInitialShader(class ShaderWrapper * shader) { mInitialShader = shader; }
 
 	////////////////////////
 	// セッター
 	////////////////////////
-	void SetShader(class Shader * shader) { mShader = shader; }
+	void SetShader(class ShaderWrapper * shader) { mShader = shader; }
 
 	void SetDrawFlag(bool value) { BitFlagFunc::Set(mMeshCompFlags, MeshComponentFlagMask::mDrawFlagMask, value); }
 
 	////////////////////////
 	// ゲッター
 	////////////////////////
-	class Shader * GetShader() const { return mShader; }
+	class ShaderWrapper * GetShader() const { return mShader; }
 
 	bool GetDrawFlag() const { return BitFlagFunc::GetOr(mMeshCompFlags, MeshComponentFlagMask::mDrawFlagMask); }
 
@@ -48,13 +48,13 @@ public:
 	///////////////////
 	
 	// シェーダ指定
-	void DrawFullDissolveObject(class Shader * shader) const;
+	void DrawFullDissolveObject(class ShaderWrapper * shader) const;
 
 	// メンバーのシェーダを使用
 	void DrawFullDissolveObject() const { DrawFullDissolveObject(mShader); }
 
 	// シェーダ指定
-	void DrawNotFullDissolveObject(class Shader * shader) const;
+	void DrawNotFullDissolveObject(class ShaderWrapper * shader) const;
 
 	// メンバーのシェーダを使用
 	void DrawNotFullDissolveObject() const { DrawNotFullDissolveObject(mShader); }
@@ -71,10 +71,10 @@ private:
 	int mDrawPriority;
 
 	// 描画に原則使用するシェーダ
-	class Shader * mShader;
+	class ShaderWrapper * mShader;
 
 	// シェーダの初期化値
-	static class Shader * mInitialShader;
+	static class ShaderWrapper * mInitialShader;
 
-	void DrawUnderCondition(class Shader * shader, std::function<bool(Mesh::ObjectData * obj, size_t polyGroupIndex)> condition) const;
+	void DrawUnderCondition(class ShaderWrapper * shader, std::function<bool(Mesh::ObjectData * obj, size_t polyGroupIndex)> condition) const;
 };

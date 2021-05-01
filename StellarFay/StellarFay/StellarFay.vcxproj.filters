@@ -117,6 +117,9 @@
     <ClCompile Include="SourceCode\ShaderWrapper.cpp">
       <Filter>ソース ファイル\ShaderWrapper</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\TestActor.cpp">
+      <Filter>ソース ファイル\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\ShaderWrapper.h">
       <Filter>ヘッダー ファイル\ShaderWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\TestActor.h">
+      <Filter>ヘッダー ファイル\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

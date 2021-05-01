@@ -3,12 +3,12 @@
 #include "Mesh.h"
 #include "GameSystem.h"
 #include "Renderer.h"
-#include "Shader.h"
+#include "ShaderWrapper.h"
 
 // 名前空間の省略
 namespace mcfm = MeshComponentFlagMask;
 
-Shader * MeshComponent::mInitialShader = nullptr;
+ShaderWrapper * MeshComponent::mInitialShader = nullptr;
 
 MeshComponent::MeshComponent(Actor * owner, Mesh * msh, int drawPriority) :
 	ComponentBase(owner, 1000),
@@ -26,11 +26,11 @@ MeshComponent::~MeshComponent()
 
 void MeshComponent::SetInitialShader(const std::string & vertFilePath, const std::string & fragFilePath)
 {
-	Shader * shd = RENDERER_INSTANCE.GetShader(vertFilePath, fragFilePath);
-	SetInitialShader(shd);
+	//ShaderWrapper * shd = RENDERER_INSTANCE.GetShader(vertFilePath, fragFilePath);
+	//SetInitialShader(shd);
 }
 
-void MeshComponent::DrawFullDissolveObject(Shader * shader) const
+void MeshComponent::DrawFullDissolveObject(ShaderWrapper * shader) const
 {
 	// ディゾルブが1であるかを検証するラムダ式
 	auto isFullDissolve = [](Mesh::ObjectData * obj, size_t polyGroupIndex)
@@ -43,7 +43,7 @@ void MeshComponent::DrawFullDissolveObject(Shader * shader) const
 	DrawUnderCondition(shader, isFullDissolve);
 }
 
-void MeshComponent::DrawNotFullDissolveObject(Shader * shader) const
+void MeshComponent::DrawNotFullDissolveObject(ShaderWrapper * shader) const
 {
 	// ディゾルブが1未満であるかを検証するラムダ式
 	auto isNotFullDissolve = [](Mesh::ObjectData * obj, size_t polyGroupIndex)
@@ -56,7 +56,7 @@ void MeshComponent::DrawNotFullDissolveObject(Shader * shader) const
 	DrawUnderCondition(shader, isNotFullDissolve);
 }
 
-void MeshComponent::DrawUnderCondition(Shader * shader, std::function<bool(Mesh::ObjectData*obj, size_t polyGroupIndex)> condition) const
+void MeshComponent::DrawUnderCondition(ShaderWrapper * shader, std::function<bool(Mesh::ObjectData*obj, size_t polyGroupIndex)> condition) const
 {
 	// 頂点配列アクティブ化
 	mMesh->mVertexArray->Activate();
@@ -65,7 +65,7 @@ void MeshComponent::DrawUnderCondition(Shader * shader, std::function<bool(Mesh:
 	shader->Activate();
 
 	// ユニフォーム変数設定
-	mOwner->SetUniforms(shader);
+	shader->SetUniforms();
 
 	// ポリゴングループごとに描画処理
 	for (auto objItr : mMesh->mObjects)
@@ -88,16 +88,11 @@ void MeshComponent::DrawUnderCondition(Shader * shader, std::function<bool(Mesh:
 			// エイリアス取得
 			const Mesh::ObjectData::PolyGroup * polygPtr = objItr->GetPolyGroups()[polygIndex];
 
+			// ポリゴングループごとのユニフォーム設定
+			shader->SetPolyUniforms(polygPtr);
+
 			const Mesh::MtlData * mtl = polygPtr->mUsemtl;
 			const Texture * tex = mtl->GetTexture();
-
-			if (tex)
-			{
-				tex->Activate();
-			}
-
-			// ディゾルブ転送
-			shader->SetUniform1f("dissolve", mtl->GetDissolve());
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, polygPtr->mEBO);
 			glDrawElements(GL_TRIANGLES, polygPtr->mIndices.size(), GL_UNSIGNED_INT, 0);
