@@ -26,8 +26,8 @@ public:
 	// メッシュコンポーネント登録解除
 	void DeregisterMeshComponent(class MeshComponent * meshComp);
 
-	// カメラ位置のセット
-	void SetCameraPos(const Vector3D & pos) { mCameraPosition = pos; }
+	// アクティブとするカメラのセット
+	void SetActiveCamera(const class Camera * cam) { mActiveCamera = cam; }
 
 	// 背景色設定
 	void SetBGColor(const Vector3D & color) { mBGColor = color; }
@@ -38,8 +38,17 @@ public:
 	// 描画
 	void Draw();
 
+	// アクティブなカメラの取得
+	const class Camera * GetActiveCamera() const { return mActiveCamera; }
+
 	// プロジェクション行列の取得
 	const class Matrix4 & GetProjectionMat() const { return mProjectionMat; }
+
+	// 描画域の大きさ取得
+	Uint32 GetWidth() const { return mWindowWidth; }
+
+	// 描画域の大きさ取得
+	Uint32 GetHeight() const { return mWindowHeight; }
 
 private:
 	// ウィンドウサイズ
@@ -78,8 +87,8 @@ private:
 	// メッシュコンポーネントのコンテナ（カメラ距離ソート）
 	std::list<class MeshComponent *> mMeshComponentsSortedInCameraDistance;
 
-	// カメラ位置
-	Vector3D mCameraPosition;
+	// カメラ
+	const class Camera * mActiveCamera;
 
 	// 背景色
 	Vector3D mBGColor;

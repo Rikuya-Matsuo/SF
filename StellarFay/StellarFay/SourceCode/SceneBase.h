@@ -14,9 +14,11 @@ public:
 	// シーンのファクトリ関数
 	static SceneBase * GenerateScene(SceneEnum sceneEnum);
 
+	// 最新シーンのゲッター
+	static const SceneBase * GetLatestScene() { return mLatestScene; }
+
 	// 受け取ったアクターに所属シーンとして、最新のシーンを教える
-	// （そのままポインタを返すと、外部から最新シーンをいじることが可能となるため、カプセル化の観点から却下）
-	static void GetLatestScene(class Actor * actor);
+	static void TellLatestSceneToActor(class Actor * actor);
 
 	// 次シーンへの移動
 	bool GetGoNextSceneFlag() const { return mGoNextSceneFlag; }
@@ -36,6 +38,9 @@ public:
 protected:
 	// アクターへのポインタのコンテナ
 	std::list<class Actor *> mActors;
+
+	// カメラ
+	std::list<class Camera *> mCameras;
 
 	// 最も新しく作られたSceneBaseクラスへのポインタ
 	static SceneBase * mLatestScene;
@@ -64,6 +69,9 @@ private:
 
 	// 所属アクターの更新
 	void UpdateActors();
+
+	// カメラ更新
+	void UpdateCameras();
 };
 
 // シーンの種類の列挙型

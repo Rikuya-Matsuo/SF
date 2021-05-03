@@ -13,7 +13,8 @@ namespace afm = ActorFlagMask;
 
 Actor::Actor(int priority) :
 	mPriority(priority),
-	mActorFlags(afm::mInitialFlag)
+	mActorFlags(afm::mInitialFlag),
+	mScales(1.0f)
 {
 	// 静的変数の設定
 	if (!mPhongShader)
@@ -22,7 +23,7 @@ Actor::Actor(int priority) :
 	}
 
 	// 所属シーン取得及び、シーンへのアクター登録
-	SceneBase::GetLatestScene(this);
+	SceneBase::TellLatestSceneToActor(this);
 	mBelongScene->RegisterActor(this);
 }
 

@@ -96,14 +96,14 @@ void GameSystem::Loop()
 
 void GameSystem::Finish()
 {
-	if (mRenderer)
-	{
-		delete mRenderer;
-	}
-
 	if (mCurrentScene)
 	{
 		delete mCurrentScene;
+	}
+
+	if (mRenderer)
+	{
+		delete mRenderer;
 	}
 }
 

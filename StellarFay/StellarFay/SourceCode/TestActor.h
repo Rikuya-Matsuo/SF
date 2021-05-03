@@ -9,4 +9,6 @@ public:
 
 private:
 	class ShaderWrapper * mShader;
+
+	void UpdateActor() override;
 };

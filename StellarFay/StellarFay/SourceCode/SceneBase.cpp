@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Actor.h"
 #include "TestScene.h"
+#include "Camera.h"
 
 SceneBase * SceneBase::mLatestScene = nullptr;
 
@@ -21,9 +22,17 @@ SceneBase::~SceneBase()
 	mActors.clear();
 
 	std::list<Actor *>().swap(mActors);
+
+	for (auto itr : mCameras)
+	{
+		delete itr;
+	}
+	mCameras.clear();
+
+	std::list<Camera *>().swap(mCameras);
 }
 
-void SceneBase::GetLatestScene(Actor * actor)
+void SceneBase::TellLatestSceneToActor(Actor * actor)
 {
 	// アクターに最新シーンを設定
 	actor->SetBelongScene(mLatestScene);
@@ -38,7 +47,7 @@ SceneBase * SceneBase::GenerateScene(SceneEnum sceneEnum)
 	switch (sceneEnum)
 	{
 	case Test_SceneEnum:
-		ret = new TextScene();
+		ret = new TestScene();
 		break;
 
 	case Title_SceneEnum:
@@ -103,6 +112,9 @@ void SceneBase::Update()
 
 	// シーンの更新
 	UpdateScene();
+
+	// カメラの更新
+	UpdateCameras();
 }
 
 void SceneBase::UpdateScene()
@@ -120,5 +132,13 @@ void SceneBase::UpdateActors()
 		{
 			itr->Update();
 		}
+	}
+}
+
+void SceneBase::UpdateCameras()
+{
+	for (auto itr : mCameras)
+	{
+		itr->Update();
 	}
 }

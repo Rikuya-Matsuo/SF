@@ -49,6 +49,12 @@
     <Filter Include="ヘッダー ファイル\ShaderWrapper">
       <UniqueIdentifier>{ec924f8b-8e0b-4c8b-8402-1aaffc0321f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Camera">
+      <UniqueIdentifier>{1b448325-3ffd-425e-b441-79938698a24a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{73b12dfb-cbce-4d0c-8d00-4fd40324d13d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c">
@@ -119,6 +125,12 @@
     </ClCompile>
     <ClCompile Include="SourceCode\TestActor.cpp">
       <Filter>ソース ファイル\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Camera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\ActorFollowCamera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +205,12 @@
     </ClInclude>
     <ClInclude Include="SourceCode\TestActor.h">
       <Filter>ヘッダー ファイル\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Camera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\ActorFollowCamera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

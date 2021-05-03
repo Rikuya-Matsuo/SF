@@ -5,6 +5,7 @@
 #include "MeshComponent.h"
 #include "Actor.h"
 #include "CommonMath.h"
+#include "Camera.h"
 
 Renderer::Renderer()
 {
@@ -213,7 +214,7 @@ void Renderer::DrawNotFullDissolveObjects()
 	// カメラ距離の2乗を計算
 	auto calcCamDistSq = [this](const Actor * actor) -> float
 	{
-		return (actor->GetPosition() - mCameraPosition).LengthSq();
+		return (actor->GetPosition() - mActiveCamera->GetPosition()).LengthSq();
 	};
 	// カメラ距離大きい順
 	auto camDistLongOrder = [&calcCamDistSq](const MeshComponent * lhs, const MeshComponent * rhs)

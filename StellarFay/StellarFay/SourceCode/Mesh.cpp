@@ -575,11 +575,18 @@ void Mesh::ObjPolyVertData::Load(const std::string & str)
 		{
 			buf += *ptr;
 		}
-		// '/'が読み込めた場合でも、bufが空ならばスキップする
-		else if (!buf.empty())
+		else
 		{
 			// 終端文字を読んだフラグの真偽を設定
 			readStrEnd = (*ptr == '\0');
+
+			// '/'が読み込めたがbufが空文字列の場合、次の要素の設定に移る
+			if (buf.empty())
+			{
+				index++;
+				ptr++;
+				continue;
+			}
 
 			// 得られた数値
 			int num = std::stoi(buf);

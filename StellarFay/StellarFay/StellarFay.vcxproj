@@ -151,6 +151,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c" />
     <ClCompile Include="SourceCode\Actor.cpp" />
+    <ClCompile Include="SourceCode\ActorFollowCamera.cpp" />
+    <ClCompile Include="SourceCode\Camera.cpp" />
     <ClCompile Include="SourceCode\ComponentBase.cpp" />
     <ClCompile Include="SourceCode\DestroyableActor.cpp" />
     <ClCompile Include="SourceCode\GameSystem.cpp" />
@@ -174,6 +176,8 @@
     <ClCompile Include="SourceCode\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\ActorFollowCamera.h" />
+    <ClInclude Include="SourceCode\Camera.h" />
     <ClInclude Include="SourceCode\ObjMeshShaderWrapper.h" />
     <ClInclude Include="SourceCode\Actor.h" />
     <ClInclude Include="SourceCode\BitFlagFunc.h" />
