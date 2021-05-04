@@ -357,11 +357,23 @@ bool Mesh::Load(const std::string & path)
 				Texture * tex = RENDERER_INSTANCE.GetTexture(texPath);
 				if (tex->Fail())
 				{
-					printf("テクスチャの読み込みに失敗 : %s", texPath.c_str());
+					printf("map_Kd テクスチャの読み込みに失敗 : %s", texPath.c_str());
 					return false;
 				}
 
-				mMtlDatas.back()->mTexture = tex;
+				mMtlDatas.back()->mDiffuseTexture = tex;
+			}
+			else if (wordsInLine[1] == "map_Ks")
+			{
+				std::string texPath = relativePathTmp + wordsInLine[1];
+				Texture * tex = RENDERER_INSTANCE.GetTexture(texPath);
+				if (tex->Fail())
+				{
+					printf("map_Ks テクスチャの読み込みに失敗 : %s", texPath.c_str());
+					return false;
+				}
+
+				mMtlDatas.back()->mSpecularTexture = tex;
 			}
 
 			wordsInLine.clear();
@@ -546,7 +558,7 @@ void Mesh::DrawUnderCondition(Shader * shader, std::function<bool(ObjectData * o
 
 			// テクスチャをアクティブ化
 			const MtlData * mtl = polygPtr->mUsemtl;
-			const Texture * tex = mtl->mTexture;
+			const Texture * tex = mtl->mDiffuseTexture;
 			if (tex)
 			{
 				tex->Activate();

@@ -91,9 +91,6 @@ void MeshComponent::DrawUnderCondition(ShaderWrapper * shader, std::function<boo
 			// ポリゴングループごとのユニフォーム設定
 			shader->SetPolyUniforms(polygPtr);
 
-			const Mesh::MtlData * mtl = polygPtr->mUsemtl;
-			const Texture * tex = mtl->GetTexture();
-
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, polygPtr->mEBO);
 			glDrawElements(GL_TRIANGLES, polygPtr->mIndices.size(), GL_UNSIGNED_INT, 0);
 		}

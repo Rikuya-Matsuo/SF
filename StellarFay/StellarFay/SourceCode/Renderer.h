@@ -8,6 +8,14 @@
 #include "Matrix.h"
 #include "Hash.h"
 
+struct LightInfo
+{
+	Vector3D mDirection;
+	Vector3D mDiffuseColor;
+	Vector3D mAmbientColor;
+	Vector3D mSpecularColor;
+};
+
 class Renderer
 {
 public:
@@ -43,6 +51,9 @@ public:
 
 	// アクティブなカメラの取得
 	const class Camera * GetActiveCamera() const { return mActiveCamera; }
+
+	// ライト情報の参照取得
+	LightInfo & GetLightInfo() { return mLightInfo; }
 
 	// 描画域の大きさ取得
 	Uint32 GetWidth() const { return mWindowWidth; }
@@ -96,6 +107,9 @@ private:
 
 	// 背景色
 	Vector3D mBGColor;
+
+	// ライト情報
+	LightInfo mLightInfo;
 
 	// 不透明オブジェクト描画部分
 	void DrawFullDissolveObjects();

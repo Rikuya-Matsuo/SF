@@ -29,7 +29,7 @@ void ObjMeshShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * p
 	mShader->SetUniform1i("tex0", 0);
 	Texture::ActivateTextureUnit(0);
 
-	const Texture * tex = mtl->GetTexture();
+	const Texture * tex = mtl->GetDiffuseTexture();
 	if (tex)
 	{
 		tex->Activate();

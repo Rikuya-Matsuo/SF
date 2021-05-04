@@ -19,12 +19,14 @@ GameSystem::~GameSystem()
 
 bool GameSystem::Init()
 {
+	// SDL機能の初期化
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER)!= 0)
 	{
 		printf("SDL初期化失敗\n");
 		return false;
 	}
 
+	// 画像読み込み機能の初期化
 	int imgInitFlags = IMG_INIT_PNG | IMG_INIT_JPG;
 	if (IMG_Init(imgInitFlags) != imgInitFlags)
 	{
@@ -38,6 +40,7 @@ bool GameSystem::Init()
 	fullScreenFlag = false;
 #endif
 
+	// レンダラーの生成・初期化
 	mRenderer = new Renderer();
 	bool successRendererInit = mRenderer->Init(1920, 1080, fullScreenFlag);
 	if (!successRendererInit)
@@ -46,8 +49,20 @@ bool GameSystem::Init()
 		return false;
 	}
 
+	// レンダラーの設定
+	// 背景色
 	Vector3D BGcolor = Vector3D::Zero;
 	mRenderer->SetBGColor(BGcolor);
+
+	// ライト情報
+	LightInfo & light = mRenderer->GetLightInfo();
+
+	Vector3D lightDir = Vector3D(1.0f, -1.0f, 1.0f);
+	light.mDirection = Vector3D::Normalize(lightDir);
+
+	light.mDiffuseColor = Vector3D(1.0f);
+	light.mAmbientColor = Vector3D(0.4f);
+	light.mSpecularColor = Vector3D(1.0f);
 
 	return true;
 }
