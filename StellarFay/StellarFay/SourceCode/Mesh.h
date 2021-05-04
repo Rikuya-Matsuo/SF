@@ -175,11 +175,6 @@ public:
 	float GetDissolve() const { return mDissolve; }
 	const Texture * GetTexture() const { return mTexture; }
 
-	~MtlData()
-	{
-		delete mTexture;
-	}
-
 private:
 	std::string mName;
 

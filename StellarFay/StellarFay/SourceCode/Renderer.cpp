@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "Renderer.h"
 #include "Shader.h"
+#include "Texture.h"
 #include "MeshComponent.h"
 #include "Actor.h"
 #include "CommonMath.h"
@@ -19,6 +20,13 @@ Renderer::~Renderer()
 		delete itr.second;
 	}
 	mShaderMap.clear();
+
+	// テクスチャ削除
+	for (auto itr : mTextureMap)
+	{
+		delete itr.second;
+	}
+	mTextureMap.clear();
 
 	SDL_GL_DeleteContext(mContext);
 	SDL_DestroyWindow(mWindow);
@@ -101,6 +109,9 @@ bool Renderer::Init(Uint32 windowWidth, Uint32 windowHeight, bool fullScreen)
 
 Shader * Renderer::GetShader(const std::string & vertFilePath, const std::string & fragFilePath)
 {
+	// 返却値
+	Shader * ret = nullptr;
+
 	// 入力された各ファイル名で検索
 	StringPair key = std::make_pair(vertFilePath, fragFilePath);
 	auto itr = mShaderMap.find(key);
@@ -120,10 +131,57 @@ Shader * Renderer::GetShader(const std::string & vertFilePath, const std::string
 
 		// コンテナ追加
 		mShaderMap[key] = shader;
+
+		// 返却値設定
+		ret = shader;
 	}
 
-	// コンテナのkeyの要素を返す
-	return mShaderMap[key];
+	// 見つかった場合
+	else
+	{
+		// 返却値設定
+		ret = itr->second;
+	}
+
+	return ret;
+}
+
+Texture * Renderer::GetTexture(const std::string & filePath)
+{
+	// 返却値
+	Texture * ret = nullptr;
+
+	// 同じファイル名のデータを探す
+	auto itr = mTextureMap.find(filePath);
+
+	// 見つからなかった場合、新たに作成し、コンテナに追加する
+	if (itr == mTextureMap.end())
+	{
+		// 作成
+		Texture * tex = new Texture(filePath);
+
+		// 失敗時はインスタンスを削除し、nullを返す
+		if (tex->Fail())
+		{
+			delete tex;
+			return nullptr;
+		}
+
+		// コンテナに追加
+		mTextureMap[filePath] = tex;
+
+		// 返却値設定
+		ret = tex;
+	}
+
+	// 見つかった場合
+	else
+	{
+		// 返却値設定
+		ret = itr->second;
+	}
+
+	return ret;
 }
 
 void Renderer::RegisterMeshComponent(MeshComponent * meshComp)

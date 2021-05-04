@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include "Vector.h"
+#include "Renderer.h"
+#include "GameSystem.h"
 
 VertexArray::ArgumentPreset Mesh::mVAPreset;
 
@@ -27,12 +29,12 @@ Mesh::~Mesh()
 		delete mVertexArray;
 	}
 
-	for (auto itr = mObjects.rbegin(); itr != mObjects.rend(); ++itr)
+	for (auto itr = mObjects.begin(); itr != mObjects.end(); ++itr)
 	{
 		delete *itr;
 	}
 
-	for (auto itr = mMtlDatas.rbegin(); itr != mMtlDatas.rend(); ++itr)
+	for (auto itr = mMtlDatas.begin(); itr != mMtlDatas.end(); ++itr)
 	{
 		delete *itr;
 	}
@@ -352,7 +354,7 @@ bool Mesh::Load(const std::string & path)
 			else if (wordsInLine[0] == "map_Kd")
 			{
 				std::string texPath = relativePathTmp + wordsInLine[1];
-				Texture * tex = new Texture(texPath);
+				Texture * tex = RENDERER_INSTANCE.GetTexture(texPath);
 				if (tex->Fail())
 				{
 					printf("テクスチャの読み込みに失敗 : %s", texPath.c_str());

@@ -17,9 +17,6 @@ public:
 	// 初期化
 	bool Init(Uint32 windowWidth, Uint32 windowHeight, bool fullScreen);
 
-	// シェーダのロード。すでにロードされている組み合わせであればそのポインタを返す
-	class Shader * GetShader(const std::string & vertFilePath, const std::string & fragFilePath);
-
 	// メッシュコンポーネントの登録
 	void RegisterMeshComponent(class MeshComponent * meshComp);
 
@@ -37,6 +34,12 @@ public:
 
 	// 描画
 	void Draw();
+
+	// シェーダのロード。すでにロードされている組み合わせであればそのポインタを返す
+	class Shader * GetShader(const std::string & vertFilePath, const std::string & fragFilePath);
+
+	// テクスチャのロード。すでにロードされている場合はそのポインタを返す。
+	class Texture * GetTexture(const std::string & filePath);
 
 	// アクティブなカメラの取得
 	const class Camera * GetActiveCamera() const { return mActiveCamera; }
@@ -77,6 +80,10 @@ private:
 	// シェーダーコンテナ
 	typedef std::unordered_map<StringPair, class Shader *, StringPairHash> ShaderMap;
 	ShaderMap mShaderMap;
+
+	// テクスチャコンテナ
+	typedef std::unordered_map<std::string, class Texture *> TextureMap;
+	TextureMap mTextureMap;
 
 	// メッシュコンポーネントのコンテナ（描画順ソート）
 	std::list<class MeshComponent *> mMeshComponentsSortedInDrawPriority;
