@@ -90,10 +90,11 @@ bool Renderer::Init(Uint32 windowWidth, Uint32 windowHeight, bool fullScreen)
 		printf("GL 拡張読み込み失敗\n");
 	}
 
-	// プロジェクション行列の設定
-	mProjectionMat =
-		Matrix4::CreatePerspectiveFOV(DEG_TO_RAD(45.0f),
-			static_cast<float>(mWindowWidth), static_cast<float>(mWindowHeight), 0.1f, 1000.0f);
+	// 透明度や深度バッファの設定
+	glEnable(GL_DEPTH_TEST);
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 
 	return true;
 }
@@ -194,6 +195,12 @@ void Renderer::Draw()
 
 void Renderer::DrawFullDissolveObjects()
 {
+	// 透明度無効化
+	glDisable(GL_BLEND);
+
+	// 深度テスト有効化
+	glEnable(GL_DEPTH_TEST);
+
 	// 描画順に従って描画
 	for (auto itr : mMeshComponentsSortedInDrawPriority)
 	{
@@ -224,6 +231,9 @@ void Renderer::DrawNotFullDissolveObjects()
 
 	// ソート
 	mMeshComponentsSortedInCameraDistance.sort(camDistLongOrder);
+
+	// 透明度有効化
+	glEnable(GL_BLEND);
 
 	// 描画
 	for (auto itr : mMeshComponentsSortedInCameraDistance)

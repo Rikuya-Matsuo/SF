@@ -8,7 +8,7 @@ ActorFollowCamera::ActorFollowCamera(const Actor * targetActor, const Vector3D &
 {
 	if (mTargetActor)
 	{
-		mFront = mTargetActor->GetPosition();
+		mFront = mTargetActor->GetPosition() - mPosition;
 	}
 }
 
@@ -18,5 +18,5 @@ ActorFollowCamera::~ActorFollowCamera()
 
 void ActorFollowCamera::UpdateCamera()
 {
-	mFront = mTargetActor->GetPosition();
+	mFront = mTargetActor->GetPosition() - mPosition;
 }

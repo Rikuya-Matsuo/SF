@@ -41,9 +41,6 @@ public:
 	// アクティブなカメラの取得
 	const class Camera * GetActiveCamera() const { return mActiveCamera; }
 
-	// プロジェクション行列の取得
-	const class Matrix4 & GetProjectionMat() const { return mProjectionMat; }
-
 	// 描画域の大きさ取得
 	Uint32 GetWidth() const { return mWindowWidth; }
 
@@ -92,9 +89,6 @@ private:
 
 	// 背景色
 	Vector3D mBGColor;
-
-	// プロジェクション行列
-	Matrix4 mProjectionMat;
 
 	// 不透明オブジェクト描画部分
 	void DrawFullDissolveObjects();

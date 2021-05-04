@@ -7,7 +7,9 @@
 #include "Camera.h"
 
 TestActor::TestActor() :
-	Actor(0)
+	Actor(0),
+	mAxis(Vector3D::UnitY),
+	mAngle(0.0f)
 {
 	mShader = new ObjMeshShaderWrapper();
 
@@ -32,10 +34,9 @@ TestActor::~TestActor()
 
 void TestActor::UpdateActor()
 {
-	static float angle = 0.0f;
-	angle += MATH_PI * 2 * GAME_SYSTEM_INSTANCE.GetGameWorldDeltaTime();
+	mAngle += MATH_PI * 1 * GAME_SYSTEM_INSTANCE.GetGameWorldDeltaTime();
 
-	Quaternion q(Vector3D::UnitY, angle);
+	Quaternion q(mAxis, mAngle);
 
 	mRotation = q;
 }

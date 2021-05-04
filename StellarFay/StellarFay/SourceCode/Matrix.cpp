@@ -146,7 +146,7 @@ Matrix4 Matrix4::CreateFromQuaternion(const Quaternion & q)
 	mat[1][2] = 2.0f * q.y * q.z + 2.0f * q.x * q.w;
 	mat[1][3] = 0.0f;
 
-	mat[2][0] = 2.0f * q.z * q.x - 2.0f * q.y * q.w;
+	mat[2][0] = 2.0f * q.z * q.x + 2.0f * q.y * q.w;
 	mat[2][1] = 2.0f * q.z * q.y - 2.0f * q.x * q.w;
 	mat[2][2] = 1.0f - 2.0f * q.x * q.x - 2.0f * q.y * q.y;
 	mat[2][3] = 0.0f;
