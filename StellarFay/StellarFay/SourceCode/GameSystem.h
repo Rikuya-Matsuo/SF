@@ -2,6 +2,7 @@
 #include <SDL/SDL.h>
 #include "Vector.h"
 #include "Matrix.h"
+#include "RandomGenerator.h"
 
 // デバッグマクロ
 // リリース時はこれをコメントアウトする
@@ -30,6 +31,9 @@ public:
 	float GetGameWorldDeltaTime() const { return mGameWorldDetaTime; }
 
 	class Renderer * GetRenderer() { return mRenderer; }
+
+	// システムが所有する乱数生成機の参照
+	RandomGenerator & GetRand() { return mRand; }
 
 	void SetFirstScene(class SceneBase * scene) { mCurrentScene = scene; }
 
@@ -69,7 +73,14 @@ private:
 
 	// 次のシーンに移動する
 	bool GoNextScene();
+
+	//////////////////
+	// 乱数
+	//////////////////
+	// 乱数生成機
+	RandomGenerator mRand;
 };
 
 #define GAME_SYSTEM_INSTANCE GameSystem::GetInstance()
 #define RENDERER_INSTANCE (*(GAME_SYSTEM_INSTANCE.GetRenderer()))
+#define RANDOM_GENERATOR GameSystem::GetInstance().GetRand()

@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c" />
+    <ClCompile Include="SourceCode\RandomGenerator.cpp" />
     <ClCompile Include="SourceCode\Actor.cpp" />
     <ClCompile Include="SourceCode\ActorFollowCamera.cpp" />
     <ClCompile Include="SourceCode\Camera.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="SourceCode\MeshComponent.h" />
     <ClInclude Include="SourceCode\PhongShaderWrapper.h" />
     <ClInclude Include="SourceCode\Quaternion.h" />
+    <ClInclude Include="SourceCode\RandomGenerator.h" />
     <ClInclude Include="SourceCode\Renderer.h" />
     <ClInclude Include="SourceCode\SceneBase.h" />
     <ClInclude Include="SourceCode\Shader.h" />
