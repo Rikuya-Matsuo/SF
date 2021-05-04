@@ -1,5 +1,6 @@
 ﻿#include "TestActor.h"
 #include "ObjMeshShaderWrapper.h"
+#include "PhongShaderWrapper.h"
 #include "Mesh.h"
 #include "MeshComponent.h"
 #include "GameSystem.h"
@@ -11,11 +12,14 @@ TestActor::TestActor() :
 	mAxis(Vector3D::UnitY),
 	mAngle(0.0f)
 {
-	mShader = new ObjMeshShaderWrapper();
+	mShader = new PhongShaderWrapper();
 
 	mShader->UpdateUniformAddress("modelMat", &mModelMat);
 	mShader->UpdateUniformAddress("viewMat", &RENDERER_INSTANCE.GetActiveCamera()->GetViewMat());
 	mShader->UpdateUniformAddress("projectionMat", &RENDERER_INSTANCE.GetActiveCamera()->GetProjectionMat());
+
+	const Vector3D * camPosAddress = &RENDERER_INSTANCE.GetActiveCamera()->GetPosition();
+	mShader->UpdateUniformAddress("cameraPos", camPosAddress);
 
 	Mesh * msh = new Mesh();
 	bool success = msh->Load("Assets/Handgun/Handgun_obj.obj");
@@ -38,5 +42,5 @@ void TestActor::UpdateActor()
 
 	Quaternion q(mAxis, mAngle);
 
-	mRotation = q;
+	//mRotation = q;
 }

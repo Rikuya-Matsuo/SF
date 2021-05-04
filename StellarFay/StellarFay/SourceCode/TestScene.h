@@ -5,4 +5,11 @@ class TestScene : public SceneBase
 {
 public:
 	TestScene();
+
+private:
+	float mRadius;
+
+	float mAngle;
+
+	void UpdateScene() override;
 };

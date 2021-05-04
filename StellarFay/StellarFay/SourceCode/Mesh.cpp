@@ -351,6 +351,10 @@ bool Mesh::Load(const std::string & path)
 			{
 				mMtlDatas.back()->mDissolve = std::stof(wordsInLine[1]);
 			}
+			else if (wordsInLine[0] == "Ns")
+			{
+				mMtlDatas.back()->mShininess = std::stof(wordsInLine[1]);
+			}
 			else if (wordsInLine[0] == "map_Kd")
 			{
 				std::string texPath = relativePathTmp + wordsInLine[1];
@@ -363,7 +367,7 @@ bool Mesh::Load(const std::string & path)
 
 				mMtlDatas.back()->mDiffuseTexture = tex;
 			}
-			else if (wordsInLine[1] == "map_Ks")
+			else if (wordsInLine[0] == "map_Ks")
 			{
 				std::string texPath = relativePathTmp + wordsInLine[1];
 				Texture * tex = RENDERER_INSTANCE.GetTexture(texPath);

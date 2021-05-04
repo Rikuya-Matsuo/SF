@@ -29,6 +29,9 @@ void PhongShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * pol
 	// ディゾルブの転送
 	mShader->SetUniform1f("dissolve", polyGroup->mUsemtl->GetDissolve());
 
+	// スペキュラーの光沢度の転送
+	mShader->SetUniform1f("material.shininess", polyGroup->mUsemtl->GetShininess());
+
 	// ディフューズマップの設定
 	mShader->SetUniform1i("material.diffuseTex", 0);
 	const Texture * dtex = polyGroup->mUsemtl->GetDiffuseTexture();

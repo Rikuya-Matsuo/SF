@@ -173,6 +173,7 @@ public:
 
 	const std::string & GetName() const { return mName; }
 	float GetDissolve() const { return mDissolve; }
+	float GetShininess() const { return mShininess; }
 	const Texture * GetDiffuseTexture() const { return mDiffuseTexture; }
 	const Texture * GetSpecularTexture() const { return mSpecularTexture; }
 
@@ -180,6 +181,8 @@ private:
 	std::string mName;
 
 	float mDissolve;
+
+	float mShininess;
 
 	Texture * mDiffuseTexture;
 
