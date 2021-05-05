@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c" />
+    <ClCompile Include="SourceCode\ColliderComponentBase.cpp" />
     <ClCompile Include="SourceCode\RandomGenerator.cpp" />
     <ClCompile Include="SourceCode\Actor.cpp" />
     <ClCompile Include="SourceCode\ActorFollowCamera.cpp" />
@@ -179,6 +180,8 @@
   <ItemGroup>
     <ClInclude Include="SourceCode\ActorFollowCamera.h" />
     <ClInclude Include="SourceCode\Camera.h" />
+    <ClInclude Include="SourceCode\ColliderAttribute.h" />
+    <ClInclude Include="SourceCode\ColliderComponentBase.h" />
     <ClInclude Include="SourceCode\ObjMeshShaderWrapper.h" />
     <ClInclude Include="SourceCode\Actor.h" />
     <ClInclude Include="SourceCode\BitFlagFunc.h" />
@@ -193,6 +196,7 @@
     <ClInclude Include="SourceCode\Mesh.h" />
     <ClInclude Include="SourceCode\MeshComponent.h" />
     <ClInclude Include="SourceCode\PhongShaderWrapper.h" />
+    <ClInclude Include="SourceCode\PhysicManager.h" />
     <ClInclude Include="SourceCode\Quaternion.h" />
     <ClInclude Include="SourceCode\RandomGenerator.h" />
     <ClInclude Include="SourceCode\Renderer.h" />
