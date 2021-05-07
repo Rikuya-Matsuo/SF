@@ -58,6 +58,9 @@
     <Filter Include="ヘッダー ファイル\Physics">
       <UniqueIdentifier>{90abfd9b-9401-4619-92b7-cd6e14c00689}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Physics">
+      <UniqueIdentifier>{0f71433e-7f43-468d-a83b-d3fa92e2805f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c">
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="SourceCode\ColliderComponentBase.cpp">
       <Filter>ソース ファイル\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\PhysicManager.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

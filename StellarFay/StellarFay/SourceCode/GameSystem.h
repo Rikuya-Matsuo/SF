@@ -32,6 +32,8 @@ public:
 
 	class Renderer * GetRenderer() { return mRenderer; }
 
+	class PhysicManager * GetPhysicManager() { return mPhysicManager; }
+
 	// システムが所有する乱数生成機の参照
 	RandomGenerator & GetRand() { return mRand; }
 
@@ -46,6 +48,11 @@ private:
 	// レンダラー
 	/////////////////////
 	class Renderer * mRenderer;
+
+	///////////////////////
+	// 物理
+	///////////////////////
+	class PhysicManager * mPhysicManager;
 
 	////////////////
 	// 時間関係
@@ -83,4 +90,5 @@ private:
 
 #define GAME_SYSTEM_INSTANCE GameSystem::GetInstance()
 #define RENDERER_INSTANCE (*(GAME_SYSTEM_INSTANCE.GetRenderer()))
-#define RANDOM_GENERATOR GameSystem::GetInstance().GetRand()
+#define PHYSIC_MANAGER_INSTANCE (*(GAME_SYSTEM_INSTANCE.GetPhysicManager()))
+#define RANDOM_GENERATOR (GAME_SYSTEM_INSTANCE.GetRand())

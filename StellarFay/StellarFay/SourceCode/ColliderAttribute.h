@@ -20,7 +20,7 @@ static const ColliderAttribute TouchableAttributeCombinations[][2] =
 };
 
 // ２つの属性のコリジョンが接触可能かを調べる
-bool CheckTouchable(ColliderAttribute att1, ColliderAttribute att2)
+static bool CheckTouchable(ColliderAttribute att1, ColliderAttribute att2)
 {
 	bool matchFlag = false;
 

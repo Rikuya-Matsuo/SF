@@ -3,6 +3,7 @@
 #include <iostream>
 #include "GameSystem.h"
 #include "Renderer.h"
+#include "PhysicManager.h"
 #include "Input.h"
 #include "SceneBase.h"
 
@@ -64,6 +65,9 @@ bool GameSystem::Init()
 	light.mAmbientColor = Vector3D(0.8f);
 	light.mSpecularColor = Vector3D(1.0f);
 
+	// 物理クラス生成
+	mPhysicManager = new PhysicManager();
+
 	return true;
 }
 
@@ -119,6 +123,11 @@ void GameSystem::Finish()
 	if (mRenderer)
 	{
 		delete mRenderer;
+	}
+
+	if (mPhysicManager)
+	{
+		delete mPhysicManager;
 	}
 }
 

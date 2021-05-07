@@ -113,6 +113,13 @@ void Actor::RegisterComponent(ComponentBase * cmp)
 	mComponents.emplace_back(cmp);
 }
 
+void Actor::UpdateModelMat()
+{
+	mModelMat = Matrix4::CreateScale(mScales);
+	mModelMat *= Matrix4::CreateFromQuaternion(mRotation);
+	mModelMat *= Matrix4::CreateTranslation(mPosition);
+}
+
 void Actor::UpdateActor()
 {
 	// 内容は継承先に依存する
@@ -123,18 +130,17 @@ void Actor::UpdateActorLast()
 	// 内容は継承先に依存する
 }
 
-void Actor::SetPhongUniforms(Shader * shader) const
+void Actor::OnHit(ColliderComponentBase * caller, ColliderComponentBase * opponent)
 {
-	shader->SetUniform4m("modelMat", mModelMat.GetAsFloatPtr());
-
-	Matrix4 invModel = mModelMat;
-	invModel.Invert();
-	shader->SetUniform4m("invertedModelMat", invModel.GetAsFloatPtr());
+	// 処理は継承先依存
 }
 
-void Actor::UpdateModelMat()
+void Actor::OnBeTouching(ColliderComponentBase * caller, ColliderComponentBase * opponent)
 {
-	mModelMat = Matrix4::CreateScale(mScales);
-	mModelMat *= Matrix4::CreateFromQuaternion(mRotation);
-	mModelMat *= Matrix4::CreateTranslation(mPosition);
+	// 処理は継承先依存
+}
+
+void Actor::OnPart(ColliderComponentBase * caller, ColliderComponentBase * opponent)
+{
+	// 処理は継承先依存
 }

@@ -58,6 +58,28 @@ public:
 	// 描画フラグ取得
 	bool GetDrawFlag() const { return BitFlagFunc::GetOr(mActorFlags, ActorFlagMask::mDrawFlagMask); }
 	
+	////////////////////////
+	// 当たり判定関連
+	////////////////////////
+
+	// このフレームで接触した場合に呼ばれる関数
+	// 挙動は継承先依存
+	// caller	：このアクターが所有しているコライダー
+	// opponent	：接触対象であるコライダー
+	virtual void OnHit(class ColliderComponentBase * caller, ColliderComponentBase * opponent);
+
+	// 前フレーム以前から継続して接触している場合に呼ばれる関数
+	// 挙動は継承先依存
+	// caller	：このアクターが所有しているコライダー
+	// opponent	：接触対象であるコライダー
+	virtual void OnBeTouching(class ColliderComponentBase * caller, ColliderComponentBase * opponent);
+
+	// 前フレームまでは接触していたが、このフレームで離れた場合に呼ばれる関数
+	// 挙動は継承先依存
+	// caller	：このアクターが所有しているコライダー
+	// opponent	：接触対象であるコライダー
+	virtual void OnPart(class ColliderComponentBase * caller, ColliderComponentBase * opponent);
+
 	/////////////////////
 	// その他
 	/////////////////////
@@ -105,9 +127,6 @@ protected:
 	virtual void UpdateActor();
 	// 全コンポーネントの更新とUpdateActor()が終わった後に走る処理
 	virtual void UpdateActorLast();
-
-	// Phongシェーダのユニフォーム変数設定
-	void SetPhongUniforms(class Shader * shader) const;
 
 private:
 	// モデル行列の更新
