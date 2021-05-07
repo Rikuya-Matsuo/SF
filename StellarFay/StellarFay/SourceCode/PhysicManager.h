@@ -20,6 +20,9 @@ public:
 	// コライダー側で呼ぶので、外部から呼んでやる必要はない
 	void DeregisterCollider(class ColliderComponentBase * collider);
 
+	// コライダーソートの要請
+	void RequestSortCollider(ColliderAttribute att) { mSortAttributeList.emplace_back(att); }
+
 private:
 	// コライダーのリストの型
 	typedef std::list<class ColliderComponentBase *> ColliderList;
@@ -27,5 +30,9 @@ private:
 	// ColliderAttributeごとに分けられたコライダーのリスト
 	std::unordered_map<ColliderAttribute, ColliderList> mColliders;
 
+	// ソート要請が行われた属性を示すリスト
+	std::list<ColliderAttribute> mSortAttributeList;
 
+	// リストに示された属性のコライダーをソートする
+	void SortColliders();
 };
