@@ -113,12 +113,6 @@ void Actor::RegisterComponent(ComponentBase * cmp)
 	mComponents.emplace_back(cmp);
 }
 
-void Actor::SetUniforms(Shader * shader)
-{
-	// デフォルトでPhongシェーダの設定を行う
-	SetPhongUniforms(shader);
-}
-
 void Actor::UpdateActor()
 {
 	// 内容は継承先に依存する

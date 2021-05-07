@@ -73,10 +73,6 @@ public:
 	// コンポーネント基底クラスのコンストラクタにて呼び出すことで、いちいちリストへの追加処理を書かなくてもよいようにする
 	void RegisterComponent(class ComponentBase * cmp);
 
-	// シェーダのユニフォーム変数設定
-	// 予めシェーダをアクティブにしておく必要がある。
-	virtual void SetUniforms(class Shader * shader);
-
 protected:
 	// ビットフラグ
 	ActorFlagMask::Type mActorFlags;
