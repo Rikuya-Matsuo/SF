@@ -74,6 +74,12 @@ public:
 		return *this;
 	}
 
+	// キーとして、小文字のxy以外の文字を与えないこと
+	float operator[](char elemKey) const
+	{
+		return reinterpret_cast<const float *>(&x)[elemKey - 'x'];
+	}
+
 	friend std::ostream & operator<<(std::ostream & stream, const Vector2D & v);
 
 	float LengthSq() const
@@ -206,6 +212,14 @@ public:
 		y *= f;
 		z *= f;
 		return *this;
+	}
+
+	// 文字変数で要素を取得する
+	// 全要素について同じ処理を行うループ時に便利だが、文字変数は小文字のxyzのいずれかでなければならない
+	// 後ろに = を付ければ代入できるようにもしたかったが断念（constやキャストの関係で実現が困難）
+	float operator[](char elemKey) const
+	{
+		return this->GetAsFloatPtr()[elemKey - 'x'];
 	}
 
 	friend std::ostream & operator<<(std::ostream & stream, const Vector3D & v);

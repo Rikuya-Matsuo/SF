@@ -1,7 +1,13 @@
 ﻿#pragma once
 #include "Vector.h"
 
-struct AABB
+// 共通の基底クラスを持たせるためのクラス
+struct CollisionShapeBase
+{
+	virtual bool IsPointInside(const Vector3D & point) const = 0;
+};
+
+struct AABB : public CollisionShapeBase
 {
 	Vector3D mMax;
 	Vector3D mMin;
@@ -39,6 +45,23 @@ struct AABB
 		return size.x * size.y * size.z;
 	}
 
+	bool IsPointInside(const Vector3D & point) const override;
+
 private:
 	bool mSetFlag = false;
 };
+
+struct Sphere : public CollisionShapeBase
+{
+	// 中心の座標
+	Vector3D mCenter;
+	
+	// 半径
+	float mRadius;
+
+	bool IsPointInside(const Vector3D & point) const override;
+};
+
+bool CheckHit(const AABB & box1, const AABB & box2);
+
+bool CheckHit(const Sphere & s1, const Sphere & s2);
