@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "ComponentBase.h"
 #include "ColliderAttribute.h"
+#include "Collision.h"
 
 class ColliderComponentBase : public ComponentBase
 {
@@ -12,6 +13,10 @@ public:
 	ColliderAttribute GetAttribute() const { return mAttribute; }
 
 	int GetCheckOrder() const { return mCheckOrder; }
+
+	// コリジョンデータの取得。継承先によって形状が異なる。
+	// 基底クラスではnullptrを返す。
+	virtual const CollisionShapeBase * GetCollision() const { return nullptr; }
 
 protected:
 	const ColliderAttribute mAttribute;

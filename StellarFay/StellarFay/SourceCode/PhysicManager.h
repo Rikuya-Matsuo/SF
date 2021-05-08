@@ -35,4 +35,8 @@ private:
 
 	// リストに示された属性のコライダーをソートする
 	void SortColliders();
+
+	// 引数に指定された属性組み合わせのチェックを行う
+	// ポインタから頭2つの組み合わせのチェックを行うものとする
+	void CollisionCheckLoop(const ColliderAttribute * attCombi);
 };

@@ -19,12 +19,18 @@ static const ColliderAttribute TouchableAttributeCombinations[][2] =
 	{Enemy_ColAtt, PlayerBullet_ColAtt}
 };
 
+// TouchableAttributeCombinationsの組み合わせの数
+static size_t CalculateTouchableAttributeCombinationMass()
+{
+	return sizeof(TouchableAttributeCombinations) / 2 / sizeof(ColliderAttribute);
+}
+
 // ２つの属性のコリジョンが接触可能かを調べる
 static bool CheckTouchable(ColliderAttribute att1, ColliderAttribute att2)
 {
 	bool matchFlag = false;
 
-	const size_t iMax = sizeof(TouchableAttributeCombinations) / 2 / sizeof(ColliderAttribute);
+	const size_t iMax = CalculateTouchableAttributeCombinationMass();
 	for (size_t i = 0; i < iMax; ++i)
 	{
 		const ColliderAttribute * tacIPtr = TouchableAttributeCombinations[i];

@@ -8,6 +8,26 @@ PhysicManager::PhysicManager()
 
 void PhysicManager::CheckHit()
 {
+	// 接触可能な全ての属性の組み合わせで判定を行う
+	const size_t tacIMax = CalculateTouchableAttributeCombinationMass();
+	for (size_t i = 0; i < tacIMax; ++i)
+	{
+		const ColliderAttribute * attCombi = TouchableAttributeCombinations[i];
+
+		CollisionCheckLoop(attCombi);
+	}
+}
+
+void PhysicManager::CollisionCheckLoop(const ColliderAttribute * attCombi)
+{
+	// 指定属性のリストのエイリアス取得
+	ColliderList * colList[2] = { &mColliders[attCombi[0]], &mColliders[attCombi[1]] };
+
+	// 片方のリストが空なら関数を抜ける
+	if (colList[0]->empty() || colList[1]->empty())
+	{
+		return;
+	}
 }
 
 void PhysicManager::RegisterCollider(ColliderComponentBase * collider)
