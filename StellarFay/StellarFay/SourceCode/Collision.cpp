@@ -1,4 +1,5 @@
 ﻿#include "Collision.h"
+#include "CommonMath.h"
 
 // 判定を行う軸の順番
 // 外部のクラスから閲覧できないようにするため、cppに定義する
@@ -17,6 +18,17 @@ bool CheckHit(const AABB & box1, const AABB & box2)
 
 	// 全ての軸でボックスの範囲が重なっていれば、接触している
 	bool hitFlag = chkEachElem(chkOrder[0]) && chkEachElem(chkOrder[1]) && chkEachElem(chkOrder[2]);
+
+	return hitFlag;
+}
+
+bool CheckHit(const AABB & box, const Sphere & s)
+{
+	// 球の中心からボックスまでの最短距離を計算
+	float distSq = box.MinDistanceSq(s.mCenter);
+
+	// 最短距離が球の半径以下なら接触している
+	bool hitFlag = (distSq <= s.mRadius * s.mRadius);
 
 	return hitFlag;
 }
@@ -48,6 +60,31 @@ bool AABB::IsPointInside(const Vector3D & point) const
 	bool inside = chkInsideEachElem(chkOrder[0]) && chkInsideEachElem(chkOrder[1]) && chkInsideEachElem(chkOrder[2]);
 
 	return inside;
+}
+
+float AABB::MinDistanceSq(const Vector3D & point) const
+{
+	// 指定された軸のpointに最も近い座標を返す
+	auto chkNearest = [&point, this](char elemKey)
+	{
+		float near;
+		near = LARGER(mMin[elemKey], point[elemKey]);
+		near = SMALLER(mMax[elemKey], near);
+
+		return near;
+	};
+
+	// pointに最も近い、ボックス表面上の点
+	Vector3D nearestPoint;
+
+	nearestPoint.x = chkNearest('x');
+	nearestPoint.y = chkNearest('y');
+	nearestPoint.z = chkNearest('z');
+
+	// pointからボックスまでの最短ベクトル
+	Vector3D nearestVec = nearestPoint - point;
+
+	return nearestPoint.LengthSq();
 }
 
 bool Sphere::IsPointInside(const Vector3D & point) const

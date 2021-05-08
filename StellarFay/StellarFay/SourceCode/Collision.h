@@ -47,6 +47,8 @@ struct AABB : public CollisionShapeBase
 
 	bool IsPointInside(const Vector3D & point) const override;
 
+	float MinDistanceSq(const Vector3D & point) const;
+
 private:
 	bool mSetFlag = false;
 };
@@ -63,5 +65,7 @@ struct Sphere : public CollisionShapeBase
 };
 
 bool CheckHit(const AABB & box1, const AABB & box2);
+
+bool CheckHit(const AABB & box, const Sphere & s);
 
 bool CheckHit(const Sphere & s1, const Sphere & s2);
