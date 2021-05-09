@@ -7,6 +7,8 @@ public:
 	// nullptrを渡す場合は、通常のPhongシェーダをラップする
 	PhongShaderWrapper(Shader * shader = nullptr);
 
+	void SetUniforms() const override;
+
 	void SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const override;
 
 	// ユニフォーム変数"cameraPos"を設定できる関数

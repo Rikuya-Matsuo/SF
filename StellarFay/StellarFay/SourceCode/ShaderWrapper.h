@@ -18,7 +18,7 @@ protected:
 	typedef std::unordered_map<std::string, int> UnifList1i;
 	typedef std::unordered_map<std::string, const int *> UnifAddressList1i;
 	typedef std::unordered_map<std::string, Matrix4> UnifList4m;
-	typedef std::unordered_map < std::string, const Matrix4 *> UnifAddressList4m;
+	typedef std::unordered_map<std::string, const Matrix4 *> UnifAddressList4m;
 
 public:
 	ShaderWrapper(Shader * shader = nullptr);

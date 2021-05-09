@@ -24,6 +24,37 @@ PhongShaderWrapper::PhongShaderWrapper(Shader * shader) :
 	mUniformAddressList3f["light.specular"] = &lightInfoRef.mSpecularColor;
 }
 
+void PhongShaderWrapper::SetUniforms() const
+{
+	// 基底クラスの同関数を呼ぶ
+	ShaderWrapper::SetUniforms();
+
+	// 逆行列のセット
+	Matrix4 invMat;
+	static const char * modelKey = "modelMat";
+
+	// モデル行列を探す
+	// 参照から
+	auto itrRef = mUniformAddressList4m.find(modelKey);
+	if (itrRef != mUniformAddressList4m.end())
+	{
+		invMat = *itrRef->second;
+	}
+
+	// 見つからなかった場合行列型のマップから
+	else
+	{
+		auto itr = mUniformList4m.find(modelKey);
+		if (itr != mUniformList4m.end())
+		{
+			invMat = itr->second;
+		}
+	}
+
+	// ユニフォーム転送
+	mShader->SetUniform4m("invertedModelMat", invMat.GetAsFloatPtr());
+}
+
 void PhongShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
 {
 	// ディゾルブの転送
