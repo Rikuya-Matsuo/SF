@@ -58,7 +58,7 @@ bool GameSystem::Init()
 	// ライト情報
 	LightInfo & light = mRenderer->GetLightInfo();
 
-	Vector3D lightDir = Vector3D(1.0f, -1.0f, 0.0f);
+	Vector3D lightDir = Vector3D(1.0f, 0.0f, 0.0f);
 	light.mDirection = Vector3D::Normalize(lightDir);
 
 	light.mDiffuseColor = Vector3D(1.0f);

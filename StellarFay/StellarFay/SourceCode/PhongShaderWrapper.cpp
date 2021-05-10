@@ -51,6 +51,9 @@ void PhongShaderWrapper::SetUniforms() const
 		}
 	}
 
+	// ここで逆行列化
+	invMat.Invert();
+
 	// ユニフォーム転送
 	mShader->SetUniform4m("invertedModelMat", invMat.GetAsFloatPtr());
 }

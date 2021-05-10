@@ -30,5 +30,5 @@ void TestScene::UpdateScene()
 	pos.x = sinf(mAngle) * mRadius;
 	pos.z = cosf(mAngle) * mRadius;
 
-	c->SetPosition(pos);
+	//c->SetPosition(pos);
 }

@@ -38,9 +38,9 @@ TestActor::~TestActor()
 
 void TestActor::UpdateActor()
 {
-	mAngle += MATH_PI * 1 * GAME_SYSTEM_INSTANCE.GetGameWorldDeltaTime();
+	mAngle += MATH_PI * 0.5f * GAME_SYSTEM_INSTANCE.GetGameWorldDeltaTime();
 
 	Quaternion q(mAxis, mAngle);
 
-	//mRotation = q;
+	mRotation = q;
 }
