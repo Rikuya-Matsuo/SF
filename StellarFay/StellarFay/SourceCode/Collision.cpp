@@ -6,7 +6,7 @@
 // このゲームでは自機は基本的にz方向に進むため、z軸から判定を行った方が工程を減らせるのではないかと考え、この順番にしている
 const char chkOrder[3] = { 'z', 'x', 'y' };
 
-bool CheckHit(const AABB & box1, const AABB & box2)
+bool CollisionFunc::CheckHit(const AABB & box1, const AABB & box2)
 {
 	// 各要素が接触しているかを検証するラムダ式
 	auto chkEachElem = [&box1, &box2](char elem)
@@ -22,7 +22,7 @@ bool CheckHit(const AABB & box1, const AABB & box2)
 	return hitFlag;
 }
 
-bool CheckHit(const AABB & box, const Sphere & s)
+bool CollisionFunc::CheckHit(const AABB & box, const Sphere & s)
 {
 	// 球の中心からボックスまでの最短距離を計算
 	float distSq = box.MinDistanceSq(s.mCenter);
@@ -33,7 +33,12 @@ bool CheckHit(const AABB & box, const Sphere & s)
 	return hitFlag;
 }
 
-bool CheckHit(const Sphere & s1, const Sphere & s2)
+inline bool CollisionFunc::CheckHit(const Sphere & s, const AABB & box)
+{
+	return CheckHit(box, s);
+}
+
+bool CollisionFunc::CheckHit(const Sphere & s1, const Sphere & s2)
 {
 	// 半径の合計
 	const float radiusSum = s1.mRadius + s2.mRadius;

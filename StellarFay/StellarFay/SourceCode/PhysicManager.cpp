@@ -1,5 +1,6 @@
 ﻿#include "PhysicManager.h"
 #include "ColliderComponentBase.h"
+#include "Actor.h"
 #include <algorithm>
 
 PhysicManager::PhysicManager()
@@ -27,6 +28,68 @@ void PhysicManager::CollisionCheckLoop(const ColliderAttribute * attCombi)
 	if (colList[0]->empty() || colList[1]->empty())
 	{
 		return;
+	}
+
+	// 判定を行う2つのコライダーコンポーネントへのポインタをエイリアスとして持つ配列
+	ColliderComponentBase * colliders[2] = { nullptr };
+
+	// 判定の形状データをエイリアスとして持つ配列
+	const AABB * colBoxes[2] = { nullptr };
+	const Sphere * colSpheres[2] = { nullptr };
+
+	// 判定の前準備をするラムダ式
+	auto prepareForJudge = [&colliders, &colBoxes, &colSpheres](size_t index, ColliderComponentBase * col)
+	{
+		// 判定が可能でなければ偽を返す
+		bool skipJudge = !col->GetActiveFlag() || !col->GetOwner()->GetActiveFlag();
+		if (skipJudge)
+		{
+			return false;
+		}
+
+		// エイリアス取得
+		colliders[index] = col;
+		colBoxes[index] = col->GetWorldBox();
+		colSpheres[index] = col->GetWorldSphere();
+
+		return true;
+	};
+
+	// 全ての組み合わせについて検証
+	for (auto list0itr = colList[0]->begin(); list0itr != colList[0]->end(); ++list0itr)
+	{
+		// 準備
+		bool allowed = prepareForJudge(0, *list0itr);
+
+		// 判定が可能でなければスキップ
+		if (!allowed)
+		{
+			continue;
+		}
+
+		for (auto list1itr = colList[1]->begin(); list1itr != colList[1]->end(); ++list1itr)
+		{
+			// 準備
+			allowed = prepareForJudge(1, *list1itr);
+
+			// 判定が可能でなければスキップ
+			if (!allowed)
+			{
+				continue;
+			}
+
+			// （同じ属性同士での判定時）同じコライダー同士での判定は行わない
+			bool sameCollider = (colliders[0] == colliders[1]);
+			if (sameCollider)
+			{
+				continue;
+			}
+
+			// 判定
+			// 形状によって関数のオーバーライドが異なるので、形状の組み合わせによって分岐
+			//bool hitFlag;
+			
+		}
 	}
 }
 

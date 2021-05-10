@@ -14,9 +14,17 @@ public:
 
 	int GetCheckOrder() const { return mCheckOrder; }
 
-	// コリジョンデータの取得。継承先によって形状が異なる。
+	// コリジョン基底データの取得。継承先によって形状が異なる。
 	// 基底クラスではnullptrを返す。
 	virtual const CollisionShapeBase * GetCollision() const { return nullptr; }
+
+	// AABBの取得
+	// AABBをコリジョンとして持たないコンポーネントからはnullptrを返す
+	virtual const AABB * GetWorldBox() const { return nullptr; }
+
+	// 球の取得
+	// 球をコリジョンとして持たないコンポーネントからはnullptrを返す
+	virtual const Sphere * GetWorldSphere() const { return nullptr; }
 
 protected:
 	const ColliderAttribute mAttribute;

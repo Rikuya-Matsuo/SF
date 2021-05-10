@@ -64,8 +64,13 @@ struct Sphere : public CollisionShapeBase
 	bool IsPointInside(const Vector3D & point) const override;
 };
 
-bool CheckHit(const AABB & box1, const AABB & box2);
+namespace CollisionFunc
+{
+	bool CheckHit(const AABB & box1, const AABB & box2);
 
-bool CheckHit(const AABB & box, const Sphere & s);
+	bool CheckHit(const AABB & box, const Sphere & s);
 
-bool CheckHit(const Sphere & s1, const Sphere & s2);
+	inline bool CheckHit(const Sphere & s, const AABB & box);
+
+	bool CheckHit(const Sphere & s1, const Sphere & s2);
+}
