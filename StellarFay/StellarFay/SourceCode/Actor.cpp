@@ -130,17 +130,17 @@ void Actor::UpdateActorLast()
 	// 内容は継承先に依存する
 }
 
-void Actor::OnHit(ColliderComponentBase * caller, ColliderComponentBase * opponent)
+void Actor::OnHit(const ColliderComponentBase * caller, const ColliderComponentBase * opponent)
 {
 	// 処理は継承先依存
 }
 
-void Actor::OnBeTouching(ColliderComponentBase * caller, ColliderComponentBase * opponent)
+void Actor::OnBeTouching(const ColliderComponentBase * caller, const ColliderComponentBase * opponent)
 {
 	// 処理は継承先依存
 }
 
-void Actor::OnPart(ColliderComponentBase * caller, ColliderComponentBase * opponent)
+void Actor::OnPart(const ColliderComponentBase * caller, const ColliderComponentBase * opponent)
 {
 	// 処理は継承先依存
 }

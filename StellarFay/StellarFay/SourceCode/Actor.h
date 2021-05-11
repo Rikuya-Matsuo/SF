@@ -66,19 +66,19 @@ public:
 	// 挙動は継承先依存
 	// caller	：このアクターが所有しているコライダー
 	// opponent	：接触対象であるコライダー
-	virtual void OnHit(class ColliderComponentBase * caller, ColliderComponentBase * opponent);
+	virtual void OnHit(const class ColliderComponentBase * caller, const ColliderComponentBase * opponent);
 
 	// 前フレーム以前から継続して接触している場合に呼ばれる関数
 	// 挙動は継承先依存
 	// caller	：このアクターが所有しているコライダー
 	// opponent	：接触対象であるコライダー
-	virtual void OnBeTouching(class ColliderComponentBase * caller, ColliderComponentBase * opponent);
+	virtual void OnBeTouching(const class ColliderComponentBase * caller, const ColliderComponentBase * opponent);
 
 	// 前フレームまでは接触していたが、このフレームで離れた場合に呼ばれる関数
 	// 挙動は継承先依存
 	// caller	：このアクターが所有しているコライダー
 	// opponent	：接触対象であるコライダー
-	virtual void OnPart(class ColliderComponentBase * caller, ColliderComponentBase * opponent);
+	virtual void OnPart(const class ColliderComponentBase * caller, const ColliderComponentBase * opponent);
 
 	/////////////////////
 	// その他

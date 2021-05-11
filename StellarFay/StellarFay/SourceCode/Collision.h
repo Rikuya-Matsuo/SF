@@ -1,14 +1,31 @@
 ﻿#pragma once
 #include "Vector.h"
+#include <SDL/SDL.h>
 
-// 共通の基底クラスを持たせるためのクラス
+enum CollisionShapeEnum : Uint8
+{
+	AABB_CollisionShapeEnum = 0,
+	Sphere_CollisionShapeEnum,
+	Invalid_CollisionShapeEnum
+};
+
+// コリジョン形状の基底クラス
 struct CollisionShapeBase
 {
+	CollisionShapeBase(CollisionShapeEnum shape) :
+		mShape(shape)
+	{}
+
+	const CollisionShapeEnum mShape;
+
 	virtual bool IsPointInside(const Vector3D & point) const = 0;
 };
 
 struct AABB : public CollisionShapeBase
 {
+	AABB() :
+		CollisionShapeBase(CollisionShapeEnum::AABB_CollisionShapeEnum) {}
+
 	Vector3D mMax;
 	Vector3D mMin;
 
@@ -55,6 +72,9 @@ private:
 
 struct Sphere : public CollisionShapeBase
 {
+	Sphere() :
+		CollisionShapeBase(CollisionShapeEnum::Sphere_CollisionShapeEnum) {}
+
 	// 中心の座標
 	Vector3D mCenter;
 	
@@ -70,7 +90,10 @@ namespace CollisionFunc
 
 	bool CheckHit(const AABB & box, const Sphere & s);
 
-	inline bool CheckHit(const Sphere & s, const AABB & box);
+	inline bool CheckHit(const Sphere & s, const AABB & box)
+	{
+		return CheckHit(box, s);
+	}
 
 	bool CheckHit(const Sphere & s1, const Sphere & s2);
 }

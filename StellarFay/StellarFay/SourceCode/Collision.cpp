@@ -33,11 +33,6 @@ bool CollisionFunc::CheckHit(const AABB & box, const Sphere & s)
 	return hitFlag;
 }
 
-inline bool CollisionFunc::CheckHit(const Sphere & s, const AABB & box)
-{
-	return CheckHit(box, s);
-}
-
 bool CollisionFunc::CheckHit(const Sphere & s1, const Sphere & s2)
 {
 	// 半径の合計
