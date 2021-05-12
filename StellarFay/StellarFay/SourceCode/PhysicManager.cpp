@@ -7,6 +7,27 @@ PhysicManager::PhysicManager()
 {
 }
 
+PhysicManager::~PhysicManager()
+{
+	// コライダーリストのメモリ解放
+	for (auto itr = mColliders.begin(); itr != mColliders.end(); ++itr)
+	{
+		itr->second.clear();
+
+		ColliderList().swap(itr->second);
+	}
+	mColliders.clear();
+	std::unordered_map<ColliderAttribute, ColliderList>().swap(mColliders);
+
+	// ソート要請受け付けリストのメモリ解放
+	mSortAttributeList.clear();
+	std::list<ColliderAttribute>().swap(mSortAttributeList);
+
+	// 接触状況記録マップのメモリ解放
+	mHitState.clear();
+	std::unordered_map<ColliderPair, HitState, ColPairHash>().swap(mHitState);
+}
+
 void PhysicManager::CheckHit()
 {
 	// 接触可能な全ての属性の組み合わせで判定を行う

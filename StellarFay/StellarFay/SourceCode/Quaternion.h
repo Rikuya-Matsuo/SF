@@ -32,6 +32,15 @@ public:
 		w = cosf(angle / 2.0f);
 	}
 
+	bool operator==(const Quaternion & rhs) const
+	{
+		return
+			(this->x == rhs.x) &&
+			(this->y == rhs.y) &&
+			(this->z == rhs.z) &&
+			(this->w == rhs.w);
+	}
+
 	float LengthSq() const
 	{
 		return (x * x + y * y + z * z + w * w);

@@ -222,6 +222,14 @@ public:
 		return this->GetAsFloatPtr()[elemKey - 'x'];
 	}
 
+	bool operator==(const Vector3D & rhs) const
+	{
+		return
+			(this->x == rhs.x) &&
+			(this->y == rhs.y) &&
+			(this->z == rhs.z);
+	}
+
 	friend std::ostream & operator<<(std::ostream & stream, const Vector3D & v);
 
 	float LengthSq() const

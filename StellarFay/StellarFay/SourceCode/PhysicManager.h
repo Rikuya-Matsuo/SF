@@ -10,6 +10,8 @@ class PhysicManager final
 public:
 	PhysicManager();
 
+	~PhysicManager();
+
 	// 当たり判定
 	void CheckHit();
 
