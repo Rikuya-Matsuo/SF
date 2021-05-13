@@ -55,3 +55,8 @@ void ShaderWrapper::SetUniforms() const
 void ShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
 {
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

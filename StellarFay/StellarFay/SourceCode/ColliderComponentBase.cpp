@@ -14,3 +14,8 @@ ColliderComponentBase::~ColliderComponentBase()
 {
 	PHYSIC_MANAGER_INSTANCE.DeregisterCollider(this);
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

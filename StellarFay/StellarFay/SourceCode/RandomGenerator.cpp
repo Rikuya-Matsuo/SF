@@ -16,3 +16,8 @@ float RandomGenerator::RangeF(float min, float max)
 	std::uniform_real_distribution<float> range(min, max);
 	return range(mRand);
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

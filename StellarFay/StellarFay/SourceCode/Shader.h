@@ -51,3 +51,8 @@ private:
 
 	bool Load(GLuint & target, const std::string & path, GLenum shaderType);
 };
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

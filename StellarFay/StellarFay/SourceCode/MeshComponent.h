@@ -78,3 +78,8 @@ private:
 
 	void DrawUnderCondition(class ShaderWrapper * shader, std::function<bool(Mesh::ObjectData * obj, size_t polyGroupIndex)> condition) const;
 };
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

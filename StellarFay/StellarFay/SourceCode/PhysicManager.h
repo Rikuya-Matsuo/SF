@@ -77,3 +77,8 @@ private:
 	// コライダーの所有者であるアクターの当たり判定反応関数を呼ぶ
 	void CallReaction(const class ColliderComponentBase ** col, bool hitFlag);
 };
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

@@ -35,3 +35,8 @@ void ObjMeshShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * p
 		tex->Activate();
 	}
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

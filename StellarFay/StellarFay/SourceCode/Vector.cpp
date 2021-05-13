@@ -82,3 +82,8 @@ std::ostream & operator<<(std::ostream & stream, const Vector3D & v)
 
 	return stream;
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

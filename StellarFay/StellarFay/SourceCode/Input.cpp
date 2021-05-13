@@ -35,3 +35,8 @@ void Input::LastUpdate()
 	// キー状態保存
 	SDL_memcpy(mPrevKeyStates, mKeyStates, SDL_NUM_SCANCODES);
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

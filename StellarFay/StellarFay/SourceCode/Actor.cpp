@@ -153,3 +153,8 @@ void Actor::OnPart(const ColliderComponentBase * caller, const ColliderComponent
 {
 	// 処理は継承先依存
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

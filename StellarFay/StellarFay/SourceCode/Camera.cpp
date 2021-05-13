@@ -44,3 +44,8 @@ void Camera::CalculateMatrices()
 	// プロジェクション行列の計算
 	mProjectionMat = Matrix4::CreatePerspectiveFOV(mZoom, mWidth, mHeight, 0.1f, 1000.f);
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

@@ -92,3 +92,8 @@ void PhongShaderWrapper::UpdateMatricesReference(const Matrix4 * modelMatAddress
 void PhongShaderWrapper::UpdateMatricesReference(const Matrix4 * modelMatAddress, const Matrix4 * viewMat, const Matrix4 * projMat)
 {
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

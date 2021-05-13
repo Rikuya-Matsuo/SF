@@ -80,3 +80,8 @@ void VertexArray::ArgumentPreset::SetAttributeSizes(size_t argMass, ...)
 
 	mAttributeSizes.shrink_to_fit();
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

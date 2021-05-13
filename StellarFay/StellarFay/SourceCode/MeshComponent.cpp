@@ -96,3 +96,8 @@ void MeshComponent::DrawUnderCondition(ShaderWrapper * shader, std::function<boo
 		}
 	}
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

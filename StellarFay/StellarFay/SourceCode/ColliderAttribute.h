@@ -47,3 +47,8 @@ static bool CheckTouchable(ColliderAttribute att1, ColliderAttribute att2)
 
 	return matchFlag;
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

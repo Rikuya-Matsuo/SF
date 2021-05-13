@@ -22,3 +22,8 @@ void ComponentBase::SetPriority(int priority)
 	mOwner->RequestSortComponents();
 	mPriority = priority;
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

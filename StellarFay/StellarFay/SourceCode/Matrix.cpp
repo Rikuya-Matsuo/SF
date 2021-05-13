@@ -192,3 +192,8 @@ std::ostream & operator<<(std::ostream & stream, const Matrix4 m)
 
 	return stream;
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

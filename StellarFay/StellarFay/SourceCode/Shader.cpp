@@ -214,3 +214,8 @@ bool Shader::Load(GLuint & target, const std::string & path, GLenum shaderType)
 
 	return true;
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

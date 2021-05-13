@@ -5,3 +5,8 @@
 #define LERP(a, b, rate)		(a + (b - a) * rate)
 #define LARGER(a, b)			((a > b) ? a : b)
 #define SMALLER(a, b)			((a < b) ? a : b)
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

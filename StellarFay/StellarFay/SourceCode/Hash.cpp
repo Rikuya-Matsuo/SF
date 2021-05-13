@@ -79,3 +79,8 @@ size_t Hash::Fnv1(uint64_t * bytes, size_t length)
 {
 	return _Fnv1(bytes, sizeof(uint64_t), length);
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

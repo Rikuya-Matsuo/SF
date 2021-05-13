@@ -52,3 +52,8 @@ void main()
 	vec3 result = ambientColor + diffuseColor + specularColor;
 	FragColor = vec4(result, dissolve);
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

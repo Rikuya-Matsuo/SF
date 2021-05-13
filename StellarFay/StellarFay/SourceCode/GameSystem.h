@@ -92,3 +92,8 @@ private:
 #define RENDERER_INSTANCE (*(GAME_SYSTEM_INSTANCE.GetRenderer()))
 #define PHYSIC_MANAGER_INSTANCE (*(GAME_SYSTEM_INSTANCE.GetPhysicManager()))
 #define RANDOM_GENERATOR (GAME_SYSTEM_INSTANCE.GetRand())
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

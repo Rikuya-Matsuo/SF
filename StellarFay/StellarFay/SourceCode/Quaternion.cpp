@@ -1,3 +1,8 @@
 ﻿#include "Quaternion.h"
 
 const Quaternion Quaternion::Identity(0.0f, 0.0f, 0.0f, 1.0f);
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////
