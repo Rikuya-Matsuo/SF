@@ -20,6 +20,34 @@ namespace ActorFlagMask
 	static const Type mInitialFlag = mActiveFlagMask | mDrawFlagMask;
 }
 
+struct TransformData
+{
+	// 位置ベクトル
+	Vector3D mPosition;
+
+	// スケール値ベクトル
+	Vector3D mScales;
+
+	// 回転
+	Quaternion mRotation;
+
+	TransformData() : mScales(1.0f)	{}
+
+	bool operator==(const TransformData & rhs)
+	{
+		// 工夫として、ゲーム内で変化させる頻度が多そうなものから比較をする
+		return
+			(this->mPosition == rhs.mPosition) &&
+			(this->mRotation == rhs.mRotation) &&
+			(this->mScales == rhs.mScales);
+	}
+
+	bool operator!=(const TransformData & rhs)
+	{
+		return !(*this == rhs);
+	}
+};
+
 class Actor
 {
 public:
@@ -47,7 +75,7 @@ public:
 	///////////////////
 
 	// 位置取得
-	const Vector3D & GetPosition() const { return mPosition; }
+	const Vector3D & GetPosition() const { return mTransform.mPosition; }
 
 	// 更新順の値を取得
 	int GetPriority() const { return mPriority; }
@@ -101,15 +129,12 @@ protected:
 
 	// この値が小さいものから処理を行う。
 	int mPriority;
+	
+	// このフレームの変形情報
+	TransformData mTransform;
 
-	// 位置ベクトル
-	Vector3D mPosition;
-
-	// スケール値ベクトル
-	Vector3D mScales;
-
-	// 回転
-	Quaternion mRotation;
+	// モデル行列更新前のフレームの変形情報
+	TransformData mPrevTransform;
 
 	// モデル行列
 	Matrix4 mModelMat;

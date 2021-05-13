@@ -12,14 +12,14 @@ TestActor::TestActor() :
 	mAxis(Vector3D::UnitY),
 	mAngle(0.0f)
 {
-	mShader = new PhongShaderWrapper();
+	mShaderWrapper = new PhongShaderWrapper();
 
-	mShader->UpdateUniformAddress("modelMat", &mModelMat);
-	mShader->UpdateUniformAddress("viewMat", &RENDERER_INSTANCE.GetActiveCamera()->GetViewMat());
-	mShader->UpdateUniformAddress("projectionMat", &RENDERER_INSTANCE.GetActiveCamera()->GetProjectionMat());
+	mShaderWrapper->UpdateUniformAddress("modelMat", &mModelMat);
+	mShaderWrapper->UpdateUniformAddress("viewMat", &RENDERER_INSTANCE.GetActiveCamera()->GetViewMat());
+	mShaderWrapper->UpdateUniformAddress("projectionMat", &RENDERER_INSTANCE.GetActiveCamera()->GetProjectionMat());
 
 	const Vector3D * camPosAddress = &RENDERER_INSTANCE.GetActiveCamera()->GetPosition();
-	mShader->UpdateUniformAddress("cameraPos", camPosAddress);
+	mShaderWrapper->UpdateCameraPosRefUniform(camPosAddress);
 
 	Mesh * msh = new Mesh();
 	bool success = msh->Load("Assets/Handgun/Handgun_obj.obj");
@@ -28,12 +28,13 @@ TestActor::TestActor() :
 	{
 		MeshComponent * meshComp = new MeshComponent(this, msh, 0);
 
-		meshComp->SetShader(mShader);
+		meshComp->SetShader(mShaderWrapper);
 	}
 }
 
 TestActor::~TestActor()
 {
+	delete mShaderWrapper;
 }
 
 void TestActor::UpdateActor()
@@ -42,5 +43,5 @@ void TestActor::UpdateActor()
 
 	Quaternion q(mAxis, mAngle);
 
-	mRotation = q;
+	mTransform.mRotation = q;
 }

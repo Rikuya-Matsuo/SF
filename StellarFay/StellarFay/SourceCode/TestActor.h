@@ -9,7 +9,7 @@ public:
 	~TestActor();
 
 private:
-	class ShaderWrapper * mShader;
+	class PhongShaderWrapper * mShaderWrapper;
 
 	Vector3D mAxis;
 

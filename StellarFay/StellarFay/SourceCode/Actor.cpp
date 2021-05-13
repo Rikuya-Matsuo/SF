@@ -13,8 +13,7 @@ namespace afm = ActorFlagMask;
 
 Actor::Actor(int priority) :
 	mPriority(priority),
-	mActorFlags(afm::mInitialFlag),
-	mScales(1.0f)
+	mActorFlags(afm::mInitialFlag)
 {
 	// 静的変数の設定
 	if (!mPhongShader)
@@ -25,6 +24,9 @@ Actor::Actor(int priority) :
 	// 所属シーン取得及び、シーンへのアクター登録
 	SceneBase::TellLatestSceneToActor(this);
 	mBelongScene->RegisterActor(this);
+
+	// 一旦現在の変形情報でモデル行列を作成
+	UpdateModelMat();
 }
 
 Actor::~Actor()
@@ -80,8 +82,12 @@ void Actor::Update()
 	// 継承先依存の最終更新
 	UpdateActorLast();
 
-	// 行列の更新
-	UpdateModelMat();
+	// 以前の行列の更新後に、変形情報に変化があった場合
+	if (mPrevTransform != mTransform)
+	{
+		// 行列の更新
+		UpdateModelMat();
+	}
 }
 
 void Actor::SetPriority(int priority)
@@ -115,9 +121,12 @@ void Actor::RegisterComponent(ComponentBase * cmp)
 
 void Actor::UpdateModelMat()
 {
-	mModelMat = Matrix4::CreateScale(mScales);
-	mModelMat *= Matrix4::CreateFromQuaternion(mRotation);
-	mModelMat *= Matrix4::CreateTranslation(mPosition);
+	mModelMat = Matrix4::CreateScale(mTransform.mScales);
+	mModelMat *= Matrix4::CreateFromQuaternion(mTransform.mRotation);
+	mModelMat *= Matrix4::CreateTranslation(mTransform.mPosition);
+
+	// 変形情報記録
+	mPrevTransform = mTransform;
 }
 
 void Actor::UpdateActor()

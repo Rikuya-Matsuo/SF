@@ -84,3 +84,11 @@ void PhongShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * pol
 		stex->Activate();
 	}
 }
+
+void PhongShaderWrapper::UpdateMatricesReference(const Matrix4 * modelMatAddress, const Renderer & renderer)
+{
+}
+
+void PhongShaderWrapper::UpdateMatricesReference(const Matrix4 * modelMatAddress, const Matrix4 * viewMat, const Matrix4 * projMat)
+{
+}
