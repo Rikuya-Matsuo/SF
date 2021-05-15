@@ -1,6 +1,7 @@
 ﻿#include "TestActor.h"
 #include "ObjMeshShaderWrapper.h"
 #include "PhongShaderWrapper.h"
+#include "MonoColorShaderWrapper.h"
 #include "Mesh.h"
 #include "MeshComponent.h"
 #include "GameSystem.h"
@@ -35,7 +36,7 @@ TestActor::TestActor() :
 
 	Shader * sh = RENDERER_INSTANCE.GetShader("Shaders/1color.vert", "Shaders/1color.frag");
 
-	mShaderWrapper2 = new ShaderWrapper(sh);
+	mShaderWrapper2 = new MonoColorShaderWrapper(sh);
 
 	mShaderWrapper2->UpdateUniformElement("color", Vector3D(0.0f, 0.36f, 0.78f));
 	mShaderWrapper2->UpdateUniformElement("dissolve", 0.3f);

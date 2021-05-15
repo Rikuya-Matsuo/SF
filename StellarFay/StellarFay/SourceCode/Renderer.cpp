@@ -104,6 +104,10 @@ bool Renderer::Init(Uint32 windowWidth, Uint32 windowHeight, bool fullScreen)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
+	glEnable(GL_CULL_FACE);
+
+	glCullFace(GL_FRONT);
+
 	return true;
 }
 
@@ -254,7 +258,7 @@ void Renderer::Draw()
 void Renderer::DrawFullDissolveObjects()
 {
 	// 透明度無効化
-	glDisable(GL_BLEND);
+	//glDisable(GL_BLEND);
 
 	// 深度テスト有効化
 	glEnable(GL_DEPTH_TEST);
