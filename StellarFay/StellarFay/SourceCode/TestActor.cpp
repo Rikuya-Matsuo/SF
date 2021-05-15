@@ -10,8 +10,15 @@
 TestActor::TestActor() :
 	Actor(0),
 	mAxis(Vector3D::UnitY),
-	mAngle(0.0f)
+	mAngle(0.0f),
+	mShaderWrapper(nullptr),
+	mShaderWrapper2(nullptr)
 {
+	ShaderWrapper * swptr = nullptr;
+
+//#define PHONG
+#ifdef PHONG
+
 	mShaderWrapper = new PhongShaderWrapper();
 
 	mShaderWrapper->UpdateUniformAddress("modelMat", &mModelMat);
@@ -21,6 +28,26 @@ TestActor::TestActor() :
 	const Vector3D * camPosAddress = &RENDERER_INSTANCE.GetActiveCamera()->GetPosition();
 	mShaderWrapper->UpdateCameraPosRefUniform(camPosAddress);
 
+
+	swptr = mShaderWrapper;
+
+#else
+
+	Shader * sh = RENDERER_INSTANCE.GetShader("Shaders/1color.vert", "Shaders/1color.frag");
+
+	mShaderWrapper2 = new ShaderWrapper(sh);
+
+	mShaderWrapper2->UpdateUniformElement("color", Vector3D(0.0f, 0.36f, 0.78f));
+	mShaderWrapper2->UpdateUniformElement("dissolve", 0.3f);
+
+	mShaderWrapper2->UpdateUniformAddress("modelMat", &mModelMat);
+	mShaderWrapper2->UpdateUniformAddress("viewMat", &RENDERER_INSTANCE.GetActiveCamera()->GetViewMat());
+	mShaderWrapper2->UpdateUniformAddress("projectionMat", &RENDERER_INSTANCE.GetActiveCamera()->GetProjectionMat());
+
+	swptr = mShaderWrapper2;
+
+#endif
+
 	Mesh * msh = new Mesh();
 	bool success = msh->Load("Assets/Handgun/Handgun_obj.obj");
 
@@ -28,13 +55,21 @@ TestActor::TestActor() :
 	{
 		MeshComponent * meshComp = new MeshComponent(this, msh, 0);
 
-		meshComp->SetShader(mShaderWrapper);
+		meshComp->SetShader(swptr);
 	}
 }
 
 TestActor::~TestActor()
 {
-	delete mShaderWrapper;
+	if (mShaderWrapper)
+	{
+		delete mShaderWrapper;
+	}
+
+	if (mShaderWrapper2)
+	{
+		delete mShaderWrapper2;
+	}
 }
 
 void TestActor::UpdateActor()

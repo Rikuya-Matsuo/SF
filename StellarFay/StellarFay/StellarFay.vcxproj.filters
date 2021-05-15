@@ -256,5 +256,11 @@
     <None Include="Shaders\ObjMesh.frag">
       <Filter>リソース ファイル</Filter>
     </None>
+    <None Include="Shaders\1color.vert">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="Shaders\1color.frag">
+      <Filter>リソース ファイル</Filter>
+    </None>
   </ItemGroup>
 </Project>

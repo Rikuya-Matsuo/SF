@@ -212,6 +212,8 @@
     <ClInclude Include="SourceCode\VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\1color.frag" />
+    <None Include="Shaders\1color.vert" />
     <None Include="Shaders\ObjMesh.frag" />
     <None Include="Shaders\ObjMesh.vert" />
     <None Include="Shaders\Phong.frag" />

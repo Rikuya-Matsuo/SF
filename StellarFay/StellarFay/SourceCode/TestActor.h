@@ -11,6 +11,8 @@ public:
 private:
 	class PhongShaderWrapper * mShaderWrapper;
 
+	class ShaderWrapper * mShaderWrapper2;
+
 	Vector3D mAxis;
 
 	float mAngle;
