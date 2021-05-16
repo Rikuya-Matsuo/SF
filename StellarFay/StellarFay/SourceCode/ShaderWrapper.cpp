@@ -56,6 +56,11 @@ void ShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGrou
 {
 }
 
+ShaderWrapper::DissolveSetting ShaderWrapper::GetDissolveSetting() const
+{
+	return DissolveSetting::Default;
+}
+
 //////////////////////////////////////////////////////////////
 // Project		: StellarFay
 // Copyright (c) 2021 Rikuya Matsuo. All rights reserved.

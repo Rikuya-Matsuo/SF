@@ -39,7 +39,7 @@ TestActor::TestActor() :
 	mShaderWrapper2 = new MonoColorShaderWrapper(sh);
 
 	mShaderWrapper2->UpdateUniformElement("color", Vector3D(0.0f, 0.36f, 0.78f));
-	mShaderWrapper2->UpdateUniformElement("dissolve", 0.3f);
+	mShaderWrapper2->UpdateUniformElement("dissolve", 0.9f);
 
 	mShaderWrapper2->UpdateUniformAddress("modelMat", &mModelMat);
 	mShaderWrapper2->UpdateUniformAddress("viewMat", &RENDERER_INSTANCE.GetActiveCamera()->GetViewMat());

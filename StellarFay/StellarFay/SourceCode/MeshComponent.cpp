@@ -30,6 +30,13 @@ void MeshComponent::SetInitialShader(const std::string & vertFilePath, const std
 	//SetInitialShader(shd);
 }
 
+// 常に真を返す関数
+// DrawFullDissolveObject(), DrawNotFullDissolveObject()の内部で使用する。
+bool AllTrue(Mesh::ObjectData * obj, size_t polyGroupIndex)
+{
+	return true;
+};
+
 void MeshComponent::DrawFullDissolveObject(ShaderWrapper * shader) const
 {
 	// ディゾルブが1であるかを検証するラムダ式
@@ -39,21 +46,62 @@ void MeshComponent::DrawFullDissolveObject(ShaderWrapper * shader) const
 		return (mtl->GetDissolve() == 1.0f);
 	};
 
-	// 条件を指定して描画
-	DrawUnderCondition(shader, isFullDissolve);
+	// 透明度に関する設定を取得
+	using DisSet = ShaderWrapper::DissolveSetting;
+	DisSet setting = shader->GetDissolveSetting();
+	
+	// 「全てのポリゴンを透明・半透明としてみなす」場合、何も描画しない
+	if (setting == DisSet::AllNotFullDissolve)
+	{
+		return;
+	}
+
+	// 全てのポリゴンを不透明とみなすか
+	bool isAllFullDissolve = (setting == DisSet::AllFullDissolve);
+
+	// 状況ごとに条件を指定して描画
+	if (!isAllFullDissolve)
+	{
+		DrawUnderCondition(shader, isFullDissolve);
+	}
+	else
+	{
+		DrawUnderCondition(shader, AllTrue);
+	}
 }
 
 void MeshComponent::DrawNotFullDissolveObject(ShaderWrapper * shader) const
 {
-	// ディゾルブが1未満であるかを検証するラムダ式
+	// ディゾルブが0より大きく1未満であるかを検証するラムダ式
 	auto isNotFullDissolve = [](Mesh::ObjectData * obj, size_t polyGroupIndex)
 	{
 		const Mesh::MtlData * mtl = obj->GetPolyGroups()[polyGroupIndex]->mUsemtl;
-		return (mtl->GetDissolve() < 1.0f);
+		float dissolve = mtl->GetDissolve();
+		return (dissolve < 1.0f && dissolve > 0.0f);
 	};
 
-	// 条件を指定して描画
-	DrawUnderCondition(shader, isNotFullDissolve);
+	// 透明度に関する設定を取得
+	using DisSet = ShaderWrapper::DissolveSetting;
+	DisSet setting = shader->GetDissolveSetting();
+
+	// 「全てのポリゴンを不透明とみなす」場合、何も描画しない
+	if (setting == DisSet::AllFullDissolve)
+	{
+		return;
+	}
+
+	// 全てのポリゴンを透明・半透明とみなすか
+	bool isAllNotFullDissolve = (setting == DisSet::AllNotFullDissolve);
+
+	// 状況ごとに条件を指定して描画
+	if (!isAllNotFullDissolve)
+	{
+		DrawUnderCondition(shader, isNotFullDissolve);
+	}
+	else
+	{
+		DrawUnderCondition(shader, AllTrue);
+	}
 }
 
 void MeshComponent::DrawUnderCondition(ShaderWrapper * shader, std::function<bool(Mesh::ObjectData*obj, size_t polyGroupIndex)> condition) const

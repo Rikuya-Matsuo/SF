@@ -11,6 +11,13 @@ public:
 
 	void SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const override;
 
+	DissolveSetting GetDissolveSetting() const override;
+
 private:
 	static Shader * mMonoColorShader;
 };
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////

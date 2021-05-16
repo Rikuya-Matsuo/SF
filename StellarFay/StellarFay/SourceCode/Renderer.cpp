@@ -258,7 +258,7 @@ void Renderer::Draw()
 void Renderer::DrawFullDissolveObjects()
 {
 	// 透明度無効化
-	//glDisable(GL_BLEND);
+	glDisable(GL_BLEND);
 
 	// 深度テスト有効化
 	glEnable(GL_DEPTH_TEST);

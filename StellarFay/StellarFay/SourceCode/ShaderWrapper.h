@@ -46,6 +46,20 @@ public:
 	void UpdateUniformAddress(const std::string & name, const int * address) { mUniformAddressList1i[name] = address; }
 	void UpdateUniformAddress(const std::string & name, const Matrix4 * address) { mUniformAddressList4m[name] = address; }
 
+	// 透明度に関する描画設定
+	// Default				: ポリゴンごとに決められた透明度を用いる
+	// AllNotFullDissolve	: 全て透明・半透明なポリゴンとみなす
+	// AllFullDissolve		: 全て不透明なポリゴンとみなす
+	enum DissolveSetting : Uint8
+	{
+		Default = 0,
+		AllNotFullDissolve,
+		AllFullDissolve,
+		Invalid
+	};
+
+	virtual DissolveSetting GetDissolveSetting() const;
+
 protected:
 	Shader * mShader;
 
