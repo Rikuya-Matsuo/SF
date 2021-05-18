@@ -18,7 +18,7 @@ MonoColorShaderWrapper::MonoColorShaderWrapper(Shader * shader) :
 	mUniformList1f["dissolve"] = 1.0f;
 }
 
-void MonoColorShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
+void MonoColorShaderWrapper::InputPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
 {
 	const char * dissolveKey = "dissolve";
 	float dissolve = mUniformList1f.at(dissolveKey);

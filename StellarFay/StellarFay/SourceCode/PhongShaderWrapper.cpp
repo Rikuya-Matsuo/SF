@@ -24,10 +24,10 @@ PhongShaderWrapper::PhongShaderWrapper(Shader * shader) :
 	mUniformAddressList3f["light.specular"] = &lightInfoRef.mSpecularColor;
 }
 
-void PhongShaderWrapper::SetUniforms() const
+void PhongShaderWrapper::InputUniforms() const
 {
 	// 基底クラスの同関数を呼ぶ
-	ShaderWrapper::SetUniforms();
+	ShaderWrapper::InputUniforms();
 
 	// 逆行列のセット
 	Matrix4 invMat;
@@ -58,7 +58,7 @@ void PhongShaderWrapper::SetUniforms() const
 	mShader->SetUniform4m("invertedModelMat", invMat.GetAsFloatPtr());
 }
 
-void PhongShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
+void PhongShaderWrapper::InputPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
 {
 	// ディゾルブの転送
 	mShader->SetUniform1f("dissolve", polyGroup->mUsemtl->GetDissolve());

@@ -8,7 +8,7 @@ public:
 
 	~ObjMeshShaderWrapper();
 
-	void SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const override;
+	void InputPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const override;
 
 private:
 	static Shader * mObjMeshShader;

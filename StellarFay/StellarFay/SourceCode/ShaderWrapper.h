@@ -25,26 +25,29 @@ public:
 
 	virtual ~ShaderWrapper();
 
-	virtual void SetUniforms() const;
+	// リスト内のユニフォーム設定をシェーダに転送する
+	virtual void InputUniforms() const;
 	
 	// ポリゴングループごとのユニフォーム設定
 	// 挙動は継承先依存
 	// テクスチャのアクティブ化もここに含まれる
-	virtual void SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const;
+	virtual void InputPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const;
 
+	// シェーダのアクティブ化
 	void Activate() const { mShader->Activate(); }
 
-	void UpdateUniformElement(const std::string & name, float value) { mUniformList1f[name] = value; }
-	void UpdateUniformElement(const std::string & name, const Vector3D & value) { mUniformList3f[name] = value; }
-	void UpdateUniformElement(const std::string & name, int value) { mUniformList1i[name] = value; }
-	void UpdateUniformElement(const std::string & name, const Matrix4 & value) { mUniformList4m[name] = value; }
+	// ユニフォームの値を設定
+	void SetUniformElement(const std::string & name, float value) { mUniformList1f[name] = value; }
+	void SetUniformElement(const std::string & name, const Vector3D & value) { mUniformList3f[name] = value; }
+	void SetUniformElement(const std::string & name, int value) { mUniformList1i[name] = value; }
+	void SetUniformElement(const std::string & name, const Matrix4 & value) { mUniformList4m[name] = value; }
 
 	// 数値でなく、メモリアドレスを登録することで、数値に変化があっても追従してユニフォーム転送を行える
 	// ローカル変数を登録すると当然エラーとなるので注意
-	void UpdateUniformAddress(const std::string & name, const float * address) { mUniformAddressList1f[name] = address; }
-	void UpdateUniformAddress(const std::string & name, const Vector3D * address) { mUniformAddressList3f[name] = address; }
-	void UpdateUniformAddress(const std::string & name, const int * address) { mUniformAddressList1i[name] = address; }
-	void UpdateUniformAddress(const std::string & name, const Matrix4 * address) { mUniformAddressList4m[name] = address; }
+	void SetUniformAddress(const std::string & name, const float * address) { mUniformAddressList1f[name] = address; }
+	void SetUniformAddress(const std::string & name, const Vector3D * address) { mUniformAddressList3f[name] = address; }
+	void SetUniformAddress(const std::string & name, const int * address) { mUniformAddressList1i[name] = address; }
+	void SetUniformAddress(const std::string & name, const Matrix4 * address) { mUniformAddressList4m[name] = address; }
 
 	// 透明度に関する描画設定
 	// Default				: ポリゴンごとに決められた透明度を用いる
@@ -58,10 +61,16 @@ public:
 		Invalid
 	};
 
+	// 透明度統一設定の変更
+	void SetDissolveSetting(DissolveSetting setting) { mDissolveSetting = setting; }
+
+	// 透明度統一設定の取得
 	virtual DissolveSetting GetDissolveSetting() const;
 
 protected:
 	Shader * mShader;
+
+	DissolveSetting mDissolveSetting;
 
 	/////////////////////////////////////////////
 	// ユニフォーム変数に転送する値のリスト

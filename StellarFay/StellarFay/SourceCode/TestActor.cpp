@@ -22,9 +22,9 @@ TestActor::TestActor() :
 
 	mShaderWrapper = new PhongShaderWrapper();
 
-	mShaderWrapper->UpdateUniformAddress("modelMat", &mModelMat);
-	mShaderWrapper->UpdateUniformAddress("viewMat", &RENDERER_INSTANCE.GetActiveCamera()->GetViewMat());
-	mShaderWrapper->UpdateUniformAddress("projectionMat", &RENDERER_INSTANCE.GetActiveCamera()->GetProjectionMat());
+	mShaderWrapper->SetUniformAddress("modelMat", &mModelMat);
+	mShaderWrapper->SetUniformAddress("viewMat", &RENDERER_INSTANCE.GetActiveCamera()->GetViewMat());
+	mShaderWrapper->SetUniformAddress("projectionMat", &RENDERER_INSTANCE.GetActiveCamera()->GetProjectionMat());
 
 	const Vector3D * camPosAddress = &RENDERER_INSTANCE.GetActiveCamera()->GetPosition();
 	mShaderWrapper->UpdateCameraPosRefUniform(camPosAddress);
@@ -38,12 +38,12 @@ TestActor::TestActor() :
 
 	mShaderWrapper2 = new MonoColorShaderWrapper(sh);
 
-	mShaderWrapper2->UpdateUniformElement("color", Vector3D(0.0f, 0.36f, 0.78f));
-	mShaderWrapper2->UpdateUniformElement("dissolve", 0.9f);
+	mShaderWrapper2->SetUniformElement("color", Vector3D(0.0f, 0.36f, 0.78f));
+	mShaderWrapper2->SetUniformElement("dissolve", 0.9f);
 
-	mShaderWrapper2->UpdateUniformAddress("modelMat", &mModelMat);
-	mShaderWrapper2->UpdateUniformAddress("viewMat", &RENDERER_INSTANCE.GetActiveCamera()->GetViewMat());
-	mShaderWrapper2->UpdateUniformAddress("projectionMat", &RENDERER_INSTANCE.GetActiveCamera()->GetProjectionMat());
+	mShaderWrapper2->SetUniformAddress("modelMat", &mModelMat);
+	mShaderWrapper2->SetUniformAddress("viewMat", &RENDERER_INSTANCE.GetActiveCamera()->GetViewMat());
+	mShaderWrapper2->SetUniformAddress("projectionMat", &RENDERER_INSTANCE.GetActiveCamera()->GetProjectionMat());
 
 	swptr = mShaderWrapper2;
 

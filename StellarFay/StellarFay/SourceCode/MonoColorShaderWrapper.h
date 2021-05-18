@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "ShaderWrapper.h"
 
+// GetDissolveSetting()から返却される透明度統一設定は"dissolve"のユニフォーム設定により自動で決定されるため、
+// SetDissolveSetting()による変更は無効
 class MonoColorShaderWrapper : public ShaderWrapper
 {
 public:
@@ -9,7 +11,7 @@ public:
 	void UpdateColorUniformElement(const Vector3D & color) { mUniformList3f["color"] = color; }
 	void UpdateDissolveUniformElement(float dissolve) { mUniformList1f["dissolve"] = dissolve; }
 
-	void SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const override;
+	void InputPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const override;
 
 	DissolveSetting GetDissolveSetting() const override;
 

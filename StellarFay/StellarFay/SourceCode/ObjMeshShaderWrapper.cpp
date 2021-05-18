@@ -18,7 +18,7 @@ ObjMeshShaderWrapper::~ObjMeshShaderWrapper()
 {
 }
 
-void ObjMeshShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
+void ObjMeshShaderWrapper::InputPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
 {
 	const Mesh::MtlData * mtl = polyGroup->mUsemtl;
 

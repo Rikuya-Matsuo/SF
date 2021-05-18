@@ -1,7 +1,8 @@
 ﻿#include "ShaderWrapper.h"
 
 ShaderWrapper::ShaderWrapper(Shader * shader) :
-	mShader(shader)
+	mShader(shader),
+	mDissolveSetting(DissolveSetting::Default)
 {
 }
 
@@ -9,7 +10,7 @@ ShaderWrapper::~ShaderWrapper()
 {
 }
 
-void ShaderWrapper::SetUniforms() const
+void ShaderWrapper::InputUniforms() const
 {
 	for (auto itr : mUniformList1f)
 	{
@@ -52,13 +53,13 @@ void ShaderWrapper::SetUniforms() const
 	}
 }
 
-void ShaderWrapper::SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
+void ShaderWrapper::InputPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const
 {
 }
 
 ShaderWrapper::DissolveSetting ShaderWrapper::GetDissolveSetting() const
 {
-	return DissolveSetting::Default;
+	return mDissolveSetting;
 }
 
 //////////////////////////////////////////////////////////////

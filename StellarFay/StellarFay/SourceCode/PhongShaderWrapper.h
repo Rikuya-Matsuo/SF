@@ -9,9 +9,9 @@ public:
 	// nullptrを渡す場合は、通常のPhongシェーダをラップする
 	PhongShaderWrapper(Shader * shader = nullptr);
 
-	void SetUniforms() const override;
+	void InputUniforms() const override;
 
-	void SetPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const override;
+	void InputPolyUniforms(const Mesh::ObjectData::PolyGroup * polyGroup) const override;
 
 	// 面倒な行列系の設定をこの関数一つで行うことを理想とした関数
 	// オーバーライド複数あり

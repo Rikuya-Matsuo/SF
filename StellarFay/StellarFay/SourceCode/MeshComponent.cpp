@@ -113,7 +113,7 @@ void MeshComponent::DrawUnderCondition(ShaderWrapper * shader, std::function<boo
 	shader->Activate();
 
 	// ユニフォーム変数設定
-	shader->SetUniforms();
+	shader->InputUniforms();
 
 	// ポリゴングループごとに描画処理
 	for (auto objItr : mMesh->mObjects)
@@ -137,7 +137,7 @@ void MeshComponent::DrawUnderCondition(ShaderWrapper * shader, std::function<boo
 			const Mesh::ObjectData::PolyGroup * polygPtr = objItr->GetPolyGroups()[polygIndex];
 
 			// ポリゴングループごとのユニフォーム設定
-			shader->SetPolyUniforms(polygPtr);
+			shader->InputPolyUniforms(polygPtr);
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, polygPtr->mEBO);
 			glDrawElements(GL_TRIANGLES, polygPtr->mIndices.size(), GL_UNSIGNED_INT, 0);
