@@ -30,13 +30,6 @@ void MeshComponent::SetInitialShader(const std::string & vertFilePath, const std
 	//SetInitialShader(shd);
 }
 
-// 常に真を返す関数
-// DrawFullDissolveObject(), DrawNotFullDissolveObject()の内部で使用する。
-bool AllTrue(Mesh::ObjectData * obj, size_t polyGroupIndex)
-{
-	return true;
-};
-
 void MeshComponent::DrawFullDissolveObject(ShaderWrapper * shader) const
 {
 	// ディゾルブが1であるかを検証するラムダ式
@@ -66,18 +59,24 @@ void MeshComponent::DrawFullDissolveObject(ShaderWrapper * shader) const
 	}
 	else
 	{
-		DrawUnderCondition(shader, AllTrue);
+		// 常に真を返すラムダ式
+		auto allTrue = [](Mesh::ObjectData * obj, size_t polyGroupIndex)
+		{
+			return true;
+		};
+
+		DrawUnderCondition(shader, allTrue);
 	}
 }
 
 void MeshComponent::DrawNotFullDissolveObject(ShaderWrapper * shader) const
 {
-	// ディゾルブが0より大きく1未満であるかを検証するラムダ式
+	// ディゾルブが1未満であるかを検証するラムダ式
 	auto isNotFullDissolve = [](Mesh::ObjectData * obj, size_t polyGroupIndex)
 	{
 		const Mesh::MtlData * mtl = obj->GetPolyGroups()[polyGroupIndex]->mUsemtl;
 		float dissolve = mtl->GetDissolve();
-		return (dissolve < 1.0f && dissolve > 0.0f);
+		return (dissolve < 1.0f);
 	};
 
 	// 透明度に関する設定を取得
@@ -100,7 +99,14 @@ void MeshComponent::DrawNotFullDissolveObject(ShaderWrapper * shader) const
 	}
 	else
 	{
-		DrawUnderCondition(shader, AllTrue);
+		// 元のディゾルブが0である場合を除き、全て描画する事を許可するラムダ式
+		auto isNot0 = [](Mesh::ObjectData * obj, size_t polyGroupIndex)
+		{
+			const Mesh::MtlData * mtl = obj->GetPolyGroups()[polyGroupIndex]->mUsemtl;
+			return (mtl->GetDissolve() > 0.0f);
+		};
+
+		DrawUnderCondition(shader, isNot0);
 	}
 }
 
