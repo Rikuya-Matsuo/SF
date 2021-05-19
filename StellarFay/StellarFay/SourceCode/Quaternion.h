@@ -2,6 +2,7 @@
 #include "Vector.h"
 #include "CommonMath.h"
 
+// 四元数
 class Quaternion
 {
 public:
@@ -88,7 +89,47 @@ public:
 	// 球面線形補完
 	static Quaternion Slerp(const Quaternion & a, const Quaternion & b, float rate)
 	{
-		return Quaternion();
+		// 回転を示す四元数の長さは１なので、内積からcosθを求める
+		float rawCos = Quaternion::Dot(a, b);
+
+		// rawCosの絶対値を記録
+		// 回転を示す四元数は符号が反転していても同じ回転を示す。
+		// rawCosが負の場合は片方の符号が反転しているため、cosの方を合わせる
+		float cos = fabsf(rawCos);
+
+		// 球面線形補間の式における、各四元数にかかる係数
+		float scaleA, scaleB;
+
+		// 係数の計算
+		// 2つの回転が同一直線上にない場合
+		if (cos < 1.0f)
+		{
+			const float theta = acosf(cos);
+			const float invSin = 1.0f / sinf(theta);
+
+			scaleA = sinf((1.0f - rate) * theta) * invSin;
+			scaleB = sinf(rate * theta) * invSin;
+		}
+		// 同一直線上にある場合
+		else
+		{
+			// 線形補完を使う
+			scaleA = 1.0f - rate;
+			scaleB = rate;
+		}
+
+		if (rawCos < 0.0f)
+		{
+			scaleB *= -1;
+		}
+
+		Quaternion ret;
+		ret.x = scaleA * a.x + scaleB * b.x;
+		ret.y = scaleA * a.y + scaleB * b.y;
+		ret.z = scaleA * a.z + scaleB * b.z;
+		ret.w = scaleA * a.w + scaleB * b.w;
+		ret.Normalize();
+		return ret;
 	}
 
 	static const Quaternion Identity;
