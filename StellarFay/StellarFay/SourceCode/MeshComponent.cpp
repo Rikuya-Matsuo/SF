@@ -145,8 +145,8 @@ void MeshComponent::DrawUnderCondition(ShaderWrapper * shader, std::function<boo
 			// ポリゴングループごとのユニフォーム設定
 			shader->InputPolyUniforms(polygPtr);
 
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, polygPtr->mEBO);
-			glDrawElements(GL_TRIANGLES, polygPtr->mIndices.size(), GL_UNSIGNED_INT, 0);
+			// 描画
+			polygPtr->mElementBuffer->DrawElements();
 		}
 	}
 }

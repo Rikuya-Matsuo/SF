@@ -8,6 +8,7 @@ public:
 	// indices			: インデックス属性データ
 	// indicesMass		: indicesの要素数
 	// indexDataSize	: indicesの要素１つ当たりのデータの大きさ(byte)
+	// type				: indicesの要素の型（デフォルトはGL_UNSIGNED_INT）
 	ElementBuffer(const void * indices, size_t indicesMass, size_t indexDataSize, GLenum type = GL_UNSIGNED_INT);
 
 	~ElementBuffer()
@@ -19,6 +20,7 @@ public:
 	void Activate() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mEBO); }
 
 	// 描画。アクティブ化も込み。
+	// 引数のデフォルトはGL_TRIANGLES
 	void DrawElements(GLenum mode = GL_TRIANGLES) const;
 
 private:
