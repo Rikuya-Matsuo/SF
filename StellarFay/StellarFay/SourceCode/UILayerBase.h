@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 #include "Vector.h"
 
-// UI‘w‚ÌƒNƒ‰ƒX
+// UIå±¤ã®ã‚¯ãƒ©ã‚¹
 class UILayerBase
 {
 public:
