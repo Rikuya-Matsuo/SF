@@ -153,6 +153,9 @@
     <ClCompile Include="SourceCode\MonoColorShaderWrapper.cpp">
       <Filter>ソース ファイル\ShaderWrapper</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\ElementBuffer.cpp">
+      <Filter>ソース ファイル\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\MonoColorShaderWrapper.h">
       <Filter>ヘッダー ファイル\ShaderWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\ElementBuffer.h">
+      <Filter>ヘッダー ファイル\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

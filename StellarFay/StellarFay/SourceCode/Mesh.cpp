@@ -423,7 +423,7 @@ bool Mesh::Load(const std::string & path)
 			glGenBuffers(1, &polygItr->mEBO);
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, polygItr->mEBO);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * polygItr->mIndices.size(), polygItr->mIndices.data(), GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(size_t) * polygItr->mIndices.size(), polygItr->mIndices.data(), GL_STATIC_DRAW);
 		}
 	}
 

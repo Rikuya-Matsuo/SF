@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c" />
     <ClCompile Include="SourceCode\ColliderComponentBase.cpp" />
     <ClCompile Include="SourceCode\Collision.cpp" />
+    <ClCompile Include="SourceCode\ElementBuffer.cpp" />
     <ClCompile Include="SourceCode\MonoColorShaderWrapper.cpp" />
     <ClCompile Include="SourceCode\PhysicManager.cpp" />
     <ClCompile Include="SourceCode\RandomGenerator.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="SourceCode\Camera.h" />
     <ClInclude Include="SourceCode\ColliderAttribute.h" />
     <ClInclude Include="SourceCode\ColliderComponentBase.h" />
+    <ClInclude Include="SourceCode\ElementBuffer.h" />
     <ClInclude Include="SourceCode\MonoColorShaderWrapper.h" />
     <ClInclude Include="SourceCode\ObjMeshShaderWrapper.h" />
     <ClInclude Include="SourceCode\Actor.h" />

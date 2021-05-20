@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Collision.h"
 #include "VertexArray.h"
+#include "ElementBuffer.h"
 #include "Hash.h"
 #include <vector>
 #include <list>
