@@ -177,6 +177,7 @@
     <ClCompile Include="SourceCode\TestActor.cpp" />
     <ClCompile Include="SourceCode\TestScene.cpp" />
     <ClCompile Include="SourceCode\Texture.cpp" />
+    <ClCompile Include="SourceCode\UILayerBase.cpp" />
     <ClCompile Include="SourceCode\Vector.cpp" />
     <ClCompile Include="SourceCode\VertexArray.cpp" />
   </ItemGroup>
@@ -210,6 +211,7 @@
     <ClInclude Include="SourceCode\TestActor.h" />
     <ClInclude Include="SourceCode\TestScene.h" />
     <ClInclude Include="SourceCode\Texture.h" />
+    <ClInclude Include="SourceCode\UILayerBase.h" />
     <ClInclude Include="SourceCode\Vector.h" />
     <ClInclude Include="SourceCode\VertexArray.h" />
   </ItemGroup>

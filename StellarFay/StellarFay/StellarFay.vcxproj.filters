@@ -61,6 +61,12 @@
     <Filter Include="ソース ファイル\Physics">
       <UniqueIdentifier>{0f71433e-7f43-468d-a83b-d3fa92e2805f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UILayer">
+      <UniqueIdentifier>{b66af4d6-5031-4df9-9a22-3f20fe676011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\UILayer">
+      <UniqueIdentifier>{90f9e648-6eac-4f05-a6af-8cc73b4dd04d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c">
@@ -152,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="SourceCode\MonoColorShaderWrapper.cpp">
       <Filter>ソース ファイル\ShaderWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\UILayerBase.cpp">
+      <Filter>ソース ファイル\UILayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\MonoColorShaderWrapper.h">
       <Filter>ヘッダー ファイル\ShaderWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\UILayerBase.h">
+      <Filter>ヘッダー ファイル\UILayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
