@@ -20,6 +20,15 @@ Renderer::~Renderer()
 		delete itr.second;
 	}
 	mShaderMap.clear();
+	ShaderMap().swap(mShaderMap);
+
+	// メッシュ削除
+	for (auto itr : mMeshMap)
+	{
+		delete itr.second;
+	}
+	mMeshMap.clear();
+	MeshMap().swap(mMeshMap);
 
 	// テクスチャ削除
 	for (auto itr : mTextureMap)
@@ -27,6 +36,7 @@ Renderer::~Renderer()
 		delete itr.second;
 	}
 	mTextureMap.clear();
+	TextureMap().swap(mTextureMap);
 
 	SDL_GL_DeleteContext(mContext);
 	SDL_DestroyWindow(mWindow);
@@ -147,6 +157,45 @@ Shader * Renderer::GetShader(const std::string & vertFilePath, const std::string
 		ret = itr->second;
 	}
 
+	return ret;
+}
+
+Mesh * Renderer::GetMesh(const std::string & filePath)
+{
+	// 返却値
+	Mesh * ret = nullptr;
+
+	// 同じファイル名のデータを探す
+	auto itr = mMeshMap.find(filePath);
+
+	// 見つからなかった場合、新たに作成し、コンテナに追加する
+	if (itr == mMeshMap.end())
+	{
+		// 作成
+		Mesh * mesh = new Mesh();
+		bool success = mesh->Load(filePath);
+
+		// 読み込み失敗時はnullptrを返す
+		if (!success)
+		{
+			delete mesh;
+			return nullptr;
+		}
+
+		// コンテナに追加
+		mMeshMap[filePath] = mesh;
+
+		// 返却値設定
+		ret = mesh;
+	}
+
+	// 見つかった場合それを返却する
+	else
+	{
+		ret = itr->second;
+	}
+
+	// 返却
 	return ret;
 }
 
