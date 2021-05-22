@@ -118,11 +118,23 @@ private:
 	// ライト情報
 	LightInfo mLightInfo;
 
+	// UI用頂点配列
+	class VertexArray * mSpriteVert;
+
+	// UI用インデックスバッファ
+	class ElementBuffer * mSpriteElementBuffer;
+
 	// 不透明オブジェクト描画部分
 	void DrawFullDissolveObjects();
 
 	// 半透明オブジェクト描画部分
 	void DrawNotFullDissolveObjects();
+
+	// UI用頂点座標作成
+	void CreateSpriteVert();
+
+	// UI用インデックスバッファ作成
+	void CreateSpriteElementBuffer();
 };
 
 //////////////////////////////////////////////////////////////
