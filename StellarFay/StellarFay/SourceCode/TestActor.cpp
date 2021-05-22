@@ -49,10 +49,9 @@ TestActor::TestActor() :
 
 #endif
 
-	Mesh * msh = new Mesh();
-	bool success = msh->Load("Assets/Handgun/Handgun_obj.obj");
+	Mesh * msh = RENDERER_INSTANCE.GetMesh("Assets/Handgun/Handgun_obj.obj");
 
-	if (success)
+	if (msh)
 	{
 		MeshComponent * meshComp = new MeshComponent(this, msh, 0);
 

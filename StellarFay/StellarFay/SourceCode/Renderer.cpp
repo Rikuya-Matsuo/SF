@@ -7,6 +7,8 @@
 #include "Actor.h"
 #include "CommonMath.h"
 #include "Camera.h"
+#include "VertexArray.h"
+#include "ElementBuffer.h"
 
 Renderer::Renderer()
 {
@@ -20,6 +22,15 @@ Renderer::~Renderer()
 		delete itr.second;
 	}
 	mShaderMap.clear();
+	ShaderMap().swap(mShaderMap);
+
+	// メッシュ削除
+	for (auto itr : mMeshMap)
+	{
+		delete itr.second;
+	}
+	mMeshMap.clear();
+	MeshMap().swap(mMeshMap);
 
 	// テクスチャ削除
 	for (auto itr : mTextureMap)
@@ -27,6 +38,13 @@ Renderer::~Renderer()
 		delete itr.second;
 	}
 	mTextureMap.clear();
+	TextureMap().swap(mTextureMap);
+
+	// UI用頂点配列クラス、及びインデックスバッファクラス削除
+	delete mSpriteVert;
+	mSpriteVert = nullptr;
+	delete mSpriteElementBuffer;
+	mSpriteElementBuffer = nullptr;
 
 	SDL_GL_DeleteContext(mContext);
 	SDL_DestroyWindow(mWindow);
@@ -98,6 +116,10 @@ bool Renderer::Init(Uint32 windowWidth, Uint32 windowHeight, bool fullScreen)
 		printf("GL 拡張読み込み失敗\n");
 	}
 
+	// UI描画用のデータを作成
+	CreateSpriteVert();
+	CreateSpriteElementBuffer();
+
 	// 透明度や深度バッファの設定
 	glEnable(GL_DEPTH_TEST);
 
@@ -147,6 +169,45 @@ Shader * Renderer::GetShader(const std::string & vertFilePath, const std::string
 		ret = itr->second;
 	}
 
+	return ret;
+}
+
+Mesh * Renderer::GetMesh(const std::string & filePath)
+{
+	// 返却値
+	Mesh * ret = nullptr;
+
+	// 同じファイル名のデータを探す
+	auto itr = mMeshMap.find(filePath);
+
+	// 見つからなかった場合、新たに作成し、コンテナに追加する
+	if (itr == mMeshMap.end())
+	{
+		// 作成
+		Mesh * mesh = new Mesh();
+		bool success = mesh->Load(filePath);
+
+		// 読み込み失敗時はnullptrを返す
+		if (!success)
+		{
+			delete mesh;
+			return nullptr;
+		}
+
+		// コンテナに追加
+		mMeshMap[filePath] = mesh;
+
+		// 返却値設定
+		ret = mesh;
+	}
+
+	// 見つかった場合それを返却する
+	else
+	{
+		ret = itr->second;
+	}
+
+	// 返却
 	return ret;
 }
 
@@ -307,6 +368,41 @@ void Renderer::DrawNotFullDissolveObjects()
 			itr->DrawNotFullDissolveObject();
 		}
 	}
+}
+
+void Renderer::CreateSpriteVert()
+{
+	// 頂点配列
+	float vert[] =
+	{
+		// 座標			　 UV座標
+		-0.5f, 0.5f, 0.0f, 0.0f, 1.0f,		// 左上
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,		// 左下
+		0.5f, -0.5f, 0.0f, 1.0f, 0.0f,		// 右下
+		0.5f, 0.5f, 0.0f, 1.0f, 1.0f		// 右上
+	};
+
+	size_t attribute[] = { 3, 2 };
+
+	// 可読性のため、頂点配列クラスのコンストラクタにおける一部の引数を変数にしておく
+	size_t vertElemMass = sizeof(vert) / sizeof(float);
+	size_t attElemMass = sizeof(attribute) / sizeof(size_t);
+
+	// クラスとして作成
+	mSpriteVert = new VertexArray(vert, vertElemMass, attribute, attElemMass, GL_FLOAT, GL_FALSE);
+}
+
+void Renderer::CreateSpriteElementBuffer()
+{
+	// インデックス
+	Uint8 index[] =
+	{
+		0, 1, 2,
+		0, 2, 3
+	};
+
+	// クラスとして作成
+	mSpriteElementBuffer = new ElementBuffer(index, sizeof(index) / sizeof(Uint8), sizeof(Uint8), GL_UNSIGNED_BYTE);
 }
 
 //////////////////////////////////////////////////////////////

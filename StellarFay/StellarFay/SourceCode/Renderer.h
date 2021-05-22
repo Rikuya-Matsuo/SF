@@ -46,6 +46,9 @@ public:
 	// シェーダのロード。すでにロードされている組み合わせであればそのポインタを返す
 	class Shader * GetShader(const std::string & vertFilePath, const std::string & fragFilePath);
 
+	// メッシュのロード。すでにロードされている組み合わせであればそのポインタを返す
+	class Mesh * GetMesh(const std::string & filePath);
+
 	// テクスチャのロード。すでにロードされている場合はそのポインタを返す。
 	class Texture * GetTexture(const std::string & filePath);
 
@@ -92,6 +95,10 @@ private:
 	typedef std::unordered_map<StringPair, class Shader *, StringPairHash> ShaderMap;
 	ShaderMap mShaderMap;
 
+	// メッシュコンテナ
+	typedef std::unordered_map<std::string, class Mesh *> MeshMap;
+	MeshMap mMeshMap;
+
 	// テクスチャコンテナ
 	typedef std::unordered_map<std::string, class Texture *> TextureMap;
 	TextureMap mTextureMap;
@@ -111,11 +118,23 @@ private:
 	// ライト情報
 	LightInfo mLightInfo;
 
+	// UI用頂点配列
+	class VertexArray * mSpriteVert;
+
+	// UI用インデックスバッファ
+	class ElementBuffer * mSpriteElementBuffer;
+
 	// 不透明オブジェクト描画部分
 	void DrawFullDissolveObjects();
 
 	// 半透明オブジェクト描画部分
 	void DrawNotFullDissolveObjects();
+
+	// UI用頂点座標作成
+	void CreateSpriteVert();
+
+	// UI用インデックスバッファ作成
+	void CreateSpriteElementBuffer();
 };
 
 //////////////////////////////////////////////////////////////

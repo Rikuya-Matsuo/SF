@@ -237,23 +237,31 @@ bool Mesh::Load(const std::string & path)
 	for (auto itr = mObjects.begin(); itr != mObjects.end(); ++itr)
 	{
 		(*itr)->mPolyGroups.shrink_to_fit();
-		for (auto itr2 = (*itr)->mPolyGroups.begin(); itr2 != (*itr)->mPolyGroups.end(); ++itr2)
-		{
-			(*itr2)->mIndices.shrink_to_fit();
-		}
 	}
 
 	// 頂点データを作成していく
-	std::unordered_map<ObjPolyVertData, GLuint, ObjPolyVertData::HashFunc> vertIndices;
+	
+	// 頂点配列のメモリ領域を確保する
 	mVertices.reserve(polyDatas.size() * 3 * 8);
+
+	// モデル全体における頂点のインデックス値を記録するマップ
+	std::unordered_map<ObjPolyVertData, GLuint, ObjPolyVertData::HashFunc> vertIndices;
+
+	// ポリゴンのインデックスデータのバッファ
+	typedef std::vector<GLuint> UintVec;
+	std::unordered_map<ObjectData::PolyGroup *, UintVec> indexBuffer;
+
+	// ポリゴンループ
 	for (auto polyItr : polyDatas)
 	{
 		// エイリアス取得
 		ObjectData * objAlias = mObjects[polyItr.mObjectIndex];
 		ObjectData::PolyGroup * polyGroupAlias = objAlias->mPolyGroups[polyItr.mPolyGroupIndex];
 
+		// ポリゴンの頂点ループ
 		for (size_t i = 0; i < 3; ++i)
 		{
+			// エイリアス取得
 			ObjPolyVertData & vert = polyItr.mVerts[i];
 
 			// vertIndicesから、同じ情報を持った頂点のインデックスを検索
@@ -297,7 +305,7 @@ bool Mesh::Load(const std::string & path)
 			polyGroupAlias->mUsemtlName = polyItr.mUsemtl;
 
 			// インデックスバッファに記録
-			polyGroupAlias->mIndices.emplace_back(vertIndices[vert]);
+			indexBuffer[polyGroupAlias].emplace_back(vertIndices[vert]);
 		}
 	}
 	mVertices.shrink_to_fit();
@@ -420,10 +428,10 @@ bool Mesh::Load(const std::string & path)
 	{
 		for (auto polygItr : objItr->mPolyGroups)
 		{
-			glGenBuffers(1, &polygItr->mEBO);
+			// エイリアス取得
+			UintVec & vecAlies = indexBuffer[polygItr];
 
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, polygItr->mEBO);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * polygItr->mIndices.size(), polygItr->mIndices.data(), GL_STATIC_DRAW);
+			polygItr->mElementBuffer = new ElementBuffer(vecAlies.data(), vecAlies.size(), sizeof(vecAlies[0]));
 		}
 	}
 
@@ -572,8 +580,7 @@ void Mesh::DrawUnderCondition(Shader * shader, std::function<bool(ObjectData * o
 			shader->SetUniform1f("dissolve", mtl->mDissolve);
 
 			// 描画
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, polygPtr->mEBO);
-			glDrawElements(GL_TRIANGLES, polygPtr->mIndices.size(), GL_UNSIGNED_INT, 0);
+			polygPtr->mElementBuffer->DrawElements(GL_TRIANGLES);
 		}
 	}
 }

@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Collision.h"
 #include "VertexArray.h"
+#include "ElementBuffer.h"
 #include "Hash.h"
 #include <vector>
 #include <list>
@@ -85,17 +86,16 @@ public:
 	struct PolyGroup
 	{
 		std::string mName;
-		std::vector<GLuint> mIndices;
-
-		GLuint mEBO;
+		
+		ElementBuffer * mElementBuffer;
 
 		std::string mUsemtlName;
 		const MtlData * mUsemtl;
 
 		~PolyGroup()
 		{
-			glDeleteBuffers(1, &mEBO);
-			std::vector<GLuint>().swap(mIndices);
+			delete mElementBuffer;
+			mElementBuffer = nullptr;
 		}
 	};
 
@@ -103,6 +103,15 @@ public:
 	const AABB & GetBox() const { return mBox; }
 	bool GetDrawFlag() const { return mDrawFlag; }
 	const std::vector<PolyGroup*> & GetPolyGroups() const { return mPolyGroups; }
+
+	~ObjectData()
+	{
+		for (auto itr = mPolyGroups.rbegin(); itr != mPolyGroups.rend(); ++itr)
+		{
+			delete *itr;
+		}
+		std::vector<PolyGroup *>().swap(mPolyGroups);
+	}
 
 private:
 	std::string mName;
@@ -119,15 +128,6 @@ private:
 	{
 		PolyGroup * group = new PolyGroup;
 		mPolyGroups.emplace_back(group);
-	}
-
-	~ObjectData()
-	{
-		for (auto itr = mPolyGroups.rbegin(); itr != mPolyGroups.rend(); ++itr)
-		{
-			delete *itr;
-		}
-		std::vector<PolyGroup *>().swap(mPolyGroups);
 	}
 };
 

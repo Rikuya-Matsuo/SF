@@ -162,6 +162,9 @@
     <ClCompile Include="SourceCode\UILayerBase.cpp">
       <Filter>ソース ファイル\UILayer</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\ElementBuffer.cpp">
+      <Filter>ソース ファイル\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -260,6 +263,9 @@
     <ClInclude Include="SourceCode\UILayerBase.h">
       <Filter>ヘッダー ファイル\UILayer</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\ElementBuffer.h">
+      <Filter>ヘッダー ファイル\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Phong.frag">
@@ -278,6 +284,12 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="Shaders\1color.frag">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="Shaders\Sprite.frag">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="Shaders\Sprite.vert">
       <Filter>リソース ファイル</Filter>
     </None>
   </ItemGroup>
