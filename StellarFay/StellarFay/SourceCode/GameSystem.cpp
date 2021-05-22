@@ -6,6 +6,15 @@
 #include "PhysicManager.h"
 #include "Input.h"
 #include "SceneBase.h"
+#include "UILayerBase.h"
+
+void GameSystem::RegisterUI(UILayerBase * ui)
+{
+}
+
+void GameSystem::DeregisterUI(UILayerBase * ui)
+{
+}
 
 GameSystem::GameSystem():
 	mPrevTicks(SDL_GetTicks()),

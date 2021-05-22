@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "VertexArray.h"
 #include "ElementBuffer.h"
+#include "UILayerBase.h"
 
 Renderer::Renderer()
 {
@@ -296,6 +297,14 @@ void Renderer::DeregisterMeshComponent(MeshComponent * meshComp)
 	{
 		mMeshComponentsSortedInCameraDistance.erase(itr);
 	}
+}
+
+void Renderer::RegisterUI(const UILayerBase * ui)
+{
+}
+
+void Renderer::DeregisterUI(const UILayerBase * ui)
+{
 }
 
 void Renderer::Draw()

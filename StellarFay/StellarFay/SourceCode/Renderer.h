@@ -31,6 +31,12 @@ public:
 	// メッシュコンポーネント登録解除
 	void DeregisterMeshComponent(class MeshComponent * meshComp);
 
+	// 描画するUIの登録
+	void RegisterUI(const class UILayerBase * ui);
+
+	// 描画するUIの登録解除
+	void DeregisterUI(const class UILayerBase * ui);
+
 	// アクティブとするカメラのセット
 	void SetActiveCamera(const class Camera * cam) { mActiveCamera = cam; }
 
@@ -109,6 +115,9 @@ private:
 	// メッシュコンポーネントのコンテナ（カメラ距離ソート）
 	std::list<class MeshComponent *> mMeshComponentsSortedInCameraDistance;
 
+	// 描画するUI
+	std::list<const class UILayerBase *> mUIs;
+	
 	// カメラ
 	const class Camera * mActiveCamera;
 

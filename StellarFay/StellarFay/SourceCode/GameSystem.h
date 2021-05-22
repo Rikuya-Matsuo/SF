@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <SDL/SDL.h>
+#include <list>
 #include "Vector.h"
 #include "Matrix.h"
 #include "RandomGenerator.h"
@@ -41,6 +42,12 @@ public:
 
 	void SetTimeSpeedRate(float rate) { mTimeSpeedRate = rate; }
 
+	// UIの登録
+	void RegisterUI(class UILayerBase * ui);
+
+	// UIの登録解除
+	void DeregisterUI(class UILayerBase * ui);
+
 private:
 	GameSystem();
 
@@ -80,6 +87,12 @@ private:
 
 	// 次のシーンに移動する
 	bool GoNextScene();
+
+	//////////////////
+	// UI
+	//////////////////
+	// UIコンテナ
+	std::list<class UILayerBase *> mUIs;
 
 	//////////////////
 	// 乱数
