@@ -165,6 +165,9 @@
     <ClCompile Include="SourceCode\ElementBuffer.cpp">
       <Filter>ソース ファイル\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\SpriteShaderWrapper.cpp">
+      <Filter>ソース ファイル\ShaderWrapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\ElementBuffer.h">
       <Filter>ヘッダー ファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SpriteShaderWrapper.h">
+      <Filter>ヘッダー ファイル\ShaderWrapper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
