@@ -145,8 +145,14 @@ void MeshComponent::DrawUnderCondition(ShaderWrapper * shader, std::function<boo
 			// ポリゴングループごとのユニフォーム設定
 			shader->InputPolyUniforms(polygPtr);
 
+			// インデックスバッファのエイリアス取得
+			ElementBuffer * elemBuffer = polygPtr->mElementBuffer;
+
+			// インデックスバッファをアクティブ化
+			elemBuffer->Activate();
+
 			// 描画
-			polygPtr->mElementBuffer->DrawElements();
+			elemBuffer->DrawElements();
 		}
 	}
 }

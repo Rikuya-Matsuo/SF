@@ -11,7 +11,7 @@ public:
 	void Update();
 
 	// 描画
-	virtual void Draw() const;
+	virtual void Draw(const class ElementBuffer * elemBuf) const;
 
 	// 描画優先度の取得
 	int GetDrawPriority() const { return mDrawPriority; }

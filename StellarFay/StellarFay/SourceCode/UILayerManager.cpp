@@ -1,5 +1,6 @@
 ﻿#include "UILayerManager.h"
 #include "UILayerBase.h"
+#include "ElementBuffer.h"
 #include <algorithm>
 
 UILayerManager::UILayerManager() :
@@ -50,14 +51,14 @@ void UILayerManager::Update()
 	(*itr)->Update();
 }
 
-void UILayerManager::Draw()
+void UILayerManager::Draw(const ElementBuffer * elemBuf)
 {
 	// リストの順番に従って描画していく
 	for (auto itr : mDrawList)
 	{
 		if (itr->GetDrawFlag())
 		{
-			itr->Draw();
+			itr->Draw(elemBuf);
 		}
 	}
 }

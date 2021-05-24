@@ -12,7 +12,7 @@ public:
 	void Update();
 
 	// 描画
-	void Draw();
+	void Draw(const class ElementBuffer * elemBuf);
 
 	// UIの登録
 	void RegisterUILayer(class UILayerBase * ui);

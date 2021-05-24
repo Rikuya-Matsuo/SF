@@ -31,17 +31,14 @@ public:
 	// メッシュコンポーネント登録解除
 	void DeregisterMeshComponent(class MeshComponent * meshComp);
 
-	// 描画するUIの登録
-	void RegisterUI(const class UILayerBase * ui);
-
-	// 描画するUIの登録解除
-	void DeregisterUI(const class UILayerBase * ui);
-
 	// アクティブとするカメラのセット
 	void SetActiveCamera(const class Camera * cam) { mActiveCamera = cam; }
 
 	// 背景色設定
 	void SetBGColor(const Vector3D & color) { mBGColor = color; }
+
+	// UIマネージャークラスへのポインタをセット
+	void SetUIManagerPtr(class UILayerManager * uiManager) { mUIManager = uiManager; }
 
 	// 画面のクリア
 	void ClearWindow() const { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
@@ -115,9 +112,6 @@ private:
 	// メッシュコンポーネントのコンテナ（カメラ距離ソート）
 	std::list<class MeshComponent *> mMeshComponentsSortedInCameraDistance;
 
-	// 描画するUI
-	std::list<const class UILayerBase *> mUIs;
-	
 	// カメラ
 	const class Camera * mActiveCamera;
 
@@ -126,6 +120,10 @@ private:
 
 	// ライト情報
 	LightInfo mLightInfo;
+
+	// UIマネージャへのポインタ
+	// 生成・削除はゲームシステムが行う
+	class UILayerManager * mUIManager;
 
 	// UI用頂点配列
 	class VertexArray * mSpriteVert;
@@ -138,6 +136,9 @@ private:
 
 	// 半透明オブジェクト描画部分
 	void DrawNotFullDissolveObjects();
+
+	// UI描画部分
+	void DrawSprites();
 
 	// UI用頂点座標作成
 	void CreateSpriteVert();

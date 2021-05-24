@@ -6,15 +6,7 @@
 #include "PhysicManager.h"
 #include "Input.h"
 #include "SceneBase.h"
-#include "UILayerBase.h"
-
-void GameSystem::RegisterUI(UILayerBase * ui)
-{
-}
-
-void GameSystem::DeregisterUI(UILayerBase * ui)
-{
-}
+#include "UILayerManager.h"
 
 GameSystem::GameSystem():
 	mPrevTicks(SDL_GetTicks()),
@@ -76,6 +68,9 @@ bool GameSystem::Init()
 
 	// 物理クラス生成
 	mPhysicManager = new PhysicManager();
+
+	// UIマネージャークラス生成
+	mUIManager = new UILayerManager;
 
 	return true;
 }

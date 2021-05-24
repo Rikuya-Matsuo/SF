@@ -1,4 +1,5 @@
 ﻿#include "UILayerBase.h"
+#include "ElementBuffer.h"
 
 UILayerBase::UILayerBase(int drawOrder, int updateOrder) :
 	mDrawPriority(drawOrder),
@@ -10,7 +11,7 @@ void UILayerBase::Update()
 {
 }
 
-void UILayerBase::Draw() const
+void UILayerBase::Draw(const ElementBuffer * elemBuf) const
 {
 }
 

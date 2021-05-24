@@ -35,18 +35,14 @@ public:
 
 	class PhysicManager * GetPhysicManager() { return mPhysicManager; }
 
+	class UILayerManager * GetUIManager() { return mUIManager; }
+
 	// システムが所有する乱数生成機の参照
 	RandomGenerator & GetRand() { return mRand; }
 
 	void SetFirstScene(class SceneBase * scene) { mCurrentScene = scene; }
 
 	void SetTimeSpeedRate(float rate) { mTimeSpeedRate = rate; }
-
-	// UIの登録
-	void RegisterUI(class UILayerBase * ui);
-
-	// UIの登録解除
-	void DeregisterUI(class UILayerBase * ui);
 
 private:
 	GameSystem();
@@ -91,8 +87,8 @@ private:
 	//////////////////
 	// UI
 	//////////////////
-	// UIコンテナ
-	std::list<class UILayerBase *> mUIs;
+	// UIマネージャ
+	class UILayerManager * mUIManager;
 
 	//////////////////
 	// 乱数

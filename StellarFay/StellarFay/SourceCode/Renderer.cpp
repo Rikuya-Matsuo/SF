@@ -9,7 +9,7 @@
 #include "Camera.h"
 #include "VertexArray.h"
 #include "ElementBuffer.h"
-#include "UILayerBase.h"
+#include "UILayerManager.h"
 
 Renderer::Renderer()
 {
@@ -299,14 +299,6 @@ void Renderer::DeregisterMeshComponent(MeshComponent * meshComp)
 	}
 }
 
-void Renderer::RegisterUI(const UILayerBase * ui)
-{
-}
-
-void Renderer::DeregisterUI(const UILayerBase * ui)
-{
-}
-
 void Renderer::Draw()
 {
 	// 背景色を反映
@@ -377,6 +369,18 @@ void Renderer::DrawNotFullDissolveObjects()
 			itr->DrawNotFullDissolveObject();
 		}
 	}
+}
+
+void Renderer::DrawSprites()
+{
+	// 頂点配列アクティブ化
+	mSpriteVert->Activate();
+
+	// インデックスバッファアクティブ化
+	mSpriteElementBuffer->Activate();
+
+	// 描画
+	mUIManager->Draw(mSpriteElementBuffer);
 }
 
 void Renderer::CreateSpriteVert()

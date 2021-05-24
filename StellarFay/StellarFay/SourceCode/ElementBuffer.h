@@ -19,9 +19,9 @@ public:
 	// アクティブ化
 	void Activate() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mEBO); }
 
-	// 描画。アクティブ化も込み。
+	// 描画。実行前にアクティブ化をすること。
 	// 引数のデフォルトはGL_TRIANGLES
-	void DrawElements(GLenum mode = GL_TRIANGLES) const;
+	void DrawElements(GLenum mode = GL_TRIANGLES) const { glDrawElements(mode, mIndicesMass, mType, 0); }
 
 private:
 	GLuint mEBO;
