@@ -42,6 +42,9 @@ bool GameSystem::Init()
 	fullScreenFlag = false;
 #endif
 
+	// UIマネージャークラス生成
+	mUIManager = new UILayerManager;
+
 	// レンダラーの生成・初期化
 	mRenderer = new Renderer();
 	bool successRendererInit = mRenderer->Init(1920, 1080, fullScreenFlag);
@@ -66,11 +69,11 @@ bool GameSystem::Init()
 	light.mAmbientColor = Vector3D(0.8f);
 	light.mSpecularColor = Vector3D(1.0f);
 
+	// UIマネージャ共有
+	mRenderer->SetUIManagerPtr(mUIManager);
+
 	// 物理クラス生成
 	mPhysicManager = new PhysicManager();
-
-	// UIマネージャークラス生成
-	mUIManager = new UILayerManager;
 
 	return true;
 }
@@ -95,6 +98,9 @@ void GameSystem::Loop()
 
 		// シーン更新
 		mCurrentScene->Update();
+
+		// UI更新
+		mUIManager->Update();
 
 		// シーン移動判定
 		if (mCurrentScene->GetGoNextSceneFlag())
@@ -132,6 +138,11 @@ void GameSystem::Finish()
 	if (mPhysicManager)
 	{
 		delete mPhysicManager;
+	}
+
+	if (mUIManager)
+	{
+		delete mUIManager;
 	}
 }
 
