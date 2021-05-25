@@ -11,8 +11,8 @@ TestUILayer::TestUILayer() :
 	mShaderWrapper = new SpriteShaderWrapper();
 
 	Vector2D scale = Vector2D(
-		static_cast<float>(RENDERER_INSTANCE.GetWidth()) * 2.f,
-		static_cast<float>(RENDERER_INSTANCE.GetHeight()) * 2.f
+		static_cast<float>(RENDERER_INSTANCE.GetWidth()),
+		static_cast<float>(RENDERER_INSTANCE.GetHeight())
 	);
 	Matrix4 mat = Matrix4::CreateScale(scale.x, scale.y, 1.0f);
 	mShaderWrapper->SetUniformElement("modelMat", mat);

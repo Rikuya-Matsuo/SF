@@ -10,7 +10,7 @@ uniform float dissolve;
 void main()
 {
 	vec4 color = texture(tex, fTexCoord);
-	color.a = dissolve;
+	color.a *= dissolve;
 
 	FragColor = color;
 }
