@@ -1,10 +1,18 @@
 ﻿#include "UILayerBase.h"
+#include "GameSystem.h"
+#include "UILayerManager.h"
 #include "ElementBuffer.h"
 
 UILayerBase::UILayerBase(int drawOrder, int updateOrder) :
 	mDrawPriority(drawOrder),
 	mDrawFlag(true)
 {
+	UI_MANAGER_INSTANCE.RegisterUILayer(this);
+}
+
+UILayerBase::~UILayerBase()
+{
+	UI_MANAGER_INSTANCE.DeregisterUILayer(this);
 }
 
 void UILayerBase::Update()

@@ -171,6 +171,9 @@
     <ClCompile Include="SourceCode\UILayerManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\TestUILayer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -276,6 +279,9 @@
       <Filter>ヘッダー ファイル\ShaderWrapper</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\UILayerManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\TestUILayer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

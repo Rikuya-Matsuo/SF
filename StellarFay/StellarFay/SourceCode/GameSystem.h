@@ -100,6 +100,7 @@ private:
 #define GAME_SYSTEM_INSTANCE GameSystem::GetInstance()
 #define RENDERER_INSTANCE (*(GAME_SYSTEM_INSTANCE.GetRenderer()))
 #define PHYSIC_MANAGER_INSTANCE (*(GAME_SYSTEM_INSTANCE.GetPhysicManager()))
+#define UI_MANAGER_INSTANCE (*(GAME_SYSTEM_INSTANCE.GetUIManager()))
 #define RANDOM_GENERATOR (GAME_SYSTEM_INSTANCE.GetRand())
 
 //////////////////////////////////////////////////////////////

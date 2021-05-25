@@ -7,6 +7,8 @@ class UILayerBase
 public:
 	UILayerBase(int drawOrder = 0, int updateOrder = 0);
 
+	~UILayerBase();
+
 	// 更新
 	void Update();
 
