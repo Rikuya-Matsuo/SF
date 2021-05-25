@@ -4,7 +4,7 @@
 class SpriteShaderWrapper : public ShaderWrapper
 {
 public:
-	SpriteShaderWrapper(Shader * shader = nullptr);
+	SpriteShaderWrapper(Shader * shader = nullptr, Uint8 textureMass = 1);
 
 private:
 	static Shader * mSpriteShader;

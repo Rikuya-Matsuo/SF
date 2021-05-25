@@ -21,7 +21,7 @@ protected:
 	typedef std::unordered_map<std::string, const Matrix4 *> UnifAddressList4m;
 
 public:
-	ShaderWrapper(Shader * shader = nullptr);
+	ShaderWrapper(Shader * shader = nullptr, Uint8 textureMass = 0);
 
 	virtual ~ShaderWrapper();
 
@@ -35,6 +35,11 @@ public:
 
 	// シェーダのアクティブ化
 	void Activate() const { mShader->Activate(); }
+
+	// テクスチャの設定
+	// 描画時は配列を頭から走査し、nullptrが検出された時点でテクスチャユニットへのセットを中止するので
+	// unitIndexは0から順に連番でセットしなければならない
+	void SetTexture(const class Texture * tex, Uint8 unitIndex);
 
 	// ユニフォームの値を設定
 	void SetUniformElement(const std::string & name, float value) { mUniformList1f[name] = value; }
@@ -68,8 +73,16 @@ public:
 	virtual DissolveSetting GetDissolveSetting() const;
 
 protected:
+	// 使用するシェーダ
 	Shader * mShader;
 
+	// テクスチャユニットにセットするテクスチャ
+	const class Texture ** mTextures;
+
+	// mTexturesの要素数
+	const Uint8 mTextureMass;
+
+	// 透明度に関する設定
 	DissolveSetting mDissolveSetting;
 
 	/////////////////////////////////////////////
@@ -99,6 +112,13 @@ protected:
 
 	// 行列の参照
 	UnifAddressList4m mUniformAddressList4m;
+
+	/////////////////////////////////////////////
+	// 内部関数
+	/////////////////////////////////////////////
+
+	// テクスチャをテクスチャユニットにセットしていく関数
+	void InputTextureUnits() const;
 };
 
 //////////////////////////////////////////////////////////////

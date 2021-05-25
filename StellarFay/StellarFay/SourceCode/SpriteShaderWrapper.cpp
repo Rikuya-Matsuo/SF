@@ -4,8 +4,8 @@
 
 Shader * SpriteShaderWrapper::mSpriteShader = nullptr;
 
-SpriteShaderWrapper::SpriteShaderWrapper(Shader * shader) :
-	ShaderWrapper()
+SpriteShaderWrapper::SpriteShaderWrapper(Shader * shader, Uint8 textureMass) :
+	ShaderWrapper(nullptr, textureMass)
 {
 	if (!mSpriteShader)
 	{
@@ -13,6 +13,8 @@ SpriteShaderWrapper::SpriteShaderWrapper(Shader * shader) :
 	}
 
 	mShader = (!shader) ? mSpriteShader : shader;
+
+	mUniformList1i["tex"] = 0;
 }
 
 //////////////////////////////////////////////////////////////
