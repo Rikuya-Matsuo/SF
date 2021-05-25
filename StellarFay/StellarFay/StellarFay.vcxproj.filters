@@ -172,7 +172,7 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\TestUILayer.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\UILayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -282,7 +282,7 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\TestUILayer.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\UILayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

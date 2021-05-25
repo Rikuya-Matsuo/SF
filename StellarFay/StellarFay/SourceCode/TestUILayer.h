@@ -10,4 +10,6 @@ public:
 
 private:
 	class Texture * mTex;
+
+	class ShaderWrapper * mShaderWrapper;
 };

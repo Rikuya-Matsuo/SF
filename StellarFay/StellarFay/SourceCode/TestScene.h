@@ -5,11 +5,14 @@ class TestScene : public SceneBase
 {
 public:
 	TestScene();
+	~TestScene();
 
 private:
 	float mRadius;
 
 	float mAngle;
+
+	class TestUILayer * mUI;
 
 	void UpdateScene() override;
 };

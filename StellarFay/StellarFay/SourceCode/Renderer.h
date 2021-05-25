@@ -61,6 +61,9 @@ public:
 	// ライト情報の参照取得
 	LightInfo & GetLightInfo() { return mLightInfo; }
 
+	// UI用ビュー・プロジェクション行列の参照取得
+	const Matrix4 & GetUIViewProjMat() const { return mUIViewProjMat; }
+
 	// 描画域の大きさ取得
 	Uint32 GetWidth() const { return mWindowWidth; }
 
@@ -120,6 +123,9 @@ private:
 
 	// ライト情報
 	LightInfo mLightInfo;
+
+	// UI用ビュー・プロジェクション行列
+	Matrix4 mUIViewProjMat;
 
 	// UIマネージャへのポインタ
 	// 生成・削除はゲームシステムが行う

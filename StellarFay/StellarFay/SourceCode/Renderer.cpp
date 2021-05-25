@@ -121,6 +121,8 @@ bool Renderer::Init(Uint32 windowWidth, Uint32 windowHeight, bool fullScreen)
 	CreateSpriteVert();
 	CreateSpriteElementBuffer();
 
+	mUIViewProjMat = Matrix4::CreateSimpleViewProj(static_cast<float>(mWindowWidth), static_cast<float>(mWindowHeight));
+
 	// 透明度や深度バッファの設定
 	glEnable(GL_DEPTH_TEST);
 
@@ -313,6 +315,9 @@ void Renderer::Draw()
 	// 半透明部分
 	DrawNotFullDissolveObjects();
 
+	// UI描画
+	DrawSprites();
+
 	// ウィンドウフリップ
 	SDL_GL_SwapWindow(mWindow);
 }
@@ -373,6 +378,9 @@ void Renderer::DrawNotFullDissolveObjects()
 
 void Renderer::DrawSprites()
 {
+	// 深度バッファ無効
+	glDisable(GL_DEPTH_TEST);
+
 	// 頂点配列アクティブ化
 	mSpriteVert->Activate();
 

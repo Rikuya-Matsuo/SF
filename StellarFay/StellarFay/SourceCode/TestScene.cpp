@@ -2,6 +2,7 @@
 #include "TestActor.h"
 #include "ActorFollowCamera.h"
 #include "GameSystem.h"
+#include "TestUILayer.h"
 
 TestScene::TestScene() :
 	SceneBase()
@@ -18,6 +19,13 @@ TestScene::TestScene() :
 	Actor * a = new TestActor();
 
 	camera->SetTargetActor(a);
+
+	mUI = new TestUILayer;
+}
+
+TestScene::~TestScene()
+{
+	delete mUI;
 }
 
 void TestScene::UpdateScene()
