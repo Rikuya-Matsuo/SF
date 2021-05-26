@@ -175,6 +175,7 @@
     <ClCompile Include="SourceCode\SceneBase.cpp" />
     <ClCompile Include="SourceCode\Shader.cpp" />
     <ClCompile Include="SourceCode\ShaderWrapper.cpp" />
+    <ClCompile Include="SourceCode\Sprite.cpp" />
     <ClCompile Include="SourceCode\SpriteShaderWrapper.cpp" />
     <ClCompile Include="SourceCode\TestActor.cpp" />
     <ClCompile Include="SourceCode\TestScene.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="SourceCode\SceneBase.h" />
     <ClInclude Include="SourceCode\Shader.h" />
     <ClInclude Include="SourceCode\ShaderWrapper.h" />
+    <ClInclude Include="SourceCode\Sprite.h" />
     <ClInclude Include="SourceCode\SpriteShaderWrapper.h" />
     <ClInclude Include="SourceCode\TestActor.h" />
     <ClInclude Include="SourceCode\TestScene.h" />

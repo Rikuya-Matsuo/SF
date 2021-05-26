@@ -13,6 +13,13 @@ UILayerBase::UILayerBase(int drawOrder, int updateOrder) :
 UILayerBase::~UILayerBase()
 {
 	UI_MANAGER_INSTANCE.DeregisterUILayer(this);
+
+	for (auto itr : mSprites)
+	{
+		delete itr;
+		itr = nullptr;
+	}
+	mSprites.clear();
 }
 
 void UILayerBase::Update()
@@ -21,6 +28,10 @@ void UILayerBase::Update()
 
 void UILayerBase::Draw(const ElementBuffer * elemBuf) const
 {
+	for (auto itr : mSprites)
+	{
+		itr->Draw(elemBuf);
+	}
 }
 
 void UILayerBase::UpdateUI()
@@ -32,6 +43,7 @@ void UILayerBase::SetDrawPriority(int drawPriority)
 	mDrawFlag = drawPriority;
 
 	// マネージャにソートを要請する
+	UI_MANAGER_INSTANCE.RequestSortDrawList();
 }
 
 //////////////////////////////////////////////////////////////

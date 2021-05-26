@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include "Vector.h"
+#include "Sprite.h"
+#include <list>
 
 // UI層のクラス
 class UILayerBase
@@ -10,7 +12,7 @@ public:
 	~UILayerBase();
 
 	// 更新
-	void Update();
+	virtual void Update();
 
 	// 描画
 	virtual void Draw(const class ElementBuffer * elemBuf) const;
@@ -24,6 +26,9 @@ public:
 	// 描画優先度の設定
 	void SetDrawPriority(int drawPriority);
 
+	// UIの登録
+	void RegisterSprite(Sprite * spr) { mSprites.emplace_back(spr); }
+
 protected:
 	// 描画順
 	// この数値が小さい方が順序として先に描画される
@@ -32,6 +37,9 @@ protected:
 	
 	// 描画フラグ
 	bool mDrawFlag;
+
+	// 層の中で描画するUIのコンテナ
+	std::list<Sprite *> mSprites;
 
 	// 継承先独自の更新
 	virtual void UpdateUI();

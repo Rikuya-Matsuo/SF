@@ -2,34 +2,23 @@
 #include "GameSystem.h"
 #include "Renderer.h"
 #include "Texture.h"
-#include "SpriteShaderWrapper.h"
-#include "Camera.h"
+#include "Sprite.h"
+#include "ShaderWrapper.h"
 
-TestUILayer::TestUILayer() :
-	mTex(RENDERER_INSTANCE.GetTexture("Assets/stellarFayLogoJPsub.png"))
+TestUILayer::TestUILayer()
 {
-	mShaderWrapper = new SpriteShaderWrapper();
+	Sprite * spr = new Sprite(this);
 
-	Vector2D scale = Vector2D(
-		static_cast<float>(RENDERER_INSTANCE.GetWidth()),
-		static_cast<float>(RENDERER_INSTANCE.GetHeight())
-	);
-	Matrix4 mat = Matrix4::CreateScale(scale.x, scale.y, 1.0f);
-	mShaderWrapper->SetUniformElement("modelMat", mat);
+	const Texture * tex = RENDERER_INSTANCE.GetTexture("Assets/stellarFayLogoJPsub.png");
+	spr->SetTexture(tex);
 
-	const Matrix4 & viewProjMat = RENDERER_INSTANCE.GetUIViewProjMat();
-	mShaderWrapper->SetUniformAddress("viewProjMat", &viewProjMat);
+	ShaderWrapper * sw = spr->GetShaderWrapper();
+	sw->SetUniformElement("dissolve", 1.0f);
 
-	mShaderWrapper->SetUniformElement("dissolve", 1.0f);
-
-	mShaderWrapper->SetTexture(mTex, 0);
+	spr->UpdateMatrix();
 }
 
 void TestUILayer::Draw(const ElementBuffer * elemBuf) const
 {
-	mShaderWrapper->Activate();
-
-	mShaderWrapper->InputUniforms();
-
-	elemBuf->DrawElements();
+	UILayerBase::Draw(elemBuf);
 }

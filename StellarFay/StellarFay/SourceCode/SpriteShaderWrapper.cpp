@@ -15,6 +15,8 @@ SpriteShaderWrapper::SpriteShaderWrapper(Shader * shader, Uint8 textureMass) :
 	mShader = (!shader) ? mSpriteShader : shader;
 
 	mUniformList1i["tex"] = 0;
+
+	mUniformAddressList4m["viewProjMat"] = &RENDERER_INSTANCE.GetUIViewProjMat();
 }
 
 //////////////////////////////////////////////////////////////

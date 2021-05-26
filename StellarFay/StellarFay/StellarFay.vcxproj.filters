@@ -67,6 +67,12 @@
     <Filter Include="ヘッダー ファイル\UILayer">
       <UniqueIdentifier>{90f9e648-6eac-4f05-a6af-8cc73b4dd04d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Sprite">
+      <UniqueIdentifier>{83c8a234-a25c-4f3f-8325-48217793fa9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Sprite">
+      <UniqueIdentifier>{2935d90a-a896-4314-97b7-cdd5ae0a20e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c">
@@ -173,6 +179,9 @@
     </ClCompile>
     <ClCompile Include="SourceCode\TestUILayer.cpp">
       <Filter>ソース ファイル\UILayer</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Sprite.cpp">
+      <Filter>ソース ファイル\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\TestUILayer.h">
       <Filter>ヘッダー ファイル\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Sprite.h">
+      <Filter>ヘッダー ファイル\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

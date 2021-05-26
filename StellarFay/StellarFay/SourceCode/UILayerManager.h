@@ -23,18 +23,12 @@ public:
 	// 描画リストのソート要請
 	void RequestSortDrawList() { mSortDrawListFlag = true; }
 
-	// 更新リストのソート要請
-	void RequestSortUpdateList() { mSortUpdateListFlag = true; }
-
 private:
 	// 描画用リスト
 	std::list<class UILayerBase *> mDrawList;
 
 	// 描画リストソートフラグ
 	bool mSortDrawListFlag;
-
-	// 更新リストソートフラグ
-	bool mSortUpdateListFlag;
 
 	// 描画用リストへの登録
 	void RegisterIntoDrawList(class UILayerBase * ui);

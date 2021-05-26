@@ -9,7 +9,5 @@ public:
 	void Draw(const class ElementBuffer * elemBuf) const override;
 
 private:
-	class Texture * mTex;
 
-	class ShaderWrapper * mShaderWrapper;
 };
