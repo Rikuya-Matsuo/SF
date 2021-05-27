@@ -10,6 +10,11 @@ UILayerManager::UILayerManager() :
 
 UILayerManager::~UILayerManager()
 {
+	while (!mDrawList.empty())
+	{
+		UILayerBase * layer = *(mDrawList.begin());
+		delete layer;
+	}
 }
 
 void UILayerManager::Update()

@@ -22,3 +22,8 @@ void TestUILayer::Draw(const ElementBuffer * elemBuf) const
 {
 	UILayerBase::Draw(elemBuf);
 }
+
+//////////////////////////////////////////////////////////////
+// Project		: StellarFay
+// Copyright (c) 2021 Rikuya Matsuo. All rights reserved.
+//////////////////////////////////////////////////////////////
