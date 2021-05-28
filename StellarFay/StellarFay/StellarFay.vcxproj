@@ -154,6 +154,7 @@
     <ClCompile Include="SourceCode\Collision.cpp" />
     <ClCompile Include="SourceCode\ElementBuffer.cpp" />
     <ClCompile Include="SourceCode\GameScene.cpp" />
+    <ClCompile Include="SourceCode\GameUILayer.cpp" />
     <ClCompile Include="SourceCode\MonoColorShaderWrapper.cpp" />
     <ClCompile Include="SourceCode\PhysicManager.cpp" />
     <ClCompile Include="SourceCode\RandomGenerator.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="SourceCode\TestUILayer.cpp" />
     <ClCompile Include="SourceCode\Texture.cpp" />
     <ClCompile Include="SourceCode\TitleScene.cpp" />
+    <ClCompile Include="SourceCode\TitleUILayer.cpp" />
     <ClCompile Include="SourceCode\UILayerBase.cpp" />
     <ClCompile Include="SourceCode\UILayerManager.cpp" />
     <ClCompile Include="SourceCode\Vector.cpp" />
@@ -195,6 +197,7 @@
     <ClInclude Include="SourceCode\ColliderComponentBase.h" />
     <ClInclude Include="SourceCode\ElementBuffer.h" />
     <ClInclude Include="SourceCode\GameScene.h" />
+    <ClInclude Include="SourceCode\GameUILayer.h" />
     <ClInclude Include="SourceCode\MonoColorShaderWrapper.h" />
     <ClInclude Include="SourceCode\ObjMeshShaderWrapper.h" />
     <ClInclude Include="SourceCode\Actor.h" />
@@ -224,6 +227,7 @@
     <ClInclude Include="SourceCode\TestUILayer.h" />
     <ClInclude Include="SourceCode\Texture.h" />
     <ClInclude Include="SourceCode\TitleScene.h" />
+    <ClInclude Include="SourceCode\TitleUILayer.h" />
     <ClInclude Include="SourceCode\UILayerBase.h" />
     <ClInclude Include="SourceCode\UILayerManager.h" />
     <ClInclude Include="SourceCode\Vector.h" />
