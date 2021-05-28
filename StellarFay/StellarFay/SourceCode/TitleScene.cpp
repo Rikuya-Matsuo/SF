@@ -17,6 +17,6 @@ void TitleScene::UpdateScene()
 {
 	if (INPUT_INSTANCE.GetKeyPressDown(SDL_SCANCODE_RETURN))
 	{
-		GoNextScene();
+		GoNextScene(SceneEnum::Game_SceneEnum);
 	}
 }

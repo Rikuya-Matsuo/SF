@@ -9,7 +9,7 @@ class UILayerBase
 public:
 	UILayerBase(int drawOrder = 0, int updateOrder = 0);
 
-	~UILayerBase();
+	virtual ~UILayerBase();
 
 	// 更新
 	virtual void Update();

@@ -4,7 +4,8 @@
 #include "GameSystem.h"
 #include "Renderer.h"
 
-TitleUILayer::TitleUILayer()
+TitleUILayer::TitleUILayer() :
+	UILayerBase()
 {
 	Sprite * logo = new Sprite(this);
 
