@@ -183,6 +183,12 @@
     <ClCompile Include="SourceCode\Sprite.cpp">
       <Filter>ソース ファイル\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\TitleScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -295,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="SourceCode\Sprite.h">
       <Filter>ヘッダー ファイル\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\TitleScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
