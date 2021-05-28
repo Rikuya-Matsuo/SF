@@ -20,6 +20,7 @@ Sprite::Sprite(UILayerBase * uiLayer, ShaderWrapper * shaderWrapper) :
 	}
 
 	mShaderWrapper->SetUniformAddress("modelMat", &mModelMat);
+	SetDissolve(1.0f);
 
 	uiLayer->RegisterSprite(this);
 }
@@ -34,6 +35,11 @@ void Sprite::SetTexture(const Texture * tex, Uint8 texUnitIndex)
 	{
 		mShaderWrapper->SetTexture(tex, texUnitIndex);
 	}
+}
+
+void Sprite::SetDissolve(float value)
+{
+	mShaderWrapper->SetUniformElement("dissolve", value);
 }
 
 void Sprite::UpdateMatrix()

@@ -25,6 +25,9 @@ public:
 	// テクスチャの設定
 	void SetTexture(const class Texture * tex, Uint8 texUnitIndex = 0);
 
+	// 透明度の設定
+	void SetDissolve(float value);
+
 	// 行列の更新
 	void UpdateMatrix();
 

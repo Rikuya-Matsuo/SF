@@ -10,5 +10,5 @@ public:
 	void UpdateScene() override;
 
 private:
-
+	class TitleUILayer * mUI;
 };
