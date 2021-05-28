@@ -1,0 +1,9 @@
+# なぜか拾ったデータにmtlデータがなかったので、手入力で作りました。
+# 松尾 陸弥
+
+newmtl SciFi_Fighter_MK6
+Ns 10.0
+d 1.0
+map_Bump SciFi_Fighter-MK6-bump.jpg
+map_Kd SciFi_Fighter-MK6-diffuse.jpg
+map_Ks SciFi_Fighter-MK6-spec.jpg
