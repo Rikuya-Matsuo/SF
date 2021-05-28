@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Actor.h"
 #include "TestScene.h"
+#include "TitleScene.h"
+#include "GameScene.h"
 #include "Camera.h"
 
 SceneBase * SceneBase::mLatestScene = nullptr;
@@ -52,10 +54,12 @@ SceneBase * SceneBase::GenerateScene(SceneEnum sceneEnum)
 
 	case Title_SceneEnum:
 		// タイトルシーン生成
+		ret = new TitleScene();
 		break;
 
 	case Game_SceneEnum:
 		// ゲームシーン生成
+		ret = new GameScene();
 		break;
 
 	case Base_SceneEnum:

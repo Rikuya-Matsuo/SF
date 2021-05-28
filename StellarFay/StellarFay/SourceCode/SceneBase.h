@@ -48,7 +48,14 @@ protected:
 	// 継承先の更新
 	virtual void UpdateScene();
 
-	// 次シーンへの移動を希望する
+	// 次シーンを設定し、そこへの移動を希望する
+	void GoNextScene(SceneEnum nextSceneEnum)
+	{
+		SetNextScene(nextSceneEnum);
+		GoNextScene();
+	}
+
+	// 予め設定された次シーンへの移動を希望する
 	void GoNextScene() { mGoNextSceneFlag = true; }
 
 	// 次シーンへの移動希望をキャンセルする
@@ -58,11 +65,11 @@ protected:
 
 private:
 	// アクターをソートするフラグ
-	bool mSortActorFlag : 4;
+	bool mSortActorFlag;
 
 	// 次シーンへ移動することを希望するフラグ
 	// シーンの移動はGameSystemが管理するので、あくまで「希望」である
-	bool mGoNextSceneFlag : 4;
+	bool mGoNextSceneFlag;
 
 	// 次シーンの種類を示す列挙型
 	SceneEnum mNextScene;

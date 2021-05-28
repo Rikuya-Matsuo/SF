@@ -9,7 +9,7 @@ int main(int argc, char ** argv)
 	bool successInit = GAME_SYSTEM_INSTANCE.Init();
 
 	// 最初のシーンを設定
-	SceneEnum firstScene = SceneEnum::Test_SceneEnum;
+	SceneEnum firstScene = SceneEnum::Title_SceneEnum;
 	SceneBase * scenePtr = SceneBase::GenerateScene(firstScene);
 
 	GAME_SYSTEM_INSTANCE.SetFirstScene(scenePtr);
