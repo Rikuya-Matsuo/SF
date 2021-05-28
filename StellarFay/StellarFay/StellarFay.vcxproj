@@ -153,10 +153,13 @@
     <ClCompile Include="SourceCode\ColliderComponentBase.cpp" />
     <ClCompile Include="SourceCode\Collision.cpp" />
     <ClCompile Include="SourceCode\ElementBuffer.cpp" />
+    <ClCompile Include="SourceCode\EnemyBase.cpp" />
+    <ClCompile Include="SourceCode\EnemyGroup.cpp" />
     <ClCompile Include="SourceCode\GameScene.cpp" />
     <ClCompile Include="SourceCode\GameUILayer.cpp" />
     <ClCompile Include="SourceCode\MonoColorShaderWrapper.cpp" />
     <ClCompile Include="SourceCode\PhysicManager.cpp" />
+    <ClCompile Include="SourceCode\Player.cpp" />
     <ClCompile Include="SourceCode\RandomGenerator.cpp" />
     <ClCompile Include="SourceCode\Actor.cpp" />
     <ClCompile Include="SourceCode\ActorFollowCamera.cpp" />
@@ -196,6 +199,8 @@
     <ClInclude Include="SourceCode\ColliderAttribute.h" />
     <ClInclude Include="SourceCode\ColliderComponentBase.h" />
     <ClInclude Include="SourceCode\ElementBuffer.h" />
+    <ClInclude Include="SourceCode\EnemyBase.h" />
+    <ClInclude Include="SourceCode\EnemyGroup.h" />
     <ClInclude Include="SourceCode\GameScene.h" />
     <ClInclude Include="SourceCode\GameUILayer.h" />
     <ClInclude Include="SourceCode\MonoColorShaderWrapper.h" />
@@ -214,6 +219,7 @@
     <ClInclude Include="SourceCode\MeshComponent.h" />
     <ClInclude Include="SourceCode\PhongShaderWrapper.h" />
     <ClInclude Include="SourceCode\PhysicManager.h" />
+    <ClInclude Include="SourceCode\Player.h" />
     <ClInclude Include="SourceCode\Quaternion.h" />
     <ClInclude Include="SourceCode\RandomGenerator.h" />
     <ClInclude Include="SourceCode\Renderer.h" />

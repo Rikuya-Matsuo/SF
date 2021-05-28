@@ -195,6 +195,15 @@
     <ClCompile Include="SourceCode\TitleUILayer.cpp">
       <Filter>ソース ファイル\UILayer</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\Player.cpp">
+      <Filter>ソース ファイル\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\EnemyBase.cpp">
+      <Filter>ソース ファイル\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\EnemyGroup.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -319,6 +328,15 @@
     </ClInclude>
     <ClInclude Include="SourceCode\GameUILayer.h">
       <Filter>ヘッダー ファイル\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Player.h">
+      <Filter>ヘッダー ファイル\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\EnemyBase.h">
+      <Filter>ヘッダー ファイル\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\EnemyGroup.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
