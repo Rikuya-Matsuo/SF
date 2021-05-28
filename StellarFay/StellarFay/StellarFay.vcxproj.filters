@@ -189,6 +189,12 @@
     <ClCompile Include="SourceCode\GameScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\GameUILayer.cpp">
+      <Filter>ソース ファイル\UILayer</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\TitleUILayer.cpp">
+      <Filter>ソース ファイル\UILayer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -307,6 +313,12 @@
     </ClInclude>
     <ClInclude Include="SourceCode\GameScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\TitleUILayer.h">
+      <Filter>ヘッダー ファイル\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameUILayer.h">
+      <Filter>ヘッダー ファイル\UILayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
