@@ -525,8 +525,18 @@ void Mesh::GetWordsInLine(const char * line, std::vector<std::string> & wordsInL
 		}
 	}
 
+	// バッファが空文字列でないフラグ
+	bool bufIsNotEmpty = !buf.empty();
+
+	// バッファは空文字列だが、wordsInLineも空文字列であるフラグ
+	bool bufAndWILisEmpty = (buf.empty() && wordsInLine.empty());
+
 	// ループ終了後にバッファに残された文字列も格納する
-	wordsInLine.emplace_back(buf);
+	// 空文字列は格納しないが、wordsInLineが空の場合は空文字でも格納する
+	if (bufIsNotEmpty || bufAndWILisEmpty)
+	{
+		wordsInLine.emplace_back(buf);
+	}
 }
 
 Mesh::ObjectData * Mesh::FindObjectWithName(const std::string & objectName) const
@@ -615,6 +625,13 @@ void Mesh::ObjPolyVertData::Load(const std::string & str)
 
 			// 得られた数値
 			int num = std::stoi(buf);
+
+			// objファイルはフォーマットがまあまあ自由であるため
+			// 値の前に"-"を付ける場合がある。これは正の値として読み取るようにする
+			if (num < 0)
+			{
+				num *= -1;
+			}
 
 			switch (index)
 			{

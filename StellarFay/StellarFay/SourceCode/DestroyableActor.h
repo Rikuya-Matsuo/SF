@@ -7,7 +7,7 @@ class DestroyableActor : public Actor
 	// 型だけ先に定義する
 protected:
 	// ヒットポイントの型
-	typedef char HitPoint;
+	typedef float HitPoint;
 
 public:
 	// コンストラクタ（hpがヒットポイントの初期値でかつ最大値となる）
