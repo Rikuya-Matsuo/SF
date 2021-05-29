@@ -1,6 +1,7 @@
 ﻿#include "PhongShaderWrapper.h"
 #include "GameSystem.h"
 #include "Renderer.h"
+#include "Camera.h"
 
 Shader * PhongShaderWrapper::mPhongShader = nullptr;
 
@@ -85,12 +86,18 @@ void PhongShaderWrapper::InputPolyUniforms(const Mesh::ObjectData::PolyGroup * p
 	}
 }
 
-void PhongShaderWrapper::UpdateMatricesReference(const Matrix4 * modelMatAddress, const Renderer & renderer)
+void PhongShaderWrapper::SetMatricesReference(const Matrix4 * modelMatAddress, const Renderer & renderer)
 {
+	SetModelMatRefUniform(modelMatAddress);
+	SetViewMatRefUniform(&renderer.GetActiveCamera()->GetViewMat());
+	SetProjectionMatRefUniform(&renderer.GetActiveCamera()->GetProjectionMat());
 }
 
-void PhongShaderWrapper::UpdateMatricesReference(const Matrix4 * modelMatAddress, const Matrix4 * viewMat, const Matrix4 * projMat)
+void PhongShaderWrapper::SetMatricesReference(const Matrix4 * modelMatAddress, const Matrix4 * viewMat, const Matrix4 * projMat)
 {
+	SetModelMatRefUniform(modelMatAddress);
+	SetViewMatRefUniform(viewMat);
+	SetProjectionMatRefUniform(projMat);
 }
 
 //////////////////////////////////////////////////////////////

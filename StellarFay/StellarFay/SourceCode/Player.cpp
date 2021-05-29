@@ -13,9 +13,11 @@ Player::Player() :
 	MeshComponent * mshComp = new MeshComponent(this, msh, 0);
 
 	mShaderWrapper = new PhongShaderWrapper();
-	mShaderWrapper->UpdateMatricesReference(&mModelMat, RENDERER_INSTANCE);
+	mShaderWrapper->SetMatricesReference(&mModelMat, RENDERER_INSTANCE);
 
 	mshComp->SetShader(mShaderWrapper);
+
+	mTransform.mScales.SetAll(0.003f);
 }
 
 Player::~Player()
