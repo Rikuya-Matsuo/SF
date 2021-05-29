@@ -9,6 +9,7 @@
 #include <vector>
 #include <list>
 #include <string>
+#include <unordered_map>
 #include <functional>
 #include <cstring>
 
@@ -44,6 +45,8 @@ public:
 	class MtlData;
 
 private:
+	static VertexArray::ArgumentPreset mVAPreset;
+
 	VertexArray * mVertexArray;
 
 	// 頂点配列
@@ -63,16 +66,28 @@ private:
 	// データ内容：ObjPolyVertData[3]、所属するオブジェクトのインデックス、所属するポリゴングループのインデックス、使用するMtlの名前
 	struct ObjPolyData;
 
-	// 読み込んだ１行を単語に分解する
-	void GetWordsInLine(const char * line, std::vector<std::string> & wordsInLine);
-
 	// オブジェクトを名前で検索
 	class ObjectData * FindObjectWithName(const std::string & objectName) const;
 
 	// 条件が真となるものを描画する
 	void DrawUnderCondition(Shader * shader, std::function<bool(ObjectData * obj, size_t polyGroupIndex)> condition) const;
+	
+	//////////////////////////
+	// ロード関連
+	//////////////////////////
 
-	static VertexArray::ArgumentPreset mVAPreset;
+	// ロードのフローを通して使うローカル変数群
+	struct LoadLocalVariable;
+
+	// 読み込んだ１行を単語に分解する
+	void GetWordsInLine(const char * line, std::vector<std::string> & wordsInLine);
+
+	// Objファイルのロード
+	bool LoadObj(LoadLocalVariable & local, const std::string & path);
+
+	// Mtlファイルのロード
+	bool LoadMtl(LoadLocalVariable & local, const std::string & path);
+
 };
 
 //////////////////////////
@@ -187,6 +202,30 @@ private:
 	Texture * mDiffuseTexture;
 
 	Texture * mSpecularTexture;
+};
+
+struct Mesh::LoadLocalVariable
+{
+	std::vector<Vector3D> vertexPos;
+	std::vector<Vector2D> texCoord;
+	std::vector<Vector3D> norm;
+	std::vector<ObjPolyData> polyDatas;
+	std::vector<std::string> mtllibStrings;
+	std::string lastUsemtlWord;
+
+	// ファイル内の１行の中の、半角スペースで区切られた単語を格納する
+	std::vector<std::string> wordsInLine;
+
+	// バッファ
+	static const unsigned int bufSize = 256;
+	char buf[bufSize];
+
+	// モデル全体における頂点のインデックス値を記録するマップ
+	std::unordered_map<ObjPolyVertData, GLuint, ObjPolyVertData::HashFunc> vertIndices;
+
+	// ポリゴンのインデックスデータのバッファ
+	typedef std::vector<GLuint> UintVec;
+	std::unordered_map<ObjectData::PolyGroup *, UintVec> indexBuffer;
 };
 
 //////////////////////////////////////////////////////////////
