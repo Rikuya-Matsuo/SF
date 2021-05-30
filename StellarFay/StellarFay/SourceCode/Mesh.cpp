@@ -1,6 +1,7 @@
 ﻿#include "Mesh.h"
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include "Vector.h"
 #include "Renderer.h"
 #include "GameSystem.h"
@@ -396,28 +397,61 @@ bool Mesh::LoadObj(LoadLocalVariable & local, const std::string & path)
 				GLuint newIndex = local.vertIndices.size();
 				local.vertIndices[vert] = newIndex;
 
-				const Vector3D & pos = local.vertexPos[vert.mVertIndex - 1];
+				int posIndex = 0;
+				if (vert.mVertIndex > 0)
+				{
+					posIndex = vert.mVertIndex - 1;
+				}
+				else if (vert.mVertIndex < 0)
+				{
+					posIndex = local.vertexPos.size() + vert.mVertIndex;
+				}
+				else
+				{
+					std::cout << "Mesh : 面情報＞頂点座標にて、無効な値が検出されました。正常なモデル表示が行われない恐れがあります。\n";
+				}
+
+				const Vector3D & pos = local.vertexPos[posIndex];
 				mVertices.emplace_back(pos.x);
 				mVertices.emplace_back(pos.y);
 				mVertices.emplace_back(pos.z);
 
 				// テクスチャ座標
-				int texIndex = vert.mTexCoordIndex - 1;
-				Vector2D uv;
-				if (texIndex < 0)
+				int texIndex = 0;
+				if (vert.mTexCoordIndex > 0)
 				{
-					uv.x = uv.y = 0.0f;
+					texIndex = vert.mTexCoordIndex - 1;
+				}
+				else if (vert.mTexCoordIndex < 0)
+				{
+					texIndex = local.texCoord.size() + vert.mTexCoordIndex;
 				}
 				else
 				{
-					uv = local.texCoord[texIndex];
+					std::cout << "Mesh : 面情報＞テクスチャ座標にて、無効な値が検出されました。正常なモデル表示が行われない恐れがあります。\n";
 				}
+
+				Vector2D uv = local.texCoord[texIndex];
 				uv.y = 1 - uv.y;
 				mVertices.emplace_back(uv.x);
 				mVertices.emplace_back(uv.y);
 
 				// 法線
-				const Vector3D & n = local.norm[vert.mNormIndex - 1];
+				int normIndex = 0;
+				if (vert.mNormIndex > 0)
+				{
+					normIndex = vert.mNormIndex - 1;
+				}
+				else if (vert.mNormIndex < 0)
+				{
+					normIndex = local.norm.size() + vert.mNormIndex;
+				}
+				else
+				{
+					std::cout << "Mesh : 面情報＞法線にて、無効な値が検出されました。正常なモデル表示が行われない恐れがあります。\n";
+				}
+
+				const Vector3D & n = local.norm[normIndex];
 				mVertices.emplace_back(n.x);
 				mVertices.emplace_back(n.y);
 				mVertices.emplace_back(n.z);
@@ -631,13 +665,6 @@ void Mesh::ObjPolyVertData::Load(const std::string & str)
 
 			// 得られた数値
 			int num = std::stoi(buf);
-
-			// objファイルはフォーマットがまあまあ自由であるため
-			// 値の前に"-"を付ける場合がある。これは正の値として読み取るようにする
-			if (num < 0)
-			{
-				num *= -1;
-			}
 
 			switch (index)
 			{

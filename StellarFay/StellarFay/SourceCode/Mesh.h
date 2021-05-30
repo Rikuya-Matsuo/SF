@@ -148,9 +148,11 @@ private:
 
 struct Mesh::ObjPolyVertData
 {
-	int mVertIndex = -1;
-	int mTexCoordIndex = -1;
-	int mNormIndex = -1;
+	static const int mInvalidIndex = 0;
+
+	int mVertIndex = mInvalidIndex;
+	int mTexCoordIndex = mInvalidIndex;
+	int mNormIndex = mInvalidIndex;
 
 	void Load(const std::string & str);
 
