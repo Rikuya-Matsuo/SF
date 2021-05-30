@@ -24,3 +24,8 @@ Player::~Player()
 {
 	delete mShaderWrapper;
 }
+
+void Player::UpdateActor()
+{
+
+}

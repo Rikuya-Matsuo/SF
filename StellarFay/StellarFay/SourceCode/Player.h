@@ -7,6 +7,8 @@ public:
 	Player();
 	~Player();
 
+	void UpdateActor() override;
+
 private:
 	class PhongShaderWrapper * mShaderWrapper;
 };
