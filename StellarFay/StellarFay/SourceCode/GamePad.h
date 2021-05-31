@@ -5,13 +5,18 @@
 class GamePad final
 {
 public:
+	GamePad();
 	GamePad(int index);
 	~GamePad();
 
-	bool Fail() const { return (!mGamePad); }
+	// 接続する
+	void Connect(int index);
+
+	// 有効フラグ計算
+	bool IsValid() const { return static_cast<bool>(mGamePad); }
 
 	// スティックのデッドゾーンの設定
-	// 各スティック各方向への倒し具合がこの値に満たない場合、値を0.0fとしてクランプする
+	// 各スティック各方向への倒し具合の絶対値がこの値に満たない場合、値を0.0fとしてクランプする
 	static void SetStickDeadZone(float deadZone) { mStickDeadZone = deadZone; }
 
 	// スティックのデッドゾーン取得
@@ -25,6 +30,12 @@ public:
 
 	// このフレームでボタンが離されたかを調べる
 	bool GetButtonReleas(SDL_GameControllerButton button) const { return !GetButtonFlag(button, mButtons) && GetButtonFlag(button, mPrevButtons); }
+
+	// 左スティックの入力取得
+	const Vector2D & GetLeftStick() const { return mLeftStick; }
+
+	// 右スティックの入力取得
+	const Vector2D & GetRightStick() const { return mRightStick; }
 
 	// 更新
 	void Update();
@@ -50,7 +61,7 @@ private:
 	typedef Uint32 ButtonFlags;
 
 	// ボタン状態のビットフラグ
-	// マスクは0x01をSDL_GameControllerButtonの値分左シフトさせたもの
+	// マスクは1をSDL_GameControllerButtonの値分左シフトさせたもの
 	ButtonFlags mButtons;
 
 	// 前フレームのボタン状態ビットフラグ

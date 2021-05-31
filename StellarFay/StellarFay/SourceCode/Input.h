@@ -1,6 +1,7 @@
 ﻿#include <SDL/SDL.h>
+#include "GamePad.h"
 
-// 入力を管理するシングルトンクラス
+// 入力を管理するクラス
 class Input final
 {
 public:
@@ -24,6 +25,9 @@ public:
 	// 終了イベントフラグの取得
 	bool GetQuitEventFlag() const { return mQuitEventFlag; }
 
+	// ゲームパッドを取得する
+	const GamePad & GetGamePad(int index) const { return mGamePads[index]; }
+
 	// 更新処理
 	void Update();
 
@@ -32,6 +36,12 @@ public:
 
 private:
 	Input();
+
+	// 用意するゲームパッドクラスの数
+	static const size_t mMaxGamePadMass;
+
+	// ゲームパッド配列
+	GamePad * mGamePads;
 
 	// キー状態
 	const Uint8 * mKeyStates;
