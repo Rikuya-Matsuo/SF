@@ -73,6 +73,12 @@
     <Filter Include="ヘッダー ファイル\Sprite">
       <UniqueIdentifier>{2935d90a-a896-4314-97b7-cdd5ae0a20e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Input">
+      <UniqueIdentifier>{878da81c-00a9-44d0-85da-05ee75d08ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Input">
+      <UniqueIdentifier>{29423b16-6dfc-4bb5-b694-cc68ceb5d562}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libraries\glad\src\glad.c">
@@ -119,9 +125,6 @@
     </ClCompile>
     <ClCompile Include="SourceCode\SceneBase.cpp">
       <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\Input.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\TestScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
@@ -204,6 +207,12 @@
     <ClCompile Include="SourceCode\EnemyGroup.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\Input.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GamePad.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameSystem.h">
@@ -253,9 +262,6 @@
     </ClInclude>
     <ClInclude Include="SourceCode\SceneBase.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\Input.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\TestScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
@@ -337,6 +343,12 @@
     </ClInclude>
     <ClInclude Include="SourceCode\EnemyGroup.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GamePad.h">
+      <Filter>ヘッダー ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Input.h">
+      <Filter>ヘッダー ファイル\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

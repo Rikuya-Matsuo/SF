@@ -155,6 +155,7 @@
     <ClCompile Include="SourceCode\ElementBuffer.cpp" />
     <ClCompile Include="SourceCode\EnemyBase.cpp" />
     <ClCompile Include="SourceCode\EnemyGroup.cpp" />
+    <ClCompile Include="SourceCode\GamePad.cpp" />
     <ClCompile Include="SourceCode\GameScene.cpp" />
     <ClCompile Include="SourceCode\GameUILayer.cpp" />
     <ClCompile Include="SourceCode\MonoColorShaderWrapper.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="SourceCode\ElementBuffer.h" />
     <ClInclude Include="SourceCode\EnemyBase.h" />
     <ClInclude Include="SourceCode\EnemyGroup.h" />
+    <ClInclude Include="SourceCode\GamePad.h" />
     <ClInclude Include="SourceCode\GameScene.h" />
     <ClInclude Include="SourceCode\GameUILayer.h" />
     <ClInclude Include="SourceCode\MonoColorShaderWrapper.h" />
