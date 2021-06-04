@@ -12,6 +12,9 @@ public:
 	// 接続する
 	void Connect(int index);
 
+	// 接続解除
+	void Disconnect();
+
 	// 有効フラグ計算
 	bool IsValid() const { return static_cast<bool>(mGamePad); }
 
@@ -67,7 +70,11 @@ private:
 	// 前フレームのボタン状態ビットフラグ
 	ButtonFlags mPrevButtons;
 
+	// ボタン状態ビットフラグから、ボタンが押されているか否かを得る内部関数
 	bool GetButtonFlag(SDL_GameControllerButton button, ButtonFlags flags) const { return static_cast<bool>(flags & (1 << button)); }
+
+	// ボタン状態、スティック状態の初期化
+	void InitState();
 };
 
 //////////////////////////////////////////////////////////////

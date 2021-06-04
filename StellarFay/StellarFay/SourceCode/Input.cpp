@@ -1,4 +1,5 @@
 ﻿#include "Input.h"
+#include <iostream>
 
 const size_t Input::mMaxGamePadMass = 1;
 
@@ -22,6 +23,12 @@ Input::Input() :
 	{
 		// 接続を試みる
 		mGamePads[i].Connect(i);
+
+		// 成功時、メッセージを表示
+		if (mGamePads[i].IsValid())
+		{
+			std::cout << "GamePad " << i << " : 接続成功\n";
+		}
 	}
 }
 
@@ -46,15 +53,46 @@ void Input::Update()
 		// ゲームパッドが接続される
 		if (sdlEvent.type == SDL_EventType::SDL_CONTROLLERDEVICEADDED)
 		{
+			// 該当ゲームパッドのインデックス値を取得
 			const int index = sdlEvent.cdevice.which;
+
+			// インデックス値のゲームパッドが既に有効ならcontinue
+			if (mGamePads[index].IsValid())
+			{
+				continue;
+			}
+
+			// インデックス値が、許容ゲームパッド最大数よりも小さければ接続
 			if (index < mMaxGamePadMass)
 			{
 				mGamePads[index].Connect(index);
 			}
+
+			// メッセージ表示
+			if (mGamePads[index].IsValid())
+			{
+				std::cout << "GamePad " << index << " : 接続に成功しました\n";
+			}
+			else
+			{
+				std::cout << "!!Caution!! GamePad " << index << " : 接続に失敗\n";
+			}
 		}
 
 		// ゲームパッドが外される
+		if (sdlEvent.type == SDL_EventType::SDL_CONTROLLERDEVICEREMOVED)
+		{
+			// 該当ゲームパッドのインデックス値を取得
+			const int index = sdlEvent.cdevice.which;
+			
+			// 該当ゲームパッドが有効であれば、接続を解除する
+			if (mGamePads[index].IsValid())
+			{
+				mGamePads[index].Disconnect();
 
+				std::cout << "GamePad " << index << " : 接続を解除しました\n";
+			}
+		}
 	}
 
 	// キーボード入力状態はSDLによって自動更新されている

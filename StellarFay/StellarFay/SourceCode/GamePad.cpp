@@ -3,32 +3,24 @@
 float GamePad::mStickDeadZone = 0.0f;
 
 GamePad::GamePad() :
-	mButtons(0),
-	mPrevButtons(0),
 	mGamePad(nullptr),
 	mMapping(nullptr)
 {
+	// 初期化
+	InitState();
 }
 
 GamePad::GamePad(int index) :
 	GamePad()
 {
+	// 接続
 	Connect(index);
 }
 
 GamePad::~GamePad()
 {
-	if (mMapping)
-	{
-		SDL_free(mMapping);
-		mMapping = nullptr;
-	}
-
-	if (mGamePad)
-	{
-		SDL_GameControllerClose(mGamePad);
-		mGamePad = nullptr;
-	}
+	// 接続解除
+	Disconnect();
 }
 
 void GamePad::Connect(int index)
@@ -39,6 +31,26 @@ void GamePad::Connect(int index)
 	{
 		mMapping = SDL_GameControllerMapping(mGamePad);
 	}
+}
+
+void GamePad::Disconnect()
+{
+	// マッピングメモリ解放
+	if (mMapping)
+	{
+		SDL_free(mMapping);
+		mMapping = nullptr;
+	}
+
+	// ゲームパッドメモリ解放
+	if (mGamePad)
+	{
+		SDL_GameControllerClose(mGamePad);
+		mGamePad = nullptr;
+	}
+
+	// 状態の初期化
+	InitState();
 }
 
 void GamePad::Update()
@@ -106,6 +118,13 @@ void GamePad::Update()
 void GamePad::LastUpdate()
 {
 	mPrevButtons = mButtons;
+}
+
+void GamePad::InitState()
+{
+	mLeftStick = mRightStick = Vector2D::Zero;
+
+	mButtons = mPrevButtons = 0;
 }
 
 //////////////////////////////////////////////////////////////
