@@ -36,14 +36,14 @@ bool GameSystem::Init()
 		return false;
 	}
 
-	// デバッグ時のみフルスクリーンではない
+	// UIマネージャークラス生成
+	mUIManager = new UILayerManager;
+
+	// レンダラーについて、デバッグ時のみフルスクリーンではない
 	bool fullScreenFlag = true;
 #ifdef DEBUG_SF
 	fullScreenFlag = false;
 #endif
-
-	// UIマネージャークラス生成
-	mUIManager = new UILayerManager;
 
 	// レンダラーの生成・初期化
 	mRenderer = new Renderer();
