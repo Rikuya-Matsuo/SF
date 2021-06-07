@@ -42,6 +42,11 @@ public:
 			(this->w == rhs.w);
 	}
 
+	bool operator!=(const Quaternion & rhs) const
+	{
+		return !(*this == rhs);
+	}
+
 	float LengthSq() const
 	{
 		return (x * x + y * y + z * z + w * w);
