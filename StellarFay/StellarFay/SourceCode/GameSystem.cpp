@@ -75,6 +75,9 @@ bool GameSystem::Init()
 	// 物理クラス生成
 	mPhysicManager = new PhysicManager();
 
+	// ゲームパッドのスティックデッドゾーン設定
+	GamePad::SetStickDeadZone(0.3f);
+
 	return true;
 }
 
